@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Подписки — SubTrack</title>
+  <link rel="stylesheet" href="../assets/subtrack.css" />
+</head>
+<body>
+  <div class="app">
+    <div class="content">
+      <header class="nav" data-od-id="subscriptions-header">
+        <div class="nav-row">
+          <h1 class="nav-title">Подписки</h1>
+          <a class="nav-action" href="add-subscription.html" data-od-id="add-subscription-button" aria-label="Добавить подписку">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5.5v13M5.5 12h13"/></svg>
+          </a>
+        </div>
+      </header>
+
+      <section class="pad" data-od-id="month-summary">
+        <div class="card summary">
+          <div class="summary-label">Расходы в ноябре</div>
+          <div class="summary-total num">3 243 ₽</div>
+          <div class="summary-meta">8 подписок · следующее 16 нояб.</div>
+        </div>
+      </section>
+
+      <section class="pad" style="padding-top: 12px;" data-od-id="premium-banner-section">
+        <a class="premium" href="paywall.html" data-od-id="premium-banner">
+          <span class="premium-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l4 4 5-6 5 6 4-4v9H3V8Z"/></svg>
+          </span>
+          <span class="premium-text">
+            <b>SubTrack Plus</b>
+            <small>Безлимитные подписки, напоминания, статистика</small>
+          </span>
+          <span class="premium-cta">Открыть</span>
+        </a>
+      </section>
+
+      <section class="pad" style="padding-top: 18px; padding-bottom: 28px;" data-od-id="subscriptions-list">
+        <div class="section-label">Списания в ноябре</div>
+        <div class="card list">
+
+          <a class="subrow" href="subscription-detail.html?id=spotify" data-od-id="subscription-spotify">
+            <span class="logo sm" style="background: var(--c-spotify)">S</span>
+            <div class="grow">
+              <div class="sub-name">Spotify</div>
+              <div class="sub-meta">Музыка · 16 нояб.</div>
+            </div>
+            <div class="sub-price">
+              <div class="p num">199 ₽</div>
+              <div class="per">в месяц</div>
+            </div>
+          </a>
+
+          <a class="subrow" href="subscription-detail.html?id=vk-music" data-od-id="subscription-vk-music">
+            <span class="logo sm" style="background: var(--c-vk)">V</span>
+            <div class="grow">
+              <div class="sub-name">VK Музыка</div>
+              <div class="sub-meta">Музыка · 17 нояб.</div>
+            </div>
+            <div class="sub-price">
+              <div class="p num">159 ₽</div>
+              <div class="per">в месяц</div>
+            </div>
+          </a>
+
+          <a class="subrow" href="subscription-detail.html?id=netflix" data-od-id="subscription-netflix">
+            <span class="logo sm" style="background: var(--c-netflix)">N</span>
+            <div class="grow">
+              <div class="sub-name">Netflix</div>
+              <div class="sub-meta">Видео · 18 нояб.</div>
+            </div>
+            <div class="sub-price">
+              <div class="p num">1 590 ₽</div>
+              <div class="per">в месяц</div>
+            </div>
+          </a>
+
+          <a class="subrow" href="subscription-detail.html?id=youtube-premium" data-od-id="subscription-youtube-premium">
+            <span class="logo sm" style="background: var(--c-youtube)">Y</span>
+            <div class="grow">
+              <div class="sub-name">YouTube Premium</div>
+              <div class="sub-meta">Видео · 20 нояб.</div>
+            </div>
+            <div class="sub-price">
+              <div class="p num">199 ₽</div>
+              <div class="per">в месяц</div>
+            </div>
+          </a>
+
+          <a class="subrow" href="subscription-detail.html?id=discord-nitro" data-od-id="subscription-discord-nitro">
+            <span class="logo sm" style="background: var(--c-discord)">D</span>
+            <div class="grow">
+              <div class="sub-name">Discord Nitro</div>
+              <div class="sub-meta">Игры · 22 нояб.</div>
+            </div>
+            <div class="sub-price">
+              <div class="p num">399 ₽</div>
+              <div class="per">в месяц</div>
+            </div>
+          </a>
+
+          <a class="subrow" href="subscription-detail.html?id=icloud" data-od-id="subscription-icloud">
+            <span class="logo sm" style="background: var(--c-icloud)">i</span>
+            <div class="grow">
+              <div class="sub-name">iCloud+ 50 ГБ</div>
+              <div class="sub-meta">Облако · 24 нояб.</div>
+            </div>
+            <div class="sub-price">
+              <div class="p num">199 ₽</div>
+              <div class="per">в месяц</div>
+            </div>
+          </a>
+
+          <a class="subrow" href="subscription-detail.html?id=yandex-plus" data-od-id="subscription-yandex-plus">
+            <span class="logo sm" style="background: var(--c-yandex); color: var(--fg)">Я</span>
+            <div class="grow">
+              <div class="sub-name">Яндекс Плюс</div>
+              <div class="sub-meta">Мультимедиа · 26 нояб.</div>
+            </div>
+            <div class="sub-price">
+              <div class="p num">299 ₽</div>
+              <div class="per">в месяц</div>
+            </div>
+          </a>
+
+          <a class="subrow" href="subscription-detail.html?id=apple-tv" data-od-id="subscription-apple-tv">
+            <span class="logo sm" style="background: var(--c-apple)">A</span>
+            <div class="grow">
+              <div class="sub-name">Apple TV+</div>
+              <div class="sub-meta">Видео · 29 нояб.</div>
+            </div>
+            <div class="sub-price">
+              <div class="p num">199 ₽</div>
+              <div class="per">в месяц</div>
+            </div>
+          </a>
+
+        </div>
+      </section>
+    </div>
+
+    <nav class="tabbar" data-od-id="tabbar">
+      <a class="tab active" href="subscriptions.html" data-od-id="tab-subscriptions">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="15" rx="4.5"/><path d="M7.5 9.5h9M7.5 13h9M7.5 16.5h5.5"/></svg>
+        <span>Подписки</span>
+      </a>
+      <a class="tab" href="calendar.html" data-od-id="tab-calendar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="4.5"/><path d="M3.5 9.5h17M8 3v3.5M16 3v3.5"/></svg>
+        <span>Календарь</span>
+      </a>
+      <a class="tab" href="statistics.html" data-od-id="tab-statistics">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 20h15"/><path d="M7 20v-5.5M12 20V7.5M17 20v-8.5"/></svg>
+        <span>Статистика</span>
+      </a>
+    </nav>
+  </div>
+</body>
+</html>

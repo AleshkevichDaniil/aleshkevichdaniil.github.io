@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "screens/04-alarm.html",
+  "entry": "screens/04-alarm.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-11-18T16:19:56.630Z",
+  "updatedAt": "2026-11-18T16:19:56.630Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

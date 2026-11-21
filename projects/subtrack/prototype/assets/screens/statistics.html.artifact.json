@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "screens/statistics.html",
+  "entry": "screens/statistics.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-11-15T11:35:43.195Z",
+  "updatedAt": "2026-11-15T11:35:43.195Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

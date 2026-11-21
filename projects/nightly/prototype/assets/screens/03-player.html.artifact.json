@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "screens/03-player.html",
+  "entry": "screens/03-player.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-11-18T16:19:56.629Z",
+  "updatedAt": "2026-11-18T16:19:56.629Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

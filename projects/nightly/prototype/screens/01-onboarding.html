@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nightly — Онбординг</title>
+<link rel="stylesheet" href="../assets/tokens.css">
+<style>
+  body { background: #07080e; }
+
+  .ob {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    padding-top: 52px;
+  }
+
+  .ob-head {
+    height: 56px;
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px 0 24px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .brand .mark {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border-soft);
+    color: var(--fg);
+  }
+
+  .brand .mark .ico {
+    width: 17px;
+    height: 17px;
+  }
+
+  .viewport {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .track {
+    display: flex;
+    width: 300%;
+    height: 100%;
+    transition: transform 0.52s var(--ease);
+    will-change: transform;
+  }
+
+  .slide {
+    width: 33.3333%;
+    height: 100%;
+    padding: 0 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .art {
+    position: relative;
+    height: 268px;
+    flex: none;
+    display: grid;
+    place-items: center;
+    margin-bottom: 22px;
+  }
+
+  .art::before {
+    content: "";
+    position: absolute;
+    width: 288px;
+    height: 288px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(139, 140, 255, 0.22), transparent 64%);
+  }
+
+  .ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  .ring-1 { width: 198px; height: 198px; }
+  .ring-2 { width: 258px; height: 258px; border-color: rgba(255, 255, 255, 0.042); }
+
+  .orbit-dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 7px;
+    height: 7px;
+    margin: -3.5px 0 0 -3.5px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px 2px rgba(139, 140, 255, 0.6);
+    transform: rotate(-38deg) translateY(-129px);
+  }
+
+  .core {
+    position: relative;
+    width: 138px;
+    height: 138px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background:
+      radial-gradient(120% 120% at 30% 18%, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.02) 62%),
+      rgba(19, 23, 43, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow:
+      0 26px 60px -24px rgba(139, 140, 255, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  }
+
+  .core .ico {
+    width: 52px;
+    height: 52px;
+    stroke-width: 1.4;
+    color: var(--fg);
+    filter: drop-shadow(0 0 16px rgba(139, 140, 255, 0.45));
+  }
+
+  .dial {
+    position: absolute;
+    width: 252px;
+    height: 252px;
+    transform: rotate(-90deg);
+  }
+
+  .dial-track {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.09);
+    stroke-width: 2;
+  }
+
+  .dial-arc {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-dasharray: 653;
+    stroke-dashoffset: 212;
+    filter: drop-shadow(0 0 9px rgba(139, 140, 255, 0.65));
+  }
+
+  .core-dial {
+    width: 140px;
+    height: 140px;
+    gap: 2px;
+    align-content: center;
+  }
+
+  .dial-time {
+    font-family: var(--font-display);
+    font-size: 33px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+
+  .dial-cap {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .art-3::before {
+    background: radial-gradient(circle, rgba(255, 184, 107, 0.2), transparent 64%);
+  }
+
+  .arcs {
+    position: absolute;
+    bottom: 4px;
+    width: 240px;
+    height: 120px;
+    overflow: visible;
+  }
+
+  .arcs path {
+    fill: none;
+    stroke: rgba(255, 184, 107, 0.2);
+    stroke-width: 1;
+  }
+
+  .arcs path:nth-child(2) { stroke: rgba(255, 184, 107, 0.13); }
+  .arcs path:nth-child(3) { stroke: rgba(255, 184, 107, 0.08); }
+
+  .core-amber {
+    box-shadow:
+      0 26px 60px -24px rgba(255, 184, 107, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  }
+
+  .core-amber .ico {
+    color: var(--amber);
+    filter: drop-shadow(0 0 16px rgba(255, 184, 107, 0.45));
+  }
+
+  .slide-copy {
+    max-width: 320px;
+  }
+
+  .slide-copy .eyebrow {
+    margin-bottom: 12px;
+    color: var(--muted-soft);
+  }
+
+  .slide-copy h1 {
+    font-family: var(--font-display);
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.16;
+    margin: 0 0 12px;
+    text-wrap: balance;
+  }
+
+  .slide-copy p {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--muted);
+    max-width: 34ch;
+  }
+
+  .ob-foot {
+    flex: none;
+    padding: 20px 24px 30px;
+  }
+
+  .progress-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    padding: 0 2px;
+  }
+
+  .dots {
+    display: flex;
+    gap: 0;
+    margin-left: -8px;
+  }
+
+  [data-dot] {
+    width: 24px;
+    height: 44px;
+    padding: 0;
+    display: grid;
+    place-items: center;
+    background: none;
+    border-radius: 8px;
+  }
+
+  [data-dot]::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 99px;
+    background: rgba(255, 255, 255, 0.2);
+    transition: width 0.28s var(--ease), background-color 0.28s var(--ease);
+  }
+
+  [data-dot].is-active::before {
+    width: 22px;
+    background: var(--accent);
+  }
+
+  [data-dot]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 0;
+  }
+
+  .counter {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    color: var(--muted-soft);
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (max-height: 740px) {
+    .art { height: 220px; }
+    .art::before { width: 240px; height: 240px; }
+    .ring-1 { width: 172px; height: 172px; }
+    .ring-2 { width: 214px; height: 214px; }
+    .orbit-dot { transform: rotate(-38deg) translateY(-107px); }
+    .dial { width: 208px; height: 208px; }
+  }
+</style>
+</head>
+<body data-screen="onboarding">
+  <div class="device">
+    <div class="ob">
+      <header class="ob-head">
+        <div class="brand">
+          <span class="mark" aria-hidden="true">
+            <svg class="ico"><use href="#i-moon"></use></svg>
+          </span>
+          <span>Nightly</span>
+        </div>
+        <a class="btn-text" href="02-home.html" data-od-id="onboarding-skip">Пропустить</a>
+      </header>
+
+      <div class="viewport">
+        <div class="track" id="onboardingTrack" data-od-id="onboarding-slides">
+          <!-- 01 -->
+          <section class="slide" aria-label="Звуки для засыпания">
+            <div class="art">
+              <span class="ring ring-1" aria-hidden="true"></span>
+              <span class="ring ring-2" aria-hidden="true"></span>
+              <span class="orbit-dot" aria-hidden="true"></span>
+              <div class="core">
+                <svg class="ico" aria-hidden="true"><use href="#i-rain"></use></svg>
+              </div>
+            </div>
+            <div class="slide-copy">
+              <p class="eyebrow">01 · Звуки</p>
+              <h1>Звуки для засыпания</h1>
+              <p>Шесть живых записей — дождь, океан, ночной лес. Одно касание, и комната становится тише.</p>
+            </div>
+          </section>
+
+          <!-- 02 -->
+          <section class="slide" aria-label="Таймер с плавным затуханием">
+            <div class="art">
+              <span class="ring ring-2" aria-hidden="true"></span>
+              <svg class="dial" viewBox="0 0 240 240" aria-hidden="true">
+                <circle class="dial-track" cx="120" cy="120" r="104"></circle>
+                <circle class="dial-arc" cx="120" cy="120" r="104"></circle>
+              </svg>
+              <div class="core core-dial">
+                <span class="dial-time">28:00</span>
+                <span class="dial-cap">до тишины</span>
+              </div>
+            </div>
+            <div class="slide-copy">
+              <p class="eyebrow">02 · Таймер</p>
+              <h1>Затухание вместо тишины</h1>
+              <p>Звук стихает постепенно — без резкого обрыва, который будит через полчаса после засыпания.</p>
+            </div>
+          </section>
+
+          <!-- 03 -->
+          <section class="slide" aria-label="Умный будильник">
+            <div class="art art-3">
+              <span class="ring ring-1" aria-hidden="true"></span>
+              <span class="ring ring-2" aria-hidden="true"></span>
+              <svg class="arcs" viewBox="0 0 240 120" aria-hidden="true">
+                <path d="M20 116a100 100 0 0 1 200 0"></path>
+                <path d="M46 116a74 74 0 0 1 148 0"></path>
+                <path d="M74 116a46 46 0 0 1 92 0"></path>
+              </svg>
+              <div class="core core-amber">
+                <svg class="ico" aria-hidden="true"><use href="#i-sunrise"></use></svg>
+              </div>
+            </div>
+            <div class="slide-copy">
+              <p class="eyebrow">03 · Будильник</p>
+              <h1>Просыпаться легче</h1>
+              <p>Умный будильник разбудит в лёгкой фазе сна — в окне 30 минут до времени подъёма.</p>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <footer class="ob-foot">
+        <div class="progress-row">
+          <div class="dots" role="group" aria-label="Слайды">
+            <button type="button" data-dot aria-label="Слайд 1"></button>
+            <button type="button" data-dot aria-label="Слайд 2"></button>
+            <button type="button" data-dot aria-label="Слайд 3"></button>
+          </div>
+          <span class="counter" id="slideCounter">01 / 03</span>
+        </div>
+        <button type="button" class="btn btn-primary btn-block" id="onboardingNext" data-od-id="onboarding-next">Далее</button>
+      </footer>
+    </div>
+  </div>
+
+  <script src="../assets/icons.js"></script>
+  <script src="../assets/app.js"></script>
+</body>
+</html>

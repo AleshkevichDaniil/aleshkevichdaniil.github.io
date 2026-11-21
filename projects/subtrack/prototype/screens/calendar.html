@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Календарь — SubTrack</title>
+  <link rel="stylesheet" href="../assets/subtrack.css" />
+</head>
+<body>
+  <div class="app">
+    <div class="content">
+      <header class="nav" data-od-id="calendar-header">
+        <div class="nav-row"><h1 class="nav-title">Календарь</h1></div>
+      </header>
+
+      <section class="pad" data-od-id="calendar-card">
+        <div class="card card-pad">
+          <div class="cal-head">
+            <div class="cal-month" id="calMonth">Ноябрь 2026</div>
+            <div class="cal-nav">
+              <button type="button" id="calPrev" data-od-id="calendar-prev" aria-label="Предыдущий месяц">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+              </button>
+              <button type="button" id="calNext" data-od-id="calendar-next" aria-label="Следующий месяц">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="cal-grid" id="calGrid"></div>
+        </div>
+        <div class="summary-meta" id="dayCaption" style="margin: 14px 4px 0;">15 ноября · списаний нет</div>
+      </section>
+
+      <section class="pad" style="padding-top: 18px; padding-bottom: 28px;" data-od-id="upcoming-list">
+        <div class="section-label" id="calListLabel">Списания в ноябре</div>
+        <div class="card list" id="calList"></div>
+      </section>
+    </div>
+
+    <nav class="tabbar" data-od-id="tabbar">
+      <a class="tab" href="subscriptions.html" data-od-id="tab-subscriptions">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="15" rx="4.5"/><path d="M7.5 9.5h9M7.5 13h9M7.5 16.5h5.5"/></svg>
+        <span>Подписки</span>
+      </a>
+      <a class="tab active" href="calendar.html" data-od-id="tab-calendar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="4.5"/><path d="M3.5 9.5h17M8 3v3.5M16 3v3.5"/></svg>
+        <span>Календарь</span>
+      </a>
+      <a class="tab" href="statistics.html" data-od-id="tab-statistics">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 20h15"/><path d="M7 20v-5.5M12 20V7.5M17 20v-8.5"/></svg>
+        <span>Статистика</span>
+      </a>
+    </nav>
+  </div>
+
+  <script>
+    (function () {
+      var grid = document.getElementById('calGrid');
+      var caption = document.getElementById('dayCaption');
+      var monthLabel = document.getElementById('calMonth');
+      var prevBtn = document.getElementById('calPrev');
+      var nextBtn = document.getElementById('calNext');
+      var listLabel = document.getElementById('calListLabel');
+      var list = document.getElementById('calList');
+
+      var MONTHS_NOM = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+      var MONTHS_GEN = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+      var DOWS = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
+
+      // подписки: день списания одинаковый в каждом месяце
+      var SUBS = [
+        { name: 'Spotify',         price: '199 ₽',   day: 16, letter: 'S', color: 'var(--c-spotify)', cat: 'Музыка' },
+        { name: 'VK Музыка',       price: '159 ₽',   day: 17, letter: 'V', color: 'var(--c-vk)',      cat: 'Музыка' },
+        { name: 'Netflix',         price: '1 590 ₽', day: 18, letter: 'N', color: 'var(--c-netflix)', cat: 'Видео' },
+        { name: 'YouTube Premium', price: '199 ₽',   day: 20, letter: 'Y', color: 'var(--c-youtube)', cat: 'Видео' },
+        { name: 'Discord Nitro',   price: '399 ₽',   day: 22, letter: 'D', color: 'var(--c-discord)', cat: 'Игры' },
+        { name: 'iCloud+ 50 ГБ',   price: '199 ₽',   day: 24, letter: 'i', color: 'var(--c-icloud)',  cat: 'Облако' },
+        { name: 'Яндекс Плюс',     price: '299 ₽',   day: 26, letter: 'Я', color: 'var(--c-yandex)',  cat: 'Мультимедиа', dark: true },
+        { name: 'Apple TV+',       price: '199 ₽',   day: 29, letter: 'A', color: 'var(--c-apple)',   cat: 'Видео' }
+      ];
+
+      var MIN_MONTH = 9;   // октябрь 2026
+      var MAX_MONTH = 11;  // декабрь 2026
+      var viewYear = 2026;
+      var viewMonth = 10;  // ноябрь 2026 (0-индекс)
+      var selected = null;
+
+      function key(y, m, d) {
+        return y + '-' + String(m + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+      }
+      function isToday(y, m, d) { return y === 2026 && m === 10 && d === 15; }
+      function chargesFor(day) {
+        return SUBS.filter(function (s) { return s.day === day; });
+      }
+
+      function describe(k, day) {
+        var list = chargesFor(day);
+        return list.length
+          ? day + ' ' + MONTHS_GEN[viewMonth] + ' · ' + list.map(function (c) { return c.name + ', ' + c.price; }).join(' и ')
+          : day + ' ' + MONTHS_GEN[viewMonth] + ' · списаний нет';
+      }
+
+      function render() {
+        monthLabel.textContent = MONTHS_NOM[viewMonth] + ' ' + viewYear;
+        grid.innerHTML = '';
+        selected = null;
+
+        DOWS.forEach(function (d) {
+          var el = document.createElement('div');
+          el.className = 'cal-dow';
+          el.textContent = d;
+          grid.appendChild(el);
+        });
+
+        // неделя с понедельника
+        var firstDow = new Date(viewYear, viewMonth, 1).getDay(); // 0 = воскресенье
+        var leading = (firstDow + 6) % 7;
+        var daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+        var daysInPrev = new Date(viewYear, viewMonth, 0).getDate();
+
+        for (var i = leading; i >= 1; i--) {
+          var dim = document.createElement('div');
+          dim.className = 'cal-day dim';
+          dim.textContent = daysInPrev - i + 1;
+          grid.appendChild(dim);
+        }
+
+        var defaultDay = (viewYear === 2026 && viewMonth === 10) ? 15 : 1;
+        caption.textContent = describe(key(viewYear, viewMonth, defaultDay), defaultDay);
+
+        for (var day = 1; day <= daysInMonth; day++) {
+          (function (day) {
+            var k = key(viewYear, viewMonth, day);
+            var has = chargesFor(day).length > 0;
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'cal-day' + (isToday(viewYear, viewMonth, day) ? ' today' : '');
+            b.innerHTML = day + (has ? '<span class="cdot"></span>' : '');
+            b.setAttribute('aria-label', day + ' ' + MONTHS_GEN[viewMonth]);
+            b.addEventListener('click', function () {
+              if (selected) selected.classList.remove('sel');
+              selected = b;
+              b.classList.add('sel');
+              caption.textContent = describe(k, day);
+            });
+            grid.appendChild(b);
+          })(day);
+        }
+
+        renderList();
+        updateNav();
+      }
+
+      function renderList() {
+        listLabel.textContent = 'Списания в ' + MONTHS_GEN[viewMonth];
+        list.innerHTML = '';
+        SUBS.forEach(function (s) {
+          var row = document.createElement('div');
+          row.className = 'subrow';
+          row.innerHTML =
+            '<span class="logo sm" style="background:' + s.color + ';' + (s.dark ? 'color: var(--fg);' : '') + '">' + s.letter + '</span>' +
+            '<div class="grow"><div class="sub-name">' + s.name + '</div><div class="sub-meta">' + s.day + ' ' + MONTHS_GEN[viewMonth] + ' · ' + s.cat + '</div></div>' +
+            '<div class="sub-price"><div class="p num">' + s.price + '</div><div class="per">в месяц</div></div>';
+          list.appendChild(row);
+        });
+      }
+
+      function updateNav() {
+        prevBtn.disabled = viewMonth <= MIN_MONTH;
+        nextBtn.disabled = viewMonth >= MAX_MONTH;
+      }
+
+      function shift(delta) {
+        var m = viewMonth + delta;
+        if (m < MIN_MONTH || m > MAX_MONTH) return;
+        viewMonth = m;
+        render();
+      }
+
+      prevBtn.addEventListener('click', function () { shift(-1); });
+      nextBtn.addEventListener('click', function () { shift(1); });
+
+      render();
+    })();
+  </script>
+</body>
+</html>

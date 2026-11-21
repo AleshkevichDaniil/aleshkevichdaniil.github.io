@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Пустое состояние — SubTrack</title>
+  <link rel="stylesheet" href="../assets/subtrack.css" />
+</head>
+<body>
+  <div class="app">
+    <div class="content">
+      <header class="nav" data-od-id="empty-header">
+        <div class="nav-row">
+          <h1 class="nav-title">Подписки</h1>
+          <a class="nav-action" href="add-subscription.html" data-od-id="empty-add-button" aria-label="Добавить подписку">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5.5v13M5.5 12h13"/></svg>
+          </a>
+        </div>
+      </header>
+
+      <section class="pad" data-od-id="empty-summary">
+        <div class="card summary">
+          <div class="summary-label">Расходы в месяц</div>
+          <div class="summary-total num">0 ₽</div>
+          <div class="summary-meta">Подписок пока нет</div>
+        </div>
+      </section>
+
+      <section class="pad empty-section" style="padding-top: 8px;" data-od-id="empty-state">
+        <div class="empty">
+          <svg class="empty-illo" viewBox="0 0 132 132" fill="none" aria-hidden="true">
+            <rect x="18" y="26" width="96" height="80" rx="20" stroke="var(--border)" stroke-width="2" />
+            <path d="M34 50h44M34 66h30" stroke="var(--border)" stroke-width="6" stroke-linecap="round" />
+            <circle cx="92" cy="88" r="22" fill="var(--accent-soft)" />
+            <path d="M92 78v20M82 88h20" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" />
+          </svg>
+          <h2>Здесь пока пусто</h2>
+          <p>Добавьте первую подписку, чтобы видеть даты списаний и траты в месяц.</p>
+          <a class="btn btn-primary" href="add-subscription.html" data-od-id="empty-cta" style="max-width: 260px;">Добавить подписку</a>
+        </div>
+      </section>
+    </div>
+
+    <nav class="tabbar" data-od-id="tabbar">
+      <a class="tab active" href="subscriptions.html" data-od-id="tab-subscriptions">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="15" rx="4.5"/><path d="M7.5 9.5h9M7.5 13h9M7.5 16.5h5.5"/></svg>
+        <span>Подписки</span>
+      </a>
+      <a class="tab" href="calendar.html" data-od-id="tab-calendar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="4.5"/><path d="M3.5 9.5h17M8 3v3.5M16 3v3.5"/></svg>
+        <span>Календарь</span>
+      </a>
+      <a class="tab" href="statistics.html" data-od-id="tab-statistics">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 20h15"/><path d="M7 20v-5.5M12 20V7.5M17 20v-8.5"/></svg>
+        <span>Статистика</span>
+      </a>
+    </nav>
+  </div>
+</body>
+</html>

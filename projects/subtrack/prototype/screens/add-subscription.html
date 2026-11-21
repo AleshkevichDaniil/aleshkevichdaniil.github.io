@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Новая подписка — SubTrack</title>
+  <link rel="stylesheet" href="../assets/subtrack.css" />
+</head>
+<body>
+  <div class="app">
+    <div class="content">
+      <header class="nav" data-od-id="add-header">
+        <div class="nav-row">
+          <a class="nav-action" href="subscriptions.html" data-od-id="add-cancel" aria-label="Отмена" style="background: var(--track); color: var(--muted);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          </a>
+          <span class="nav-title-sm">Новая подписка</span>
+          <span style="width: 44px;"></span>
+        </div>
+      </header>
+
+      <section class="pad" data-od-id="add-preview">
+        <div class="card preview">
+          <div class="subrow">
+            <span class="logo" id="pvLogo" style="background: var(--accent)">?</span>
+            <div class="grow">
+              <div class="sub-name" id="pvName">Название подписки</div>
+              <div class="sub-meta" id="pvMeta">Категория · дата не выбрана</div>
+            </div>
+            <div class="sub-price">
+              <div class="p num" id="pvPrice">0 ₽</div>
+              <div class="per" id="pvPeriod">в месяц</div>
+            </div>
+          </div>
+          <div class="hint">Предпросмотр обновляется при вводе</div>
+        </div>
+      </section>
+
+      <section class="pad" style="padding-top: 18px; padding-bottom: 28px;" data-od-id="add-form">
+        <div class="field" id="fName">
+          <label for="name">Название</label>
+          <input class="input" id="name" type="text" placeholder="Например, Netflix" autocomplete="off" />
+          <div class="field-error">Введите название подписки</div>
+        </div>
+
+        <div class="field" id="fPrice" style="margin-top: 16px;">
+          <label for="price">Цена</label>
+          <div class="input-wrap">
+            <input class="input" id="price" type="text" inputmode="numeric" placeholder="0" />
+            <span class="suffix">₽</span>
+          </div>
+          <div class="field-error">Введите цену больше нуля</div>
+        </div>
+
+        <div class="field" style="margin-top: 16px;">
+          <label>Период</label>
+          <div class="seg" id="period" data-od-id="period-segment">
+            <button type="button" aria-pressed="true" data-value="month">Месяц</button>
+            <button type="button" aria-pressed="false" data-value="year">Год</button>
+          </div>
+        </div>
+
+        <div class="field" id="fDate" style="margin-top: 16px;">
+          <label for="date">Дата списания</label>
+          <input class="input" id="date" type="text" inputmode="numeric" placeholder="ДД.ММ.ГГГГ" value="20.11.2026" maxlength="10" data-od-id="charge-date" />
+          <div class="field-error">Введите дату в формате ДД.ММ.ГГГГ</div>
+        </div>
+
+        <div class="field" style="margin-top: 16px;">
+          <label>Категория</label>
+          <div class="chips" id="categories" data-od-id="category-chips">
+            <button type="button" class="chip" aria-pressed="false">Видео</button>
+            <button type="button" class="chip" aria-pressed="false">Музыка</button>
+            <button type="button" class="chip" aria-pressed="false">Облако</button>
+            <button type="button" class="chip" aria-pressed="false">Игры</button>
+            <button type="button" class="chip" aria-pressed="false">Программы</button>
+            <button type="button" class="chip" aria-pressed="false">Другое</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="btn-block-pad">
+      <button class="btn btn-primary" id="save" disabled data-od-id="save-subscription">Сохранить</button>
+    </div>
+
+    <div class="toast" id="toast">Подписка добавлена</div>
+  </div>
+
+  <script>
+    (function () {
+      var nameEl = document.getElementById('name');
+      var priceEl = document.getElementById('price');
+      var dateEl = document.getElementById('date');
+      var pvLogo = document.getElementById('pvLogo');
+      var pvName = document.getElementById('pvName');
+      var pvMeta = document.getElementById('pvMeta');
+      var pvPrice = document.getElementById('pvPrice');
+      var pvPeriod = document.getElementById('pvPeriod');
+      var fName = document.getElementById('fName');
+      var fPrice = document.getElementById('fPrice');
+      var fDate = document.getElementById('fDate');
+      var save = document.getElementById('save');
+      var toast = document.getElementById('toast');
+
+      var period = 'month';
+      var category = '';
+      var touchedName = false;
+      var touchedPrice = false;
+      var touchedDate = false;
+
+      var MONTHS = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+
+      function priceDigits() { return priceEl.value.replace(/\D/g, ''); }
+      function formatPrice() {
+        var d = priceDigits();
+        return d ? Number(d).toLocaleString('ru-RU') : '0';
+      }
+      function maskDate(raw) {
+        var d = raw.replace(/\D/g, '').slice(0, 8);
+        if (d.length > 4) return d.slice(0, 2) + '.' + d.slice(2, 4) + '.' + d.slice(4);
+        if (d.length > 2) return d.slice(0, 2) + '.' + d.slice(2);
+        return d;
+      }
+      function parseDate() {
+        var p = dateEl.value.split('.');
+        if (p.length !== 3 || p[0].length !== 2 || p[1].length !== 2 || p[2].length !== 4) return null;
+        var d = Number(p[0]), m = Number(p[1]), y = Number(p[2]);
+        if (m < 1 || m > 12 || d < 1 || d > 31) return null;
+        var dt = new Date(y, m - 1, d);
+        if (dt.getDate() !== d || dt.getMonth() !== m - 1) return null;
+        return dt;
+      }
+      function formatDate() {
+        var dt = parseDate();
+        return dt ? dt.getDate() + ' ' + MONTHS[dt.getMonth()] : '';
+      }
+
+      function render() {
+        var name = nameEl.value.trim();
+        pvName.textContent = name || 'Название подписки';
+        pvLogo.textContent = name ? name.charAt(0).toUpperCase() : '?';
+
+        var bits = [];
+        bits.push(category || 'Категория');
+        var dt = formatDate();
+        bits.push(dt || 'дата не выбрана');
+        pvMeta.textContent = bits.join(' · ');
+
+        pvPrice.textContent = formatPrice() + ' ₽';
+        pvPeriod.textContent = period === 'month' ? 'в месяц' : 'в год';
+
+        var dateOk = !!parseDate();
+        var valid = name.length > 0 && Number(priceDigits()) > 0 && dateOk;
+        save.disabled = !valid;
+        fName.classList.toggle('invalid', touchedName && name.length === 0);
+        fPrice.classList.toggle('invalid', touchedPrice && Number(priceDigits()) <= 0);
+        fDate.classList.toggle('invalid', touchedDate && !dateOk);
+      }
+
+      nameEl.addEventListener('input', render);
+      nameEl.addEventListener('blur', function () { touchedName = true; render(); });
+      priceEl.addEventListener('input', render);
+      priceEl.addEventListener('blur', function () {
+        touchedPrice = true;
+        if (priceDigits()) priceEl.value = formatPrice();
+        render();
+      });
+      dateEl.addEventListener('input', function () {
+        dateEl.value = maskDate(dateEl.value);
+        render();
+      });
+      dateEl.addEventListener('blur', function () { touchedDate = true; render(); });
+
+      document.getElementById('period').addEventListener('click', function (e) {
+        var btn = e.target.closest('button');
+        if (!btn) return;
+        period = btn.dataset.value;
+        Array.prototype.forEach.call(this.querySelectorAll('button'), function (b) {
+          b.setAttribute('aria-pressed', String(b === btn));
+        });
+        render();
+      });
+
+      document.getElementById('categories').addEventListener('click', function (e) {
+        var btn = e.target.closest('button');
+        if (!btn) return;
+        var was = btn.getAttribute('aria-pressed') === 'true';
+        Array.prototype.forEach.call(this.querySelectorAll('button'), function (b) {
+          b.setAttribute('aria-pressed', 'false');
+        });
+        btn.setAttribute('aria-pressed', String(!was));
+        category = was ? '' : btn.textContent.trim();
+        render();
+      });
+
+      save.addEventListener('click', function () {
+        touchedName = true;
+        touchedPrice = true;
+        touchedDate = true;
+        render();
+        if (save.disabled) return;
+        toast.textContent = 'Подписка «' + nameEl.value.trim() + '» добавлена';
+        toast.classList.add('show');
+        setTimeout(function () {
+          window.location.href = 'subscriptions.html';
+        }, 1100);
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>

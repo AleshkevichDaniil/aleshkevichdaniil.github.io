@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>SubTrack Plus — SubTrack</title>
+  <link rel="stylesheet" href="../assets/subtrack.css" />
+</head>
+<body>
+  <div class="app">
+    <div class="content" id="paywallMain">
+      <header class="nav" data-od-id="paywall-header">
+        <div class="nav-row">
+          <a class="nav-action" href="subscriptions.html" data-od-id="paywall-close" aria-label="Закрыть">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          </a>
+          <span class="nav-title-sm">SubTrack Plus</span>
+          <span style="width: 44px;"></span>
+        </div>
+      </header>
+
+      <div class="paywall-hero" data-od-id="paywall-hero">
+        <div class="paywall-crown">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l4 4 5-6 5 6 4-4v9H3V8Z"/></svg>
+        </div>
+        <h1 class="paywall-title">SubTrack Plus</h1>
+        <p class="paywall-sub">Все возможности трекера подписок без ограничений — на всём сроке подписки.</p>
+      </div>
+
+      <section class="pad" style="padding-top: 12px;" data-od-id="paywall-features">
+        <div class="card">
+          <div class="feature">
+            <span class="feature-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5.5v13M5.5 12h13"/></svg></span>
+            <div><div class="t">Безлимитные подписки</div><div class="d">Добавляйте сколько угодно сервисов</div></div>
+          </div>
+          <div class="feature">
+            <span class="feature-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 1 1 12 0c0 5 1.6 6 1.6 6H4.4S6 14 6 9Z"/><path d="M10 19a2 2 0 0 0 4 0"/></svg></span>
+            <div><div class="t">Напоминания</div><div class="d">За 3 дня до каждого списания</div></div>
+          </div>
+          <div class="feature">
+            <span class="feature-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 20h15"/><path d="M7.5 20v-5.5M12 20V7.5M16.5 20v-8.5"/></svg></span>
+            <div><div class="t">Статистика</div><div class="d">Графики по категориям и месяцам</div></div>
+          </div>
+          <div class="feature">
+            <span class="feature-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18a4 4 0 0 1 0-8 5.5 5.5 0 0 1 10.6 1.5A3.5 3.5 0 0 1 17 18H7Z"/></svg></span>
+            <div><div class="t">Виджеты и синхронизация</div><div class="d">iPhone, iPad и Mac</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="pad" style="padding-top: 12px;" data-od-id="paywall-plans">
+        <div class="section-label">Тариф</div>
+        <button class="plan" id="planYear" aria-pressed="true" data-od-id="plan-year">
+          <span class="radio"><span class="radio-dot"></span></span>
+          <span class="p-body">
+            <span class="p-top"><span class="p-name">Год</span><span class="p-price num">2 390 ₽ <small>в год</small></span></span>
+            <span class="p-meta">Выгода 33% · 199 ₽/мес</span>
+          </span>
+        </button>
+        <button class="plan" id="planMonth" aria-pressed="false" data-od-id="plan-month" style="margin-top: 8px;">
+          <span class="radio"><span class="radio-dot"></span></span>
+          <span class="p-body">
+            <span class="p-top"><span class="p-name">Месяц</span><span class="p-price num">299 ₽ <small>в месяц</small></span></span>
+            <span class="p-meta">Гибко · отмена в любой момент</span>
+          </span>
+        </button>
+      </section>
+
+      <section class="pad" style="padding-top: 12px; padding-bottom: 14px;" data-od-id="paywall-cta">
+        <button class="btn btn-primary" id="activate" data-od-id="activate-plus">Попробовать бесплатно</button>
+        <p class="paywall-note" id="planNote">3 дня бесплатно, затем 2 390 ₽/год</p>
+        <a class="paywall-restore" href="#" onclick="return false;">Восстановить покупку</a>
+      </section>
+    </div>
+
+    <div class="paywall-success" id="success" data-od-id="paywall-success">
+      <div class="check">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+      </div>
+      <h2>SubTrack Plus активирован</h2>
+      <p>Спасибо! Все функции доступны. Напоминания придут за 3 дня до первого списания.</p>
+      <button class="btn btn-primary" id="done" style="max-width: 260px; margin-top: 26px;">Готово</button>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var year = document.getElementById('planYear');
+      var month = document.getElementById('planMonth');
+      var note = document.getElementById('planNote');
+      var main = document.getElementById('paywallMain');
+      var success = document.getElementById('success');
+      var plan = 'year';
+
+      function select(which) {
+        plan = which;
+        year.setAttribute('aria-pressed', String(which === 'year'));
+        month.setAttribute('aria-pressed', String(which === 'month'));
+        note.textContent = which === 'year'
+          ? '3 дня бесплатно, затем 2 390 ₽/год'
+          : '3 дня бесплатно, затем 299 ₽/месяц';
+      }
+
+      year.addEventListener('click', function () { select('year'); });
+      month.addEventListener('click', function () { select('month'); });
+
+      document.getElementById('activate').addEventListener('click', function () {
+        main.style.display = 'none';
+        success.classList.add('show');
+      });
+
+      document.getElementById('done').addEventListener('click', function () {
+        window.location.href = 'subscriptions.html';
+      });
+    })();
+  </script>
+</body>
+</html>

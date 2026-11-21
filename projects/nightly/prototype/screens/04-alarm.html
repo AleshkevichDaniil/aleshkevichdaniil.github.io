@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nightly — Будильник</title>
+<link rel="stylesheet" href="../assets/tokens.css">
+<style>
+  body { background: #07080e; }
+
+  .alarm-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 4px 0 18px;
+  }
+
+  .alarm-head .eyebrow {
+    margin-bottom: 6px;
+    color: var(--muted);
+  }
+
+  /* ---------- wheel ---------- */
+
+  .wheel-card {
+    padding: 0 0 4px;
+    overflow: hidden;
+    background:
+      radial-gradient(120% 90% at 50% 0%, rgba(255, 184, 107, 0.08), transparent 62%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015));
+  }
+
+  .wheel-stage {
+    position: relative;
+    height: 210px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    overflow: hidden;
+  }
+
+  .wheel-band {
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    top: 84px;
+    height: 42px;
+    border-radius: 14px;
+    background: rgba(255, 184, 107, 0.07);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 184, 107, 0.34),
+      inset 0 -1px 0 rgba(255, 184, 107, 0.34);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wheel {
+    position: relative;
+    z-index: 1;
+    width: 72px;
+    height: 210px;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scrollbar-width: none;
+    padding: 0;
+    text-align: center;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 24%, #000 76%, transparent 100%);
+    mask-image: linear-gradient(180deg, transparent 0, #000 24%, #000 76%, transparent 100%);
+    outline-offset: -6px;
+  }
+
+  .wheel-spacer {
+    height: 84px;
+    flex: none;
+  }
+
+  .wheel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .wheel-item {
+    height: 42px;
+    line-height: 42px;
+    scroll-snap-align: center;
+    font-family: var(--font-display);
+    font-size: 29px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    font-variant-numeric: tabular-nums;
+    color: oklch(56% 0.035 277);
+    cursor: pointer;
+    transition: color 0.2s var(--ease);
+  }
+
+  .wheel-item.is-active {
+    color: var(--fg);
+  }
+
+  .colon {
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-display);
+    font-size: 27px;
+    font-weight: 500;
+    color: var(--amber);
+    padding-bottom: 2px;
+  }
+
+  .wheel-foot {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 20px 12px;
+    border-top: 1px solid var(--border-hair);
+    font-size: 12.5px;
+  }
+
+  .wf-time {
+    font-weight: 600;
+    color: var(--fg);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .wf-sep {
+    color: var(--muted-soft);
+  }
+
+  .wf-meta {
+    color: var(--muted);
+  }
+
+  /* ---------- days ---------- */
+
+  .block {
+    margin-top: 22px;
+  }
+
+  .block .between {
+    margin-bottom: 10px;
+    padding: 0 2px;
+  }
+
+  .days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+  }
+
+  .day {
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.035);
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    transition: color 0.18s var(--ease), background-color 0.18s var(--ease),
+      border-color 0.18s var(--ease);
+  }
+
+  .day:hover {
+    color: var(--fg);
+    border-color: rgba(255, 255, 255, 0.22);
+    background: rgba(255, 255, 255, 0.07);
+  }
+
+  .day[aria-pressed="true"] {
+    color: var(--fg);
+    background: var(--amber-wash);
+    border-color: var(--amber-line);
+  }
+
+  /* ---------- wake window ---------- */
+
+  .window-card {
+    margin-top: 18px;
+    padding: 16px;
+  }
+
+  .wc-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .wc-head .h3 {
+    margin-bottom: 3px;
+  }
+
+  .wc-icon {
+    width: 22px;
+    height: 22px;
+    color: var(--amber);
+    flex: none;
+  }
+
+  .seg {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    padding: 3px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.045);
+    border: 1px solid var(--border-hair);
+  }
+
+  .seg button {
+    min-height: 44px;
+    border-radius: 11px;
+    color: var(--muted);
+    font-size: 13.5px;
+    font-weight: 600;
+    transition: background-color 0.18s var(--ease), color 0.18s var(--ease);
+  }
+
+  .seg button:hover {
+    color: var(--fg);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .seg button[aria-pressed="true"] {
+    color: var(--fg);
+    background: rgba(255, 184, 107, 0.14);
+    box-shadow: inset 0 0 0 1px rgba(255, 184, 107, 0.3);
+  }
+
+  .note {
+    margin: 16px 2px 0;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--muted-soft);
+  }
+
+  /* ---------- off state ---------- */
+
+  .alarm-body {
+    transition: opacity 0.25s var(--ease);
+  }
+
+  .alarm-body.is-off .wheel-stage,
+  .alarm-body.is-off .days {
+    opacity: 0.45;
+  }
+
+  .alarm-body.is-off .wheel-item.is-active {
+    color: var(--muted);
+  }
+
+  .alarm-body.is-off .wf-time {
+    color: var(--muted);
+  }
+
+  .alarm-body.is-off .wheel-band {
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.14),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.14);
+  }
+
+  .alarm-body.is-off .colon {
+    color: var(--muted-soft);
+  }
+</style>
+</head>
+<body data-screen="alarm">
+  <div class="device" data-nav="alarm">
+    <div class="scroll nav">
+      <div class="pad">
+        <header class="alarm-head">
+          <div>
+            <p class="eyebrow">Пробуждение</p>
+            <h1 class="h1" data-od-id="alarm-title">Будильник</h1>
+          </div>
+          <button
+            type="button"
+            class="switch amber"
+            id="alarmToggle"
+            role="switch"
+            aria-checked="true"
+            aria-label="Будильник"
+            data-od-id="alarm-toggle"
+          ></button>
+        </header>
+
+        <div class="alarm-body" id="alarmBody">
+          <div class="card wheel-card">
+            <div class="wheel-stage">
+              <div class="wheel-band" aria-hidden="true"></div>
+              <div class="wheel" id="wheelHour" data-od-id="alarm-wheel-hours" tabindex="0" role="listbox" aria-label="Часы"></div>
+              <span class="colon" aria-hidden="true">:</span>
+              <div class="wheel" id="wheelMinute" data-od-id="alarm-wheel-minutes" tabindex="0" role="listbox" aria-label="Минуты"></div>
+            </div>
+            <div class="wheel-foot">
+              <span class="wf-time" id="alarmSummaryTime">07:30</span>
+              <span class="wf-sep" aria-hidden="true">·</span>
+              <span class="wf-meta" id="alarmSummaryMeta">вт, 17 нояб.</span>
+            </div>
+          </div>
+
+          <section class="block" aria-labelledby="daysTitle">
+            <div class="between">
+              <p class="eyebrow" id="daysTitle">Дни</p>
+              <span class="tiny" id="daysSummary">По будням</span>
+            </div>
+            <div class="days" role="group" aria-labelledby="daysTitle" data-od-id="alarm-days">
+              <button type="button" class="day" data-day="0" aria-pressed="true">Пн</button>
+              <button type="button" class="day" data-day="1" aria-pressed="true">Вт</button>
+              <button type="button" class="day" data-day="2" aria-pressed="true">Ср</button>
+              <button type="button" class="day" data-day="3" aria-pressed="true">Чт</button>
+              <button type="button" class="day" data-day="4" aria-pressed="true">Пт</button>
+              <button type="button" class="day" data-day="5" aria-pressed="false">Сб</button>
+              <button type="button" class="day" data-day="6" aria-pressed="false">Вс</button>
+            </div>
+          </section>
+
+          <div class="card window-card">
+            <div class="wc-head">
+              <div>
+                <p class="h3">Окно пробуждения</p>
+                <p class="meta" id="windowValue">за 30 минут до</p>
+              </div>
+              <svg class="ico wc-icon" aria-hidden="true"><use href="#i-sunrise"></use></svg>
+            </div>
+            <div class="seg" role="group" aria-label="Окно пробуждения">
+              <button type="button" data-window="15" aria-pressed="false">15 мин</button>
+              <button type="button" data-window="30" aria-pressed="true">30 мин</button>
+              <button type="button" data-window="45" aria-pressed="false">45 мин</button>
+            </div>
+          </div>
+
+          <p class="note">Будильник разбудит в лёгкой фазе сна внутри окна — мягким нарастанием звука.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/icons.js"></script>
+  <script src="../assets/app.js"></script>
+</body>
+</html>
