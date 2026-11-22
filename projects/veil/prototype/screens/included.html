@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=390, initial-scale=1" />
+  <title>Veil — что включено</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+<style data-prototype-transition>
+@keyframes prototype-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body {
+  animation: prototype-enter 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+html.prototype-leaving body {
+  opacity: 0;
+  transition: opacity 140ms ease;
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  html.prototype-leaving body { transition: none; }
+}
+</style>
+</head>
+<body data-screen="included">
+  <div class="app" data-od-id="screen-included">
+
+    <header class="hdr" data-od-id="included-header">
+      <a class="brand" href="home.html" aria-label="Veil, главная">
+        <span class="brand-mark" aria-hidden="true"></span>veil
+      </a>
+    </header>
+
+    <main class="app-body" data-od-id="included-content">
+      <div class="page-head">
+        <p class="eyebrow">Подписка</p>
+        <h1 class="page-title" data-od-id="included-title">Что включено</h1>
+        <p class="page-lead">Один аккаунт на все устройства. Без логов и скрытых ограничений.</p>
+      </div>
+
+      <div class="plan-card" data-od-id="included-plan">
+        <span class="plan-seal is-muted" data-plan-seal aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3Z" />
+          </svg>
+        </span>
+        <div class="plan-card-body">
+          <p class="mono-label">Текущий тариф</p>
+          <p class="plan-card-name" data-plan-name>Базовый</p>
+          <p class="plan-card-sub" data-if-plan="free" hidden>5 локаций · одно устройство</p>
+          <p class="plan-card-sub" data-if-plan="pro" hidden>Пробный период до 29&nbsp;ноября&nbsp;2026</p>
+        </div>
+      </div>
+
+      <p class="section-label">Сравнение</p>
+
+      <div class="cmp" data-od-id="included-comparison">
+        <div class="cmp-head">
+          <span>Возможность</span>
+          <span>Базовый</span>
+          <span>Pro</span>
+        </div>
+        <div class="cmp-row">
+          <span class="cmp-name">Локации</span>
+          <span class="cmp-cell">5</span>
+          <span class="cmp-cell is-pro">Все</span>
+        </div>
+        <div class="cmp-row">
+          <span class="cmp-name">Устройства</span>
+          <span class="cmp-cell">1</span>
+          <span class="cmp-cell is-pro">5</span>
+        </div>
+        <div class="cmp-row">
+          <span class="cmp-name">Трафик</span>
+          <span class="cmp-cell">∞</span>
+          <span class="cmp-cell is-pro">∞</span>
+        </div>
+        <div class="cmp-row">
+          <span class="cmp-name">Блокировка рекламы</span>
+          <span class="cmp-cell">—</span>
+          <span class="cmp-cell is-pro"><span class="mark">✓</span></span>
+        </div>
+        <div class="cmp-row">
+          <span class="cmp-name">Приоритетная поддержка</span>
+          <span class="cmp-cell">—</span>
+          <span class="cmp-cell is-pro"><span class="mark">✓</span></span>
+        </div>
+      </div>
+
+      <p class="note-line">Pro открывает Нью-Йорк и Токио, а также четыре дополнительных устройства.</p>
+    </main>
+
+    <div class="subfoot" data-if-plan="free" hidden data-od-id="included-cta-free">
+      <a class="btn btn-primary btn-block" href="paywall.html">Открыть Veil Pro</a>
+      <p class="fineprint">7 дней бесплатно · Отмена в любой момент</p>
+    </div>
+
+    <nav class="tabbar" aria-label="Основная навигация" data-od-id="tabbar">
+      <a class="tab" href="home.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1v-9.5Z" />
+        </svg>
+        <span>Главная</span>
+      </a>
+      <a class="tab" href="locations.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 21s7-5.4 7-11a7 7 0 1 0-14 0c0 5.6 7 11 7 11Z" />
+          <circle cx="12" cy="10" r="2.5" />
+        </svg>
+        <span>Локации</span>
+      </a>
+      <a class="tab" href="included.html" aria-current="page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3Z" />
+        </svg>
+        <span>Подписка</span>
+      </a>
+      <a class="tab" href="settings.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 7h9M17 7h3M4 17h3M11 17h9" />
+          <circle cx="15" cy="7" r="2" />
+          <circle cx="9" cy="17" r="2" />
+        </svg>
+        <span>Настройки</span>
+      </a>
+    </nav>
+
+  </div>
+
+  <script src="../assets/app.js"></script>
+<script data-prototype-transition>
+(() => {
+  if (window.__prototypeTransitions) return;
+  window.__prototypeTransitions = true;
+
+  document.addEventListener('click', (event) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      !(event.target instanceof Element)
+    ) {
+      return;
+    }
+
+    const link = event.target.closest('a[href]');
+    if (
+      !link ||
+      (link.target && link.target !== '_self') ||
+      link.hasAttribute('download')
+    ) {
+      return;
+    }
+
+    let url;
+    try {
+      url = new URL(link.href, location.href);
+    } catch {
+      return;
+    }
+
+    if (url.origin !== location.origin) return;
+    if (url.hash && url.pathname === location.pathname) return;
+
+    event.preventDefault();
+    document.documentElement.classList.add('prototype-leaving');
+
+    setTimeout(() => {
+      location.href = url.href;
+    }, 150);
+  });
+})();
+</script>
+</body>
+</html>

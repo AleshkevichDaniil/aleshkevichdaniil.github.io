@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leafy — Мои растения</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --primary:#3F7D4E;--on-primary:#FFFFFF;--primary-container:#D7E8D8;--on-primary-container:#1F4F2C;
+    --secondary-container:#E6E9DE;--on-secondary-container:#3F4A3A;
+    --tertiary:#8C5A2B;--tertiary-container:#F7DEC8;
+    --bg:#F7F5EF;--surface:#FFFDF8;--surface-container:#F1EEE6;--surface-container-high:#EBE7DD;
+    --on-surface:#1D211C;--on-surface-variant:#5E665C;--outline:#C8CFC2;--outline-variant:#DDE3D7;
+    --r-md:20px;--r-lg:24px;--r-xl:28px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Roboto',system-ui,-apple-system,'Segoe UI',sans-serif;}
+  body{background:#DCDAD2;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px;color:var(--on-surface);}
+  .phone{width:412px;height:915px;background:var(--bg);border-radius:40px;overflow:hidden;position:relative;box-shadow:0 24px 60px rgba(29,33,28,.22);display:flex;flex-direction:column;}
+  .status{height:32px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:13px;font-weight:500;color:var(--on-surface-variant);}
+  .topbar{padding:10px 20px 12px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-shrink:0;}
+  .topbar h1{font-size:28px;line-height:1.25;font-weight:700;letter-spacing:-.015em;}
+  .plus-link{color:var(--primary);font-size:14px;font-weight:500;text-decoration:none;padding:10px 14px;border-radius:22px;white-space:nowrap;}
+  .plus-link:hover{background:rgba(63,125,78,.08);}
+  .content{flex:1;overflow-y:auto;padding:0 16px 112px;}
+  .content::-webkit-scrollbar{width:0;}
+  .today{background:var(--primary-container);border-radius:var(--r-lg);padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px;}
+  .today h2{font-size:16px;font-weight:500;color:var(--on-primary-container);margin-bottom:4px;letter-spacing:-.01em;}
+  .today p{font-size:14px;color:var(--on-primary-container);opacity:.85;}
+  .today .badge{background:var(--primary);color:var(--on-primary);min-width:44px;height:44px;padding:0 12px;border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;}
+  .section-title{font-size:12px;font-weight:500;color:var(--on-surface-variant);margin:4px 4px 12px;letter-spacing:.07em;text-transform:uppercase;}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .card{background:var(--surface-container);border-radius:var(--r-md);padding:12px;text-decoration:none;color:inherit;display:block;transition:background .15s;}
+  .card:hover{background:var(--surface-container-high);}
+  .card:focus-visible{outline:2px solid var(--primary);outline-offset:2px;}
+  .photo{height:108px;border-radius:16px;background:linear-gradient(160deg,#E7F0E4,#D5E4D2);margin-bottom:10px;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  .photo svg{width:86px;height:86px;display:block;}
+  .card.wide{grid-column:span 2;display:flex;align-items:center;gap:14px;}
+  .card.wide .photo{width:104px;height:104px;flex-shrink:0;margin-bottom:0;}
+  .card.wide .photo svg{width:78px;height:78px;}
+  .card.wide .meta{min-width:0;}
+  .card h3{font-size:16px;font-weight:500;margin-bottom:2px;letter-spacing:-.01em;}
+  .card .species{font-size:13px;color:var(--on-surface-variant);margin-bottom:8px;}
+  .card.wide .species{margin-bottom:6px;}
+  .status-pill{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:500;line-height:1;}
+  .status-pill::before{content:'';width:6px;height:6px;border-radius:3px;background:currentColor;opacity:.7;}
+  .status-today{background:var(--tertiary-container);color:var(--tertiary);}
+  .status-later{background:var(--secondary-container);color:var(--on-secondary-container);}
+  .nav{height:80px;flex-shrink:0;background:var(--surface-container);display:flex;align-items:flex-start;justify-content:space-around;padding:12px 8px 0;}
+  .nav a{flex:1;min-height:48px;text-decoration:none;color:var(--on-surface-variant);display:flex;flex-direction:column;align-items:center;gap:4px;font-size:12px;font-weight:500;padding-top:2px;}
+  .nav .icon-wrap{width:64px;height:32px;border-radius:16px;display:flex;align-items:center;justify-content:center;}
+  .nav a.active{color:var(--on-primary-container);}
+  .nav a.active .icon-wrap{background:var(--primary-container);}
+  .nav svg{width:24px;height:24px;fill:currentColor;}
+  .fab{position:absolute;right:20px;bottom:96px;width:56px;height:56px;border-radius:18px;background:var(--primary-container);color:var(--on-primary-container);border:none;box-shadow:0 6px 16px rgba(29,33,28,.18);cursor:pointer;display:flex;align-items:center;justify-content:center;text-decoration:none;}
+  .fab:hover{background:#C9DFC9;}
+  .fab:active{transform:scale(.96);}
+  .fab svg{width:24px;height:24px;fill:currentColor;}
+</style>
+<style data-prototype-transition>
+@keyframes prototype-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body {
+  animation: prototype-enter 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+html.prototype-leaving body {
+  opacity: 0;
+  transition: opacity 140ms ease;
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  html.prototype-leaving body { transition: none; }
+}
+</style>
+</head>
+<body>
+<div class="phone" data-od-id="plants-screen">
+  <div class="status"><span>16:00</span><span>5G · 82%</span></div>
+  <header class="topbar">
+    <h1 data-od-id="plants-title">Мои растения</h1>
+    <a class="plus-link" href="paywall.html" data-od-id="open-paywall">Leafy Plus</a>
+  </header>
+  <main class="content">
+    <section class="today" data-od-id="today-block">
+      <div>
+        <h2>Сегодня нужно полить</h2>
+        <p>16 ноября · монстера и сансевиерия</p>
+      </div>
+      <div class="badge">2</div>
+    </section>
+    <div class="section-title">Коллекция · 5</div>
+    <div class="grid" data-od-id="plants-grid">
+      <a class="card" href="plant-detail.html?plant=monstera" data-od-id="plant-card-monstera">
+        <div class="photo"><svg viewBox="0 0 120 120" aria-hidden="true"><g fill="#3F7D4E"><path d="M60 62C48 50 40 36 44 24 56 30 62 44 62 60Z"/><path d="M60 62C72 50 80 36 76 24 64 30 58 44 58 60Z"/><path d="M58 66C44 66 32 74 28 88 42 88 54 80 58 68Z"/><path d="M62 66C76 66 88 74 92 88 78 88 66 80 62 68Z"/><path d="M60 62C56 76 56 88 60 102 64 88 64 76 60 62Z"/></g><g stroke="#D7E8D8" stroke-width="1.6" stroke-linecap="round" opacity=".9"><path d="M60 62 46 32"/><path d="M60 62 74 32"/><path d="M59 68 36 82"/><path d="M61 68 84 82"/></g><path d="M60 100C60 106 59 111 57 116" stroke="#2F5C3A" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg></div>
+        <h3>Монстера</h3>
+        <div class="species">Monstera deliciosa</div>
+        <span class="status-pill status-today">Полить сегодня</span>
+      </a>
+      <a class="card" href="plant-detail.html?plant=ficus" data-od-id="plant-card-ficus">
+        <div class="photo"><svg viewBox="0 0 120 120" aria-hidden="true"><path d="M60 116C60 92 60 60 60 26" stroke="#2F5C3A" stroke-width="2.6" fill="none" stroke-linecap="round"/><g fill="#3F7D4E"><ellipse cx="44" cy="42" rx="16" ry="9" transform="rotate(-32 44 42)"/><ellipse cx="42" cy="70" rx="15" ry="8.5" transform="rotate(-26 42 70)"/></g><g fill="#356A42"><ellipse cx="76" cy="54" rx="16" ry="9" transform="rotate(28 76 54)"/><ellipse cx="78" cy="82" rx="15" ry="8.5" transform="rotate(24 78 82)"/></g><ellipse cx="60" cy="22" rx="14" ry="9" fill="#4A8A5A"/><g stroke="#D7E8D8" stroke-width="1.3" stroke-linecap="round" opacity=".85"><path d="M60 112 60 30"/><path d="M60 60 46 38"/><path d="M60 74 74 56"/></g></svg></div>
+        <h3>Фикус</h3>
+        <div class="species">Ficus elastica</div>
+        <span class="status-pill status-later">Через 3 дня</span>
+      </a>
+      <a class="card" href="plant-detail.html?plant=zamioculcas" data-od-id="plant-card-zamioculcas">
+        <div class="photo"><svg viewBox="0 0 120 120" aria-hidden="true"><path d="M60 116C60 92 60 58 60 24" stroke="#2F5C3A" stroke-width="2.4" fill="none" stroke-linecap="round"/><g fill="#3F7D4E"><ellipse cx="47" cy="34" rx="11" ry="5" transform="rotate(-38 47 34)"/><ellipse cx="47" cy="52" rx="11" ry="5" transform="rotate(-38 47 52)"/><ellipse cx="47" cy="70" rx="11" ry="5" transform="rotate(-38 47 70)"/><ellipse cx="47" cy="88" rx="10" ry="4.6" transform="rotate(-38 47 88)"/></g><g fill="#356A42"><ellipse cx="73" cy="34" rx="11" ry="5" transform="rotate(38 73 34)"/><ellipse cx="73" cy="52" rx="11" ry="5" transform="rotate(38 73 52)"/><ellipse cx="73" cy="70" rx="11" ry="5" transform="rotate(38 73 70)"/><ellipse cx="73" cy="88" rx="10" ry="4.6" transform="rotate(38 73 88)"/></g><ellipse cx="60" cy="20" rx="5" ry="10" fill="#4A8A5A"/></svg></div>
+        <h3>Замиокулькас</h3>
+        <div class="species">Zamioculcas zamiifolia</div>
+        <span class="status-pill status-later">Через 5 дней</span>
+      </a>
+      <a class="card" href="plant-detail.html?plant=sansevieria" data-od-id="plant-card-sansevieria">
+        <div class="photo"><svg viewBox="0 0 120 120" aria-hidden="true"><g fill="#3F7D4E"><path d="M60 112C57 84 56 54 60 22 64 54 63 84 60 112Z"/><path d="M46 112C42 88 40 62 44 36 50 64 50 90 48 112Z"/><path d="M74 112C78 88 80 62 76 36 70 64 70 90 72 112Z"/></g><g fill="#356A42"><path d="M34 112C32 94 32 76 35 58 39 78 39 96 37 112Z"/><path d="M86 112C88 94 88 76 85 58 81 78 81 96 83 112Z"/></g><g stroke="#D7E8D8" stroke-width="1.4" opacity=".8"><path d="M60 30 60 104"/><path d="M46 44 46 104"/><path d="M74 44 74 104"/></g></svg></div>
+        <h3>Сансевиерия</h3>
+        <div class="species">Sansevieria trifasciata</div>
+        <span class="status-pill status-today">Полить сегодня</span>
+      </a>
+      <a class="card wide" href="plant-detail.html?plant=orchid" data-od-id="plant-card-orchid">
+        <div class="photo"><svg viewBox="0 0 120 120" aria-hidden="true"><path d="M34 116C24 96 24 76 32 60 40 78 42 98 42 116Z" fill="#356A42"/><path d="M86 116C96 96 96 76 88 60 80 78 78 98 78 116Z" fill="#3F7D4E"/><path d="M32 116C50 92 72 68 94 40" stroke="#2F5C3A" stroke-width="2.4" fill="none" stroke-linecap="round"/><g fill="#E7D3DE"><ellipse cx="94" cy="36" rx="8" ry="6.5"/><ellipse cx="86" cy="44" rx="8" ry="6.5"/><ellipse cx="99" cy="45" rx="8" ry="6.5"/><ellipse cx="92" cy="48" rx="7" ry="5.5"/><ellipse cx="94" cy="42" rx="3.4" ry="3" fill="#B98BA6"/></g><g fill="#E7D3DE"><ellipse cx="76" cy="62" rx="7" ry="5.6"/><ellipse cx="69" cy="69" rx="7" ry="5.6"/><ellipse cx="80" cy="70" rx="7" ry="5.6"/><ellipse cx="75" cy="73" rx="6" ry="4.6"/><ellipse cx="76" cy="68" rx="2.8" ry="2.5" fill="#B98BA6"/></g><g fill="#E7D3DE"><ellipse cx="60" cy="82" rx="6" ry="4.8"/><ellipse cx="54" cy="88" rx="6" ry="4.8"/><ellipse cx="64" cy="89" rx="6" ry="4.8"/><ellipse cx="59" cy="92" rx="5" ry="4"/><ellipse cx="60" cy="87" rx="2.4" ry="2.2" fill="#B98BA6"/></g></svg></div>
+        <div class="meta">
+          <h3>Орхидея</h3>
+          <div class="species">Phalaenopsis</div>
+          <span class="status-pill status-later">Через 2 дня</span>
+        </div>
+      </a>
+    </div>
+  </main>
+  <a class="fab" href="add-plant.html" data-od-id="fab-add" aria-label="Добавить растение"><svg viewBox="0 0 24 24"><path d="M11 5h2v6h6v2h-6v6h-2v-6H5v-2h6z"/></svg></a>
+  <nav class="nav" data-od-id="bottom-nav">
+    <a href="plants.html" class="active" data-od-id="nav-plants"><span class="icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 22a7 7 0 007-7c0-4-3-6.5-7-11-4 4.5-7 7-7 11a7 7 0 007 7z"/></svg></span>Растения</a>
+    <a href="calendar.html" data-od-id="nav-calendar"><span class="icon-wrap"><svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2zm0 16H5V9h14v11z"/></svg></span>Календарь</a>
+    <a href="paywall.html" data-od-id="nav-plus"><span class="icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6.2 4.5 2.4 7.3L12 16.5 5.8 21l2.4-7.3L2 9.2h7.6z"/></svg></span>Plus</a>
+  </nav>
+</div>
+<script data-prototype-transition>
+(() => {
+  if (window.__prototypeTransitions) return;
+  window.__prototypeTransitions = true;
+
+  document.addEventListener('click', (event) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      !(event.target instanceof Element)
+    ) {
+      return;
+    }
+
+    const link = event.target.closest('a[href]');
+    if (
+      !link ||
+      (link.target && link.target !== '_self') ||
+      link.hasAttribute('download')
+    ) {
+      return;
+    }
+
+    let url;
+    try {
+      url = new URL(link.href, location.href);
+    } catch {
+      return;
+    }
+
+    if (url.origin !== location.origin) return;
+    if (url.hash && url.pathname === location.pathname) return;
+
+    event.preventDefault();
+    document.documentElement.classList.add('prototype-leaving');
+
+    setTimeout(() => {
+      location.href = url.href;
+    }, 150);
+  });
+})();
+</script>
+</body>
+</html>

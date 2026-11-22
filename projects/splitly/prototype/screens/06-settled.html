@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=390, initial-scale=1">
+  <title>Splitly — все расчёты закрыты</title>
+  <link rel="stylesheet" href="../assets/splitly.css">
+<style data-prototype-transition>
+@keyframes prototype-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body {
+  animation: prototype-enter 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+html.prototype-leaving body {
+  opacity: 0;
+  transition: opacity 140ms ease;
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  html.prototype-leaving body { transition: none; }
+}
+</style>
+</head>
+<body class="screen-body">
+  <div class="screen" data-od-id="settled-screen">
+
+    <header class="app-header" data-od-id="settled-header">
+      <a class="icon-btn" href="02-groups.html" aria-label="К списку групп" data-od-id="settled-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M15 5l-7 7 7 7"></path>
+        </svg>
+      </a>
+      <div class="app-header-title">Расчёты</div>
+      <span aria-hidden="true" style="width: 44px; flex: 0 0 44px;"></span>
+    </header>
+
+    <main class="empty-screen" data-od-id="settled-content">
+      <div class="empty-art" aria-hidden="true">
+        <span class="check-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12.5l4.2 4.2L19 7"></path>
+          </svg>
+        </span>
+      </div>
+
+      <p class="empty-kicker">22 ноября 2026</p>
+      <h1 class="empty-title">Все расчёты закрыты</h1>
+      <p class="empty-copy">Марк перевёл 2 150 ₽. В группе «Поездка в Тбилиси» больше нет долгов — можно планировать следующую поездку.</p>
+
+      <div class="empty-receipt" data-od-id="settled-receipt">
+        <div class="empty-receipt-row">
+          <span>Переводов</span>
+          <strong>2</strong>
+        </div>
+        <div class="empty-receipt-row">
+          <span>Сумма</span>
+          <strong>2 150 ₽</strong>
+        </div>
+        <div class="empty-receipt-row">
+          <span>Осталось долгов</span>
+          <strong>0 ₽</strong>
+        </div>
+      </div>
+    </main>
+
+    <footer class="screen-footer" data-od-id="settled-footer">
+      <a class="btn btn-primary btn-block" href="03-group.html" data-od-id="settled-back-group">Вернуться в группу</a>
+      <a class="btn btn-ghost btn-block" href="02-groups.html" data-od-id="settled-back-groups">К списку групп</a>
+    </footer>
+  </div>
+<script data-prototype-transition>
+(() => {
+  if (window.__prototypeTransitions) return;
+  window.__prototypeTransitions = true;
+
+  document.addEventListener('click', (event) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      !(event.target instanceof Element)
+    ) {
+      return;
+    }
+
+    const link = event.target.closest('a[href]');
+    if (
+      !link ||
+      (link.target && link.target !== '_self') ||
+      link.hasAttribute('download')
+    ) {
+      return;
+    }
+
+    let url;
+    try {
+      url = new URL(link.href, location.href);
+    } catch {
+      return;
+    }
+
+    if (url.origin !== location.origin) return;
+    if (url.hash && url.pathname === location.pathname) return;
+
+    event.preventDefault();
+    document.documentElement.classList.add('prototype-leaving');
+
+    setTimeout(() => {
+      location.href = url.href;
+    }, 150);
+  });
+})();
+</script>
+</body>
+</html>

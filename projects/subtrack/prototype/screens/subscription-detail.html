@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Подписка — SubTrack</title>
+  <link rel="stylesheet" href="../assets/subtrack.css" />
+<style data-prototype-transition>
+@keyframes prototype-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body {
+  animation: prototype-enter 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+html.prototype-leaving body {
+  opacity: 0;
+  transition: opacity 140ms ease;
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  html.prototype-leaving body { transition: none; }
+}
+</style>
+</head>
+<body>
+  <div class="app">
+    <div class="content">
+      <header class="nav" data-od-id="detail-header">
+        <div class="nav-row">
+          <a class="nav-action" href="subscriptions.html" data-od-id="detail-back" aria-label="Назад">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+          </a>
+          <span class="nav-title-sm" id="navName">Подписка</span>
+          <span style="width: 44px;"></span>
+        </div>
+      </header>
+
+      <section class="pad" data-od-id="detail-hero">
+        <div class="card detail-hero">
+          <span class="logo lg" id="dLogo" style="background: var(--accent)">?</span>
+          <div class="detail-name" id="dName">Подписка</div>
+          <div class="detail-cat" id="dCat">—</div>
+          <span class="badge-status"><span class="dot"></span>Активна</span>
+        </div>
+      </section>
+
+      <section class="pad" style="padding-top: 14px;" data-od-id="detail-price">
+        <div class="card detail-price">
+          <div class="amount num" id="dAmount">0 ₽</div>
+          <div class="per" id="dPer">в месяц</div>
+          <div class="detail-next"><span>Следующее списание <b id="dNext">—</b></span><span class="detail-in" id="dIn">—</span></div>
+        </div>
+      </section>
+
+      <section class="pad" style="padding-top: 14px;" data-od-id="detail-info">
+        <div class="section-label">Детали</div>
+        <div class="card">
+          <div class="info-row"><span class="k">Период</span><span class="v" id="dPeriod">Ежемесячно</span></div>
+          <div class="info-row"><span class="k">Категория</span><span class="v" id="dCategory">—</span></div>
+          <div class="info-row"><span class="k">Подключена</span><span class="v num" id="dSince">—</span></div>
+          <div class="info-row">
+            <span class="k">Напоминания</span>
+            <button class="switch" id="dNotify" aria-pressed="true" aria-label="Напоминания"></button>
+          </div>
+        </div>
+      </section>
+
+      <section class="pad" style="padding-top: 14px;" data-od-id="detail-history">
+        <div class="section-label">История списаний</div>
+        <div class="card" id="dHistory"></div>
+      </section>
+
+      <section class="pad" style="padding-top: 18px; padding-bottom: 28px;" data-od-id="detail-danger">
+        <button class="btn btn-danger" id="cancelBtn" data-od-id="cancel-subscription">Отменить подписку</button>
+      </section>
+    </div>
+
+    <div class="modal" id="modal" data-od-id="cancel-modal">
+      <div class="modal-card">
+        <div class="modal-title">Отменить подписку?</div>
+        <div class="modal-text" id="modalText">Подписка будет удалена из вашего списка.</div>
+        <div class="modal-actions">
+          <button class="btn btn-secondary" id="modalKeep">Оставить</button>
+          <button class="btn btn-danger" id="modalCancel">Отменить</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast">Подписка отменена</div>
+  </div>
+
+  <script>
+    (function () {
+      var DATA = {
+        'spotify':         { name: 'Spotify',         letter: 'S', color: 'var(--c-spotify)', category: 'Музыка',      price: 199,  per: 'в месяц', next: '16.11.2026', since: '14.03.2025', history: [['16.10.2026', 199], ['16.09.2026', 199], ['16.08.2026', 199]] },
+        'vk-music':        { name: 'VK Музыка',       letter: 'V', color: 'var(--c-vk)',      category: 'Музыка',      price: 159,  per: 'в месяц', next: '17.11.2026', since: '02.05.2024', history: [['17.10.2026', 159], ['17.09.2026', 159], ['17.08.2026', 159]] },
+        'netflix':         { name: 'Netflix',         letter: 'N', color: 'var(--c-netflix)', category: 'Видео',       price: 1590, per: 'в месяц', next: '18.11.2026', since: '21.06.2023', history: [['18.10.2026', 1590], ['18.09.2026', 1590], ['18.08.2026', 1590]] },
+        'youtube-premium': { name: 'YouTube Premium', letter: 'Y', color: 'var(--c-youtube)', category: 'Видео',       price: 199,  per: 'в месяц', next: '20.11.2026', since: '09.11.2024', history: [['20.10.2026', 199], ['20.09.2026', 199], ['20.08.2026', 199]] },
+        'discord-nitro':   { name: 'Discord Nitro',   letter: 'D', color: 'var(--c-discord)', category: 'Игры',        price: 399,  per: 'в месяц', next: '22.11.2026', since: '12.02.2025', history: [['22.10.2026', 399], ['22.09.2026', 399], ['22.08.2026', 399]] },
+        'icloud':          { name: 'iCloud+ 50 ГБ',   letter: 'i', color: 'var(--c-icloud)',  category: 'Облако',      price: 199,  per: 'в месяц', next: '24.11.2026', since: '05.07.2024', history: [['24.10.2026', 199], ['24.09.2026', 199], ['24.08.2026', 199]] },
+        'yandex-plus':     { name: 'Яндекс Плюс',     letter: 'Я', color: 'var(--c-yandex)',  category: 'Мультимедиа', price: 299,  per: 'в месяц', next: '26.11.2026', since: '19.04.2025', history: [['26.10.2026', 299], ['26.09.2026', 299], ['26.08.2026', 299]] },
+        'apple-tv':        { name: 'Apple TV+',       letter: 'A', color: 'var(--c-apple)',   category: 'Видео',       price: 199,  per: 'в месяц', next: '29.11.2026', since: '30.08.2024', history: [['29.10.2026', 199], ['29.09.2026', 199], ['29.08.2026', 199]] }
+      };
+
+      var TODAY = new Date(2026, 10, 15); // 15.11.2026
+
+      function parseDMY(s) {
+        var p = s.split('.');
+        return new Date(Number(p[2]), Number(p[1]) - 1, Number(p[0]));
+      }
+      function fmt(n) { return n.toLocaleString('ru-RU'); }
+      function daysUntil(s) {
+        var d = parseDMY(s);
+        return Math.round((d.getTime() - TODAY.getTime()) / 86400000);
+      }
+      function plural(n, one, few, many) {
+        var m = Math.abs(n) % 100, d = m % 10;
+        if (m > 10 && m < 20) return many;
+        if (d > 1 && d < 5) return few;
+        if (d === 1) return one;
+        return many;
+      }
+
+      var id = 'netflix';
+      try { id = new URLSearchParams(location.search).get('id') || 'netflix'; } catch (e) {}
+      var sub = DATA[id] || DATA['netflix'];
+
+      document.getElementById('navName').textContent = sub.name;
+      var logo = document.getElementById('dLogo');
+      logo.textContent = sub.letter;
+      logo.style.background = sub.color;
+      if (id === 'yandex-plus') logo.style.color = 'var(--fg)';
+      document.getElementById('dName').textContent = sub.name;
+      document.getElementById('dCat').textContent = sub.category;
+      document.getElementById('dAmount').textContent = fmt(sub.price) + ' ₽';
+      document.getElementById('dPer').textContent = sub.per;
+      document.getElementById('dNext').textContent = sub.next;
+      document.getElementById('dPeriod').textContent = sub.per === 'в год' ? 'Ежегодно' : 'Ежемесячно';
+      document.getElementById('dCategory').textContent = sub.category;
+      document.getElementById('dSince').textContent = sub.since;
+
+      var days = daysUntil(sub.next);
+      document.getElementById('dIn').textContent = days === 0
+        ? 'сегодня'
+        : 'через ' + days + ' ' + plural(days, 'день', 'дня', 'дней');
+
+      var history = document.getElementById('dHistory');
+      sub.history.forEach(function (h) {
+        var row = document.createElement('div');
+        row.className = 'info-row';
+        var k = document.createElement('span'); k.className = 'k num'; k.textContent = h[0];
+        var v = document.createElement('span'); v.className = 'v num'; v.textContent = fmt(h[1]) + ' ₽';
+        row.appendChild(k); row.appendChild(v);
+        history.appendChild(row);
+      });
+
+      document.getElementById('modalText').textContent =
+        sub.name + ' будет удалена из вашего списка. История списаний сохранится.';
+
+      var modal = document.getElementById('modal');
+      var toast = document.getElementById('toast');
+      document.getElementById('cancelBtn').addEventListener('click', function () { modal.classList.add('show'); });
+      document.getElementById('modalKeep').addEventListener('click', function () { modal.classList.remove('show'); });
+      modal.addEventListener('click', function (e) { if (e.target === modal) modal.classList.remove('show'); });
+      document.getElementById('modalCancel').addEventListener('click', function () {
+        modal.classList.remove('show');
+        toast.textContent = sub.name + ' отменена';
+        toast.classList.add('show');
+        setTimeout(function () { window.location.href = 'subscriptions.html'; }, 1100);
+      });
+
+      var notify = document.getElementById('dNotify');
+      notify.addEventListener('click', function () {
+        notify.setAttribute('aria-pressed', String(notify.getAttribute('aria-pressed') !== 'true'));
+      });
+    })();
+  </script>
+<script data-prototype-transition>
+(() => {
+  if (window.__prototypeTransitions) return;
+  window.__prototypeTransitions = true;
+
+  document.addEventListener('click', (event) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      !(event.target instanceof Element)
+    ) {
+      return;
+    }
+
+    const link = event.target.closest('a[href]');
+    if (
+      !link ||
+      (link.target && link.target !== '_self') ||
+      link.hasAttribute('download')
+    ) {
+      return;
+    }
+
+    let url;
+    try {
+      url = new URL(link.href, location.href);
+    } catch {
+      return;
+    }
+
+    if (url.origin !== location.origin) return;
+    if (url.hash && url.pathname === location.pathname) return;
+
+    event.preventDefault();
+    document.documentElement.classList.add('prototype-leaving');
+
+    setTimeout(() => {
+      location.href = url.href;
+    }, 150);
+  });
+})();
+</script>
+</body>
+</html>

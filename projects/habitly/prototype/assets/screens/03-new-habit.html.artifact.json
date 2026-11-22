@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "screens/03-new-habit.html",
+  "entry": "screens/03-new-habit.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-11-22T18:10:55.796Z",
+  "updatedAt": "2026-11-22T18:10:55.796Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

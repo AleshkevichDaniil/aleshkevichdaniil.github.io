@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interval — Итоги</title>
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="../assets/screens.css">
+<style data-prototype-transition>
+@keyframes prototype-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body {
+  animation: prototype-enter 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+html.prototype-leaving body {
+  opacity: 0;
+  transition: opacity 140ms ease;
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  html.prototype-leaving body { transition: none; }
+}
+</style>
+</head>
+<body class="screen-page" data-screen="results">
+
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M7 7l10 10M17 7 7 17"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.4 4.6 4.6L19 7"/></symbol>
+</svg>
+
+<div class="page">
+  <div class="stage">
+    <div class="app-shell">
+      <div class="app" data-view="results">
+
+        <header class="app-bar">
+          <div class="bar-heading">
+            <p class="date" id="resultsDateHead">21 ноября, 19:20</p>
+            <h1 class="app-title" id="resultsTitle" data-od-id="results-title">Тренировка завершена</h1>
+          </div>
+          <a class="icon-btn" href="home.html" aria-label="На главную"><svg class="icon"><use href="#i-close"/></svg></a>
+        </header>
+
+        <main class="content results-content">
+          <section class="result-hero">
+            <span class="section-label">Общее время</span>
+            <strong class="result-time num" id="resultTime">07:50</strong>
+            <h2 class="result-name" id="resultName">Спринт 40/20</h2>
+            <span class="result-badge"><svg class="icon"><use href="#i-check"/></svg><span id="resultRoundsBadge">8 из 8 раундов</span></span>
+          </section>
+
+          <div class="stats-grid">
+            <div class="stat"><span>Работа</span><strong id="statWork">5:20</strong></div>
+            <div class="stat"><span>Отдых</span><strong id="statRest">2:20</strong></div>
+            <div class="stat"><span>Раундов</span><strong id="statRounds">8 / 8</strong></div>
+            <div class="stat"><span>Интервалов</span><strong id="statIntervals">15</strong></div>
+          </div>
+
+          <section class="result-intervals card" aria-label="Структура тренировки">
+            <div class="result-intervals-top">
+              <span class="section-label">Интервалы</span>
+              <span class="num">работа / отдых</span>
+            </div>
+            <div class="result-strip" id="resultStrip" aria-hidden="true"><span class="is-work" style="flex-grow:2"></span><span style="flex-grow:1"></span><span class="is-work" style="flex-grow:2"></span><span style="flex-grow:1"></span><span class="is-work" style="flex-grow:2"></span><span style="flex-grow:1"></span><span class="is-work" style="flex-grow:2"></span><span style="flex-grow:1"></span><span class="is-work" style="flex-grow:2"></span><span style="flex-grow:1"></span><span class="is-work" style="flex-grow:2"></span><span style="flex-grow:1"></span><span class="is-work" style="flex-grow:2"></span><span style="flex-grow:1"></span><span class="is-work" style="flex-grow:2"></span></div>
+          </section>
+        </main>
+
+        <footer class="app-footer app-footer--bordered">
+          <div class="result-actions">
+            <button class="btn btn--primary btn--block" id="saveBtn" data-od-id="results-save">Сохранить в историю</button>
+            <a class="btn btn--ghost btn--block" id="againBtn" href="timer.html?preset=tabata&fresh=1" data-od-id="results-repeat">Повторить</a>
+          </div>
+        </footer>
+
+      </div>
+    </div>
+  </div>
+
+  <p class="page-note"><a href="onboarding.html">← Все экраны</a><span class="page-note__sep">·</span><span>06 · Итоги</span></p>
+</div>
+
+<script src="../assets/app.js"></script>
+<script data-prototype-transition>
+(() => {
+  if (window.__prototypeTransitions) return;
+  window.__prototypeTransitions = true;
+
+  document.addEventListener('click', (event) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      !(event.target instanceof Element)
+    ) {
+      return;
+    }
+
+    const link = event.target.closest('a[href]');
+    if (
+      !link ||
+      (link.target && link.target !== '_self') ||
+      link.hasAttribute('download')
+    ) {
+      return;
+    }
+
+    let url;
+    try {
+      url = new URL(link.href, location.href);
+    } catch {
+      return;
+    }
+
+    if (url.origin !== location.origin) return;
+    if (url.hash && url.pathname === location.pathname) return;
+
+    event.preventDefault();
+    document.documentElement.classList.add('prototype-leaving');
+
+    setTimeout(() => {
+      location.href = url.href;
+    }, 150);
+  });
+})();
+</script>
+</body>
+</html>

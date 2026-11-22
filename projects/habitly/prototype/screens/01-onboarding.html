@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=390, initial-scale=1" />
+  <title>Habitly — Онбординг</title>
+  <link rel="stylesheet" href="../assets/habitly.css" />
+<style data-prototype-transition>
+@keyframes prototype-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body {
+  animation: prototype-enter 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+html.prototype-leaving body {
+  opacity: 0;
+  transition: opacity 140ms ease;
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  html.prototype-leaving body { transition: none; }
+}
+</style>
+</head>
+<body class="screen-page">
+  <div class="screen" data-od-id="onboarding-screen">
+
+    <header class="app-header" data-od-id="onboarding-header">
+      <span class="brand"><span class="brand-dot"></span>Habitly</span>
+    </header>
+
+    <main class="app-body" data-od-id="onboarding-content">
+
+      <section class="onboarding-hero" data-od-id="onboarding-hero">
+        <h1 class="display">Маленькие шаги.<br />Каждый день.</h1>
+        <p class="lead">Отмечайте привычки за пару секунд и смотрите, как складывается серия. Без давления и лишних экранов.</p>
+      </section>
+
+      <section class="preview" data-od-id="onboarding-preview" aria-label="Пример недели с привычками">
+        <div class="preview-top">
+          <div class="preview-number"><span class="num">28</span><span>дней<br />подряд</span></div>
+          <span class="preview-label">ваша неделя</span>
+        </div>
+        <div class="week">
+          <span class="week-day">Пн<span class="week-dot on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></span>
+          <span class="week-day">Вт<span class="week-dot on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></span>
+          <span class="week-day">Ср<span class="week-dot on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></span>
+          <span class="week-day">Чт<span class="week-dot on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></span>
+          <span class="week-day">Пт<span class="week-dot on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></span>
+          <span class="week-day">Сб<span class="week-dot on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></span>
+          <span class="week-day">Вс<span class="week-dot today on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></span>
+        </div>
+        <div class="preview-mini" aria-hidden="true">
+          <span class="tile t-sage"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4" /><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8" /></svg></span>
+          <span class="mini-text"><b>Утренняя растяжка</b><span>28 дней подряд</span></span>
+          <span class="mini-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5" /></svg></span>
+        </div>
+      </section>
+
+      <section class="feature-list" data-od-id="onboarding-features">
+        <div class="feature-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.6 2.6L16 9.5"/></svg>
+          <p><strong>Отметка в один тап.</strong><span>Список на сегодня без лишних настроек.</span></p>
+        </div>
+        <div class="feature-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c3.2 3.6 5.4 6.3 5.4 9.3a5.4 5.4 0 0 1-10.8 0C6.6 9.3 8.8 6.6 12 3z"/></svg>
+          <p><strong>Серия, которую видно.</strong><span>Считаем дни подряд и держим темп недели.</span></p>
+        </div>
+        <div class="feature-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M12 20V4M20 20v-7"/></svg>
+          <p><strong>Статистика за месяц.</strong><span>Понятно, где привычка держится, а где нет.</span></p>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="app-footer bare" data-od-id="onboarding-footer">
+      <a class="btn btn-primary btn-block" href="02-today.html">Начать</a>
+      <p class="micro">Бесплатно. Первая привычка — за минуту.</p>
+    </footer>
+
+  </div>
+<script data-prototype-transition>
+(() => {
+  if (window.__prototypeTransitions) return;
+  window.__prototypeTransitions = true;
+
+  document.addEventListener('click', (event) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      !(event.target instanceof Element)
+    ) {
+      return;
+    }
+
+    const link = event.target.closest('a[href]');
+    if (
+      !link ||
+      (link.target && link.target !== '_self') ||
+      link.hasAttribute('download')
+    ) {
+      return;
+    }
+
+    let url;
+    try {
+      url = new URL(link.href, location.href);
+    } catch {
+      return;
+    }
+
+    if (url.origin !== location.origin) return;
+    if (url.hash && url.pathname === location.pathname) return;
+
+    event.preventDefault();
+    document.documentElement.classList.add('prototype-leaving');
+
+    setTimeout(() => {
+      location.href = url.href;
+    }, 150);
+  });
+})();
+</script>
+</body>
+</html>

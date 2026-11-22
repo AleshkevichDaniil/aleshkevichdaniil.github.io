@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interval — Подписка Pro</title>
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="../assets/screens.css">
+<style data-prototype-transition>
+@keyframes prototype-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body {
+  animation: prototype-enter 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+html.prototype-leaving body {
+  opacity: 0;
+  transition: opacity 140ms ease;
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  html.prototype-leaving body { transition: none; }
+}
+</style>
+</head>
+<body class="screen-page" data-screen="paywall">
+
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M7 7l10 10M17 7 7 17"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.4 4.6 4.6L19 7"/></symbol>
+</svg>
+
+<div class="page">
+  <div class="stage">
+    <div class="app-shell">
+      <div class="app paywall" data-view="paywall">
+
+        <header class="app-bar">
+          <span class="wordmark">INTERVAL</span>
+          <a class="icon-btn" id="closePaywall" href="home.html" aria-label="Закрыть"><svg class="icon"><use href="#i-close"/></svg></a>
+        </header>
+
+        <main class="content paywall-content">
+          <div class="paywall-hero">
+            <span class="pro-tag">PRO</span>
+            <h1 class="paywall-title" id="paywallTitle" data-od-id="paywall-title">Больше,<br>чем таймер</h1>
+            <p class="paywall-sub">Пресеты без ограничений, полная история и аналитика, которая показывает реальный прогресс.</p>
+          </div>
+
+          <ul class="paywall-features">
+            <li><svg class="icon"><use href="#i-check"/></svg>Неограниченные пресеты и папки</li>
+            <li><svg class="icon"><use href="#i-check"/></svg>Аналитика по неделям и месяцам</li>
+            <li><svg class="icon"><use href="#i-check"/></svg>Синхронизация между устройствами</li>
+          </ul>
+
+          <div class="plans" data-od-id="paywall-plans">
+            <span class="section-label plans-title">Тариф</span>
+            <label class="plan" data-od-id="plan-year">
+              <input type="radio" name="plan" value="year" checked>
+              <span class="plan-info"><span class="plan-name">Год</span><span class="plan-note">207 ₽ в месяц</span></span>
+              <span class="plan-badge">−48%</span>
+              <span class="plan-price">2 490 ₽</span>
+            </label>
+            <label class="plan" data-od-id="plan-month">
+              <input type="radio" name="plan" value="month">
+              <span class="plan-info"><span class="plan-name">Месяц</span><span class="plan-note">оплата каждый месяц</span></span>
+              <span class="plan-price">399 ₽</span>
+            </label>
+          </div>
+        </main>
+
+        <footer class="app-footer paywall-footer">
+          <p class="paywall-note">Списание после подтверждения. Отменить можно в любой момент.</p>
+          <button class="btn btn--primary btn--block" id="buyBtn" data-od-id="paywall-buy">Подключить Pro</button>
+          <button class="text-btn" id="restoreBtn">Восстановить покупку</button>
+        </footer>
+
+        <div class="overlay" id="proLayer" hidden>
+          <div class="overlay-card" role="dialog" aria-modal="true" aria-labelledby="proTitle">
+            <span class="success-icon"><svg class="icon"><use href="#i-check"/></svg></span>
+            <h2 id="proTitle">Pro активирован</h2>
+            <p class="overlay-text">Пресеты без ограничений, полная история и аналитика уже доступны.</p>
+            <a class="btn btn--primary btn--block" id="proContinue" href="home.html">Продолжить</a>
+          </div>
+        </div>
+
+        <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+      </div>
+    </div>
+  </div>
+
+  <p class="page-note"><a href="onboarding.html">← Все экраны</a><span class="page-note__sep">·</span><span>08 · Подписка</span></p>
+</div>
+
+<script src="../assets/app.js"></script>
+<script data-prototype-transition>
+(() => {
+  if (window.__prototypeTransitions) return;
+  window.__prototypeTransitions = true;
+
+  document.addEventListener('click', (event) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      !(event.target instanceof Element)
+    ) {
+      return;
+    }
+
+    const link = event.target.closest('a[href]');
+    if (
+      !link ||
+      (link.target && link.target !== '_self') ||
+      link.hasAttribute('download')
+    ) {
+      return;
+    }
+
+    let url;
+    try {
+      url = new URL(link.href, location.href);
+    } catch {
+      return;
+    }
+
+    if (url.origin !== location.origin) return;
+    if (url.hash && url.pathname === location.pathname) return;
+
+    event.preventDefault();
+    document.documentElement.classList.add('prototype-leaving');
+
+    setTimeout(() => {
+      location.href = url.href;
+    }, 150);
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+/* Screen 07 — settings */
+.settings-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 4px;
+}
+
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+}
+.avatar {
+  width: 46px;
+  height: 46px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--fg);
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 650;
+  letter-spacing: 0.01em;
+}
+.profile-body { min-width: 0; }
+.profile-body b { display: block; font-size: 15.5px; font-weight: 600; letter-spacing: -0.015em; }
+.profile-body span { display: block; margin-top: 2px; font-size: 12.5px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.plan-card {
+  display: block;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+.plan-card:hover { background: color-mix(in oklch, var(--accent) 12%, var(--surface)); border-color: var(--accent); }
+.plan-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.plan-card .row-between { gap: 8px; }
+.plan-card b { display: block; font-family: var(--font-display); font-size: 15.5px; font-weight: 650; letter-spacing: -0.018em; color: var(--fg); }
+.plan-card .plan-sub { display: block; margin-top: 2px; font-size: 12px; color: var(--muted); }
+.plan-open { display: inline-flex; align-items: center; gap: 2px; font-size: 12.5px; font-weight: 600; color: var(--accent-ink); white-space: nowrap; }
+.plan-open svg { width: 15px; height: 15px; }
+.meter {
+  height: 5px;
+  margin-top: 10px;
+  border-radius: 999px;
+  background: oklch(1 0 0 / 0.85);
+  overflow: hidden;
+}
+.meter span { display: block; height: 100%; border-radius: 999px; background: var(--accent); }
+.meter-fill { width: 60%; }
+
+.section-label { margin: 6px 0 -4px 2px; }
+
+.setting-row { min-height: 54px; }
+.setting-row .sub { margin-top: 1px; }
+.setting-row .segmented { flex: 0 0 auto; width: 158px; }
+
+.about-sheet p { font-size: 12.5px; line-height: 1.55; color: var(--muted); margin-bottom: 8px; }
+.about-sheet .about-version {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-top: 1px solid var(--border);
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.about-sheet .about-version b { color: var(--fg); font-weight: 550; }
+.about-sheet .btn { margin-top: 10px; min-height: 46px; }
+.about-lead { margin-top: 8px; }

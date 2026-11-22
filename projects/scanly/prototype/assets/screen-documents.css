@@ -1,0 +1,55 @@
+/* Screen 04 — document library */
+.docs-toolbar { display: flex; flex-direction: column; gap: 12px; padding-top: 2px; }
+
+.docs-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 14px 0 8px;
+}
+.docs-head h2 {
+  font-family: var(--font-display);
+  font-size: 11.5px;
+  font-weight: 650;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.docs-head span { font-size: 11.5px; color: var(--muted); }
+
+.doc-row { text-decoration: none; padding-block: 8px; }
+.doc-row[hidden] { display: none; }
+.doc-row .title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.doc-row .chev { transition: transform 0.15s ease, color 0.15s ease; }
+.doc-row:hover .chev { transform: translateX(2px); color: var(--fg); }
+.doc-row:hover .title { color: var(--accent-ink); }
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 34px 20px 8px;
+  text-align: center;
+}
+.empty-state[hidden] { display: none; }
+.empty-icon {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 6px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+.empty-icon svg { width: 22px; height: 22px; }
+.empty-state b { font-size: 15px; font-weight: 600; }
+.empty-state p { font-size: 13px; color: var(--muted); max-width: 26ch; }
+.empty-state .btn { margin-top: 12px; max-width: 260px; min-height: 46px; font-size: 14px; }

@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "screens/07-sleep-empty.html",
+  "entry": "screens/07-sleep-empty.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-11-18T16:14:45.671Z",
+  "updatedAt": "2026-11-18T16:14:45.671Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

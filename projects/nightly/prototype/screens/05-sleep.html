@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nightly — Сон</title>
+<link rel="stylesheet" href="../assets/tokens.css">
+<style>
+  body { background: #07080e; }
+
+  .sleep-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 4px 0 18px;
+  }
+
+  .sleep-head .eyebrow {
+    margin-bottom: 6px;
+    color: var(--muted);
+  }
+
+  .date-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 32px;
+    padding: 0 12px;
+    border-radius: var(--r-pill);
+    border: 1px solid var(--border-soft);
+    background: rgba(255, 255, 255, 0.045);
+    font-size: 12.5px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .date-chip .ico {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* ---------- summary ---------- */
+
+  .summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px;
+  }
+
+  .sum-value {
+    margin: 6px 0 4px;
+    font-family: var(--font-display);
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+
+  .score {
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .score-ring {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: conic-gradient(var(--accent) 0 84%, rgba(255, 255, 255, 0.09) 84% 100%);
+    position: relative;
+  }
+
+  .score-ring::after {
+    content: "";
+    position: absolute;
+    inset: 5px;
+    border-radius: 50%;
+    background: oklch(21% 0.04 276);
+  }
+
+  .score-ring span {
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .score-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  /* ---------- chart ---------- */
+
+  .chart-card {
+    margin-top: 16px;
+    padding: 16px 16px 14px;
+  }
+
+  .chart-detail {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 12px 0 14px;
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+
+  .chart-detail strong {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--fg);
+  }
+
+  .score-pill {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    height: 24px;
+    padding: 0 9px;
+    border-radius: var(--r-pill);
+    background: rgba(255, 255, 255, 0.06);
+    font-size: 11.5px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .score-pill b {
+    color: var(--fg);
+    font-weight: 600;
+  }
+
+  .bars {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    align-items: end;
+  }
+
+  .bar-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .bar {
+    width: 100%;
+    height: 122px;
+    display: flex;
+    align-items: flex-end;
+    padding: 0;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.045);
+    overflow: hidden;
+    transition: background-color 0.18s var(--ease);
+  }
+
+  .bar:hover {
+    background: rgba(255, 255, 255, 0.085);
+  }
+
+  .bar-fill {
+    display: block;
+    width: 100%;
+    height: var(--h);
+    border-radius: 10px;
+    background: linear-gradient(180deg, var(--accent) 0%, oklch(52% 0.12 282) 100%);
+    opacity: 0.34;
+    transition: opacity 0.22s var(--ease), box-shadow 0.22s var(--ease);
+  }
+
+  .bar[aria-pressed="true"] .bar-fill {
+    opacity: 1;
+    box-shadow: 0 0 22px rgba(139, 140, 255, 0.5);
+  }
+
+  .bar-day {
+    font-size: 11px;
+    color: var(--muted-soft);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .bar-col:last-child .bar-day {
+    color: var(--fg);
+    font-weight: 600;
+  }
+
+  /* ---------- phases ---------- */
+
+  .phases {
+    margin-top: 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .phase-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 7px;
+    font-size: 13px;
+  }
+
+  .phase-top span:last-child {
+    color: var(--muted);
+    font-size: 12.5px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .phase-track {
+    height: 6px;
+    border-radius: 99px;
+    background: rgba(255, 255, 255, 0.07);
+    overflow: hidden;
+  }
+
+  .phase-track i {
+    display: block;
+    height: 100%;
+    width: var(--w);
+    border-radius: 99px;
+    background: linear-gradient(90deg, oklch(62% 0.14 280), oklch(74% 0.12 282));
+  }
+
+  .phases .phase:nth-child(2) .phase-track i {
+    background: linear-gradient(90deg, oklch(55% 0.11 300), oklch(66% 0.1 300));
+  }
+
+  .phases .phase:nth-child(3) .phase-track i {
+    background: linear-gradient(90deg, oklch(52% 0.04 277), oklch(60% 0.04 277));
+  }
+
+  .sleep-note {
+    margin: 14px 2px 0;
+    font-size: 11.5px;
+    line-height: 1.5;
+    color: var(--muted-soft);
+  }
+</style>
+<style data-prototype-transition>
+@keyframes prototype-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body {
+  animation: prototype-enter 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+html.prototype-leaving body {
+  opacity: 0;
+  transition: opacity 140ms ease;
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  html.prototype-leaving body { transition: none; }
+}
+</style>
+</head>
+<body data-screen="sleep">
+  <div class="device" data-nav="sleep">
+    <div class="scroll nav">
+      <div class="pad">
+        <header class="sleep-head">
+          <div>
+            <p class="eyebrow">Статистика</p>
+            <h1 class="h1" data-od-id="sleep-title">Сон</h1>
+          </div>
+          <span class="date-chip">
+            <svg class="ico" aria-hidden="true"><use href="#i-calendar"></use></svg>
+            <span data-demo-date>16 нояб.</span>
+          </span>
+        </header>
+
+        <section class="card summary" data-od-id="sleep-summary">
+          <div>
+            <p class="eyebrow">Средняя длительность</p>
+            <p class="sum-value">7 ч 24 мин</p>
+            <p class="tiny">за последние 7 дней</p>
+          </div>
+          <div class="score">
+            <div class="score-ring"><span>84</span></div>
+            <span class="score-label">Хорошо</span>
+          </div>
+        </section>
+
+        <section class="card chart-card" data-od-id="sleep-chart">
+          <div class="between">
+            <p class="eyebrow">Последние 7 дней</p>
+            <span class="tiny">10–16 нояб.</span>
+          </div>
+
+          <div class="chart-detail">
+            <strong id="barDate">16 нояб.</strong>
+            <span aria-hidden="true">·</span>
+            <span id="barDuration">7 ч 54 мин</span>
+            <span class="score-pill">Оценка <b id="barScore">89</b></span>
+          </div>
+
+          <div class="bars" role="group" aria-label="Длительность сна по дням">
+            <div class="bar-col">
+              <button type="button" class="bar" data-bar aria-pressed="false"
+                data-od-id="sleep-bar-10" data-date="10 нояб." data-dur="6 ч 30 мин" data-score="78"
+                aria-label="10 ноября, 6 часов 30 минут, оценка 78">
+                <span class="bar-fill" style="--h: 72%"></span>
+              </button>
+              <span class="bar-day">10</span>
+            </div>
+            <div class="bar-col">
+              <button type="button" class="bar" data-bar aria-pressed="false"
+                data-od-id="sleep-bar-11" data-date="11 нояб." data-dur="7 ч 12 мин" data-score="84"
+                aria-label="11 ноября, 7 часов 12 минут, оценка 84">
+                <span class="bar-fill" style="--h: 80%"></span>
+              </button>
+              <span class="bar-day">11</span>
+            </div>
+            <div class="bar-col">
+              <button type="button" class="bar" data-bar aria-pressed="false"
+                data-od-id="sleep-bar-12" data-date="12 нояб." data-dur="7 ч 54 мин" data-score="88"
+                aria-label="12 ноября, 7 часов 54 минуты, оценка 88">
+                <span class="bar-fill" style="--h: 88%"></span>
+              </button>
+              <span class="bar-day">12</span>
+            </div>
+            <div class="bar-col">
+              <button type="button" class="bar" data-bar aria-pressed="false"
+                data-od-id="sleep-bar-13" data-date="13 нояб." data-dur="6 ч 24 мин" data-score="74"
+                aria-label="13 ноября, 6 часов 24 минуты, оценка 74">
+                <span class="bar-fill" style="--h: 71%"></span>
+              </button>
+              <span class="bar-day">13</span>
+            </div>
+            <div class="bar-col">
+              <button type="button" class="bar" data-bar aria-pressed="false"
+                data-od-id="sleep-bar-14" data-date="14 нояб." data-dur="8 ч 12 мин" data-score="91"
+                aria-label="14 ноября, 8 часов 12 минут, оценка 91">
+                <span class="bar-fill" style="--h: 91%"></span>
+              </button>
+              <span class="bar-day">14</span>
+            </div>
+            <div class="bar-col">
+              <button type="button" class="bar" data-bar aria-pressed="false"
+                data-od-id="sleep-bar-15" data-date="15 нояб." data-dur="7 ч 42 мин" data-score="86"
+                aria-label="15 ноября, 7 часов 42 минуты, оценка 86">
+                <span class="bar-fill" style="--h: 86%"></span>
+              </button>
+              <span class="bar-day">15</span>
+            </div>
+            <div class="bar-col">
+              <button type="button" class="bar" data-bar aria-pressed="true"
+                data-od-id="sleep-bar-16" data-date="16 нояб." data-dur="7 ч 54 мин" data-score="89"
+                aria-label="16 ноября, 7 часов 54 минуты, оценка 89">
+                <span class="bar-fill" style="--h: 88%"></span>
+              </button>
+              <span class="bar-day">16</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="card phases" data-od-id="sleep-phases">
+          <div class="phase">
+            <div class="phase-top"><span>Глубокий сон</span><span>1 ч 48 мин</span></div>
+            <div class="phase-track"><i style="--w: 23%"></i></div>
+          </div>
+          <div class="phase">
+            <div class="phase-top"><span>Быстрый сон</span><span>1 ч 36 мин</span></div>
+            <div class="phase-track"><i style="--w: 21%"></i></div>
+          </div>
+          <div class="phase">
+            <div class="phase-top"><span>Пробуждения</span><span>18 мин</span></div>
+            <div class="phase-track"><i style="--w: 5%"></i></div>
+          </div>
+        </section>
+
+        <p class="sleep-note">Оценка учитывает длительность, фазы сна и число пробуждений за ночь.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/icons.js"></script>
+  <script src="../assets/app.js"></script>
+<script data-prototype-transition>
+(() => {
+  if (window.__prototypeTransitions) return;
+  window.__prototypeTransitions = true;
+
+  document.addEventListener('click', (event) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      !(event.target instanceof Element)
+    ) {
+      return;
+    }
+
+    const link = event.target.closest('a[href]');
+    if (
+      !link ||
+      (link.target && link.target !== '_self') ||
+      link.hasAttribute('download')
+    ) {
+      return;
+    }
+
+    let url;
+    try {
+      url = new URL(link.href, location.href);
+    } catch {
+      return;
+    }
+
+    if (url.origin !== location.origin) return;
+    if (url.hash && url.pathname === location.pathname) return;
+
+    event.preventDefault();
+    document.documentElement.classList.add('prototype-leaving');
+
+    setTimeout(() => {
+      location.href = url.href;
+    }, 150);
+  });
+})();
+</script>
+</body>
+</html>

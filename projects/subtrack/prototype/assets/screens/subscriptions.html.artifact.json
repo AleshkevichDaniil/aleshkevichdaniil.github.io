@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "screens/subscriptions.html",
+  "entry": "screens/subscriptions.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-11-15T11:32:39.456Z",
+  "updatedAt": "2026-11-15T11:32:39.456Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

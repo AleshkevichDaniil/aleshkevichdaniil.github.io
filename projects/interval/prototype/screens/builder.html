@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interval — Конструктор</title>
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="../assets/screens.css">
+<style data-prototype-transition>
+@keyframes prototype-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body {
+  animation: prototype-enter 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+html.prototype-leaving body {
+  opacity: 0;
+  transition: opacity 140ms ease;
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  html.prototype-leaving body { transition: none; }
+}
+</style>
+</head>
+<body class="screen-page" data-screen="builder">
+
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><rect x="7.5" y="5.5" width="3.4" height="13" rx="1.3" fill="currentColor" stroke="none"/><rect x="13.1" y="5.5" width="3.4" height="13" rx="1.3" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-skip" viewBox="0 0 24 24"><path d="M6 5.5v13l9.5-6.5z" fill="currentColor" stroke="none"/><path d="M18 6v12"/></symbol>
+  <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6.5" y="6.5" width="11" height="11" rx="2.4" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M7 7l10 10M17 7 7 17"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9.5 6 6 6-6 6"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="m14.5 6-6 6 6 6"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.2"/><path d="M12 7.6V12l3 1.9"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11.2 12 4l8 7.2"/><path d="M6.6 9.9V19h10.8V9.9"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13.4 3 6 13.4h4.9L10.3 21 18 10.6h-5z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.4 4.6 4.6L19 7"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.4" width="14" height="9.6" rx="2.4"/><path d="M8.4 10.4V8a3.6 3.6 0 0 1 7.2 0v2.4"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 8h8.4M17.4 8H20M4 16h2.6M11.6 16H20"/><circle cx="15" cy="8" r="2.1"/><circle cx="9" cy="16" r="2.1"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 19.5h16"/><path d="M7.5 19.5v-5.5"/><path d="M12 19.5V8.5"/><path d="M16.5 19.5v-8"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5.5v13M5.5 12h13"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5.5 12h13"/></symbol>
+</svg>
+
+<div class="page">
+  <div class="stage">
+    <div class="app-shell">
+      <div class="app" data-view="builder">
+
+        <header class="app-bar builder-head">
+          <a class="icon-btn" href="home.html" aria-label="Назад на главную"><svg class="icon"><use href="#i-back"/></svg></a>
+          <h1 class="bar-title" id="builderTitle" data-od-id="builder-title">Конструктор</h1>
+          <button class="text-btn" id="resetConfig">Сброс</button>
+        </header>
+
+        <main class="content builder">
+          <div class="field">
+            <label class="field-label" for="configName">Название</label>
+            <input class="input" id="configName" value="Своя тренировка" maxlength="24" autocomplete="off">
+          </div>
+
+          <div class="chips" aria-label="Заполнить из пресета">
+            <button class="chip" data-fill="tabata">Табата</button>
+            <button class="chip" data-fill="emom">EMOM</button>
+            <button class="chip" data-fill="hiit">HIIT</button>
+          </div>
+
+          <section class="config card" data-od-id="interval-config" aria-label="Параметры интервалов">
+            <div class="config-row">
+              <div class="config-copy"><strong>Работа</strong><span>длительность интервала</span></div>
+              <div class="stepper">
+                <button data-step="work" data-dir="-1" aria-label="Уменьшить работу"><svg class="icon"><use href="#i-minus"/></svg></button>
+                <output id="out-work">30 с</output>
+                <button data-step="work" data-dir="1" aria-label="Увеличить работу"><svg class="icon"><use href="#i-plus"/></svg></button>
+              </div>
+            </div>
+            <div class="config-row">
+              <div class="config-copy"><strong>Отдых</strong><span>между раундами</span></div>
+              <div class="stepper">
+                <button data-step="rest" data-dir="-1" aria-label="Уменьшить отдых"><svg class="icon"><use href="#i-minus"/></svg></button>
+                <output id="out-rest">15 с</output>
+                <button data-step="rest" data-dir="1" aria-label="Увеличить отдых"><svg class="icon"><use href="#i-plus"/></svg></button>
+              </div>
+            </div>
+            <div class="config-row">
+              <div class="config-copy"><strong>Раунды</strong><span>количество повторов</span></div>
+              <div class="stepper">
+                <button data-step="rounds" data-dir="-1" aria-label="Уменьшить раунды"><svg class="icon"><use href="#i-minus"/></svg></button>
+                <output id="out-rounds">8</output>
+                <button data-step="rounds" data-dir="1" aria-label="Увеличить раунды"><svg class="icon"><use href="#i-plus"/></svg></button>
+              </div>
+            </div>
+            <div class="config-row">
+              <div class="config-copy"><strong>Подготовка</strong><span>перед первым раундом</span></div>
+              <div class="stepper">
+                <button data-step="prep" data-dir="-1" aria-label="Уменьшить подготовку"><svg class="icon"><use href="#i-minus"/></svg></button>
+                <output id="out-prep">10 с</output>
+                <button data-step="prep" data-dir="1" aria-label="Увеличить подготовку"><svg class="icon"><use href="#i-plus"/></svg></button>
+              </div>
+            </div>
+          </section>
+
+          <section class="structure card" aria-label="Структура тренировки">
+            <div class="structure-top">
+              <span class="section-label">Структура</span>
+              <span class="num" id="structCount">15 отрезков</span>
+            </div>
+            <div class="struct-strip" id="structStrip" aria-hidden="true"><span class="is-work" style="flex-grow:30"></span><span style="flex-grow:15"></span><span class="is-work" style="flex-grow:30"></span><span style="flex-grow:15"></span><span class="is-work" style="flex-grow:30"></span><span style="flex-grow:15"></span><span class="is-work" style="flex-grow:30"></span><span style="flex-grow:15"></span><span class="is-work" style="flex-grow:30"></span><span style="flex-grow:15"></span><span class="is-work" style="flex-grow:30"></span><span style="flex-grow:15"></span><span class="is-work" style="flex-grow:30"></span><span style="flex-grow:15"></span><span class="is-work" style="flex-grow:30"></span></div>
+            <div class="struct-legend">
+              <span class="legend-item"><span class="dot dot--accent"></span>работа</span>
+              <span class="legend-item"><span class="dot"></span>отдых</span>
+            </div>
+          </section>
+
+          <p class="builder-hint">При отдыхе 0 с раунды идут без пауз.</p>
+        </main>
+
+        <footer class="app-footer">
+          <div class="builder-footer">
+            <div class="total-block"><span>Итого</span><strong id="totalTime">5:55</strong></div>
+            <a class="btn btn--primary" id="startCustom" href="timer.html?preset=custom&fresh=1" data-od-id="builder-start">Начать<svg class="icon"><use href="#i-play"/></svg></a>
+          </div>
+        </footer>
+
+        <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+      </div>
+    </div>
+  </div>
+
+  <p class="page-note"><a href="onboarding.html">← Все экраны</a><span class="page-note__sep">·</span><span>03 · Конструктор</span></p>
+</div>
+
+<script src="../assets/app.js"></script>
+<script data-prototype-transition>
+(() => {
+  if (window.__prototypeTransitions) return;
+  window.__prototypeTransitions = true;
+
+  document.addEventListener('click', (event) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      !(event.target instanceof Element)
+    ) {
+      return;
+    }
+
+    const link = event.target.closest('a[href]');
+    if (
+      !link ||
+      (link.target && link.target !== '_self') ||
+      link.hasAttribute('download')
+    ) {
+      return;
+    }
+
+    let url;
+    try {
+      url = new URL(link.href, location.href);
+    } catch {
+      return;
+    }
+
+    if (url.origin !== location.origin) return;
+    if (url.hash && url.pathname === location.pathname) return;
+
+    event.preventDefault();
+    document.documentElement.classList.add('prototype-leaving');
+
+    setTimeout(() => {
+      location.href = url.href;
+    }, 150);
+  });
+})();
+</script>
+</body>
+</html>

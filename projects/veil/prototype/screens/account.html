@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=390, initial-scale=1" />
+  <title>Veil — аккаунт</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+<style data-prototype-transition>
+@keyframes prototype-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body {
+  animation: prototype-enter 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+html.prototype-leaving body {
+  opacity: 0;
+  transition: opacity 140ms ease;
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  html.prototype-leaving body { transition: none; }
+}
+</style>
+</head>
+<body data-screen="account">
+  <div class="app" data-od-id="screen-account">
+
+    <header class="hdr hdr-center" data-od-id="account-header">
+      <a class="icon-btn" href="settings.html" aria-label="Назад к настройкам">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M19 12H5M11 6l-6 6 6 6" />
+        </svg>
+      </a>
+      <span class="hdr-label">Аккаунт</span>
+      <span class="hdr-slot" aria-hidden="true"></span>
+    </header>
+
+    <main class="app-body account-body" data-od-id="account-content">
+      <div class="acc-head" data-od-id="account-profile">
+        <span class="avatar avatar-lg" aria-hidden="true">АК</span>
+        <h1 class="acc-name" data-od-id="account-name">Анна Ковалёва</h1>
+        <p class="acc-mail">anna.k@veil.app</p>
+      </div>
+
+      <a class="plan-card" href="included.html" data-od-id="account-plan">
+        <span class="plan-seal is-muted" data-plan-seal aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3Z" />
+          </svg>
+        </span>
+        <span class="plan-card-body">
+          <span class="mono-label">Подписка</span>
+          <span class="plan-card-name" data-plan-name>Базовый</span>
+          <span class="plan-card-sub" data-if-plan="free" hidden>5 локаций · одно устройство</span>
+          <span class="plan-card-sub" data-if-plan="pro" hidden>Пробный период до 29&nbsp;ноября&nbsp;2026</span>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="m9 5 7 7-7 7" />
+        </svg>
+      </a>
+
+      <div class="section-head">
+        <p class="mono-label">Устройства</p>
+        <p class="mono-label" data-device-count>1 из 5</p>
+      </div>
+
+      <div class="group" data-od-id="account-devices">
+        <div class="device" data-od-id="device-iphone">
+          <span class="device-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="7" y="3" width="10" height="18" rx="2" />
+              <path d="M11 18h2" />
+            </svg>
+          </span>
+          <span class="device-text">
+            <span class="device-name">iPhone 15 Pro</span>
+            <span class="device-sub">Это устройство</span>
+          </span>
+        </div>
+
+        <div class="device" data-if-plan="pro" hidden data-od-id="device-macbook">
+          <span class="device-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="5" width="16" height="11" rx="1.5" />
+              <path d="M2 19h20" />
+            </svg>
+          </span>
+          <span class="device-text">
+            <span class="device-name">MacBook Air</span>
+            <span class="device-sub">18&nbsp;ноября&nbsp;2026</span>
+          </span>
+          <button class="device-remove" type="button" data-remove-device>Отключить</button>
+        </div>
+
+        <div class="device" data-if-plan="pro" hidden data-od-id="device-ipad">
+          <span class="device-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="5" y="3" width="14" height="18" rx="2" />
+              <path d="M5 17h14" />
+            </svg>
+          </span>
+          <span class="device-text">
+            <span class="device-name">iPad Pro</span>
+            <span class="device-sub">20&nbsp;ноября&nbsp;2026</span>
+          </span>
+          <button class="device-remove" type="button" data-remove-device>Отключить</button>
+        </div>
+      </div>
+
+      <p class="device-note" id="devicesEmpty" hidden>Другие устройства не подключены.</p>
+
+      <div class="account-privacy" data-od-id="account-privacy">
+        <p class="eyebrow">Приватность</p>
+        <p>Veil не хранит историю подключений. Список устройств нужен только для управления доступом.</p>
+      </div>
+
+      <button class="signout" type="button" data-open-signout data-od-id="account-signout">Выйти из аккаунта</button>
+    </main>
+
+    <div class="scrim" id="signoutSheet" hidden>
+      <section class="sheet" role="dialog" aria-modal="true" aria-labelledby="signoutTitle">
+        <span class="grabber" aria-hidden="true"></span>
+        <div class="sheet-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 4h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-4" />
+            <path d="M10 8l-4 4 4 4M6 12h9" />
+          </svg>
+        </div>
+        <h2 id="signoutTitle">Выйти из аккаунта?</h2>
+        <p>Соединение будет отключено, а сохранённые настройки удалены с этого устройства.</p>
+        <div class="sheet-actions">
+          <button class="btn btn-primary btn-block" type="button" data-signout-confirm>Выйти</button>
+          <button class="btn btn-ghost btn-block" type="button" data-close-sheet>Остаться</button>
+        </div>
+      </section>
+    </div>
+
+  </div>
+
+  <script src="../assets/app.js"></script>
+<script data-prototype-transition>
+(() => {
+  if (window.__prototypeTransitions) return;
+  window.__prototypeTransitions = true;
+
+  document.addEventListener('click', (event) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      !(event.target instanceof Element)
+    ) {
+      return;
+    }
+
+    const link = event.target.closest('a[href]');
+    if (
+      !link ||
+      (link.target && link.target !== '_self') ||
+      link.hasAttribute('download')
+    ) {
+      return;
+    }
+
+    let url;
+    try {
+      url = new URL(link.href, location.href);
+    } catch {
+      return;
+    }
+
+    if (url.origin !== location.origin) return;
+    if (url.hash && url.pathname === location.pathname) return;
+
+    event.preventDefault();
+    document.documentElement.classList.add('prototype-leaving');
+
+    setTimeout(() => {
+      location.href = url.href;
+    }, 150);
+  });
+})();
+</script>
+</body>
+</html>

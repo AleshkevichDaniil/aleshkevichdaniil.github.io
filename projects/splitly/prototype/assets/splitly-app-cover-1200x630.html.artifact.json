@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "splitly-app-cover-1200x630.html",
+  "entry": "splitly-app-cover-1200x630.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-11-22T19:53:11.337Z",
+  "updatedAt": "2026-11-22T19:53:11.337Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

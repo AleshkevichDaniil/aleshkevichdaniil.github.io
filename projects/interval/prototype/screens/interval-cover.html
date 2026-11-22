@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interval — обложка приложения 1200×630</title>
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/cover.css">
+<style data-prototype-transition>
+@keyframes prototype-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body {
+  animation: prototype-enter 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+html.prototype-leaving body {
+  opacity: 0;
+  transition: opacity 140ms ease;
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  html.prototype-leaving body { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<main class="cover" data-od-id="interval-cover" aria-label="Обложка приложения Interval">
+  <section class="cover-left">
+    <h1 class="wordmark" data-od-id="cover-wordmark">INTERVAL</h1>
+
+    <p class="tagline" data-od-id="cover-tagline">Тренируйся по секундам.<br>Раунды, отдых и прогресс — под контролем.</p>
+
+    <ul class="features" data-od-id="cover-features">
+      <li>Готовые пресеты: Табата, EMOM, HIIT</li>
+      <li>Свой конструктор интервалов</li>
+      <li>История и недельный прогресс</li>
+    </ul>
+
+    <p class="cover-footer" data-od-id="cover-footer">
+      <span class="footer-dot" aria-hidden="true"></span>
+      <span class="footer-platform">iOS</span>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      <span>Бесплатно</span>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      <span>Pro по подписке</span>
+    </p>
+  </section>
+
+  <section class="cover-right" aria-hidden="true">
+    <div class="cover-glow"></div>
+    <div class="cover-ring"></div>
+
+    <div class="phone" data-od-id="cover-phone">
+      <span class="phone-side phone-side--left-1"></span>
+      <span class="phone-side phone-side--left-2"></span>
+      <span class="phone-side phone-side--right"></span>
+
+      <div class="phone__screen">
+        <span class="phone__island"></span>
+        <span class="phone__home"></span>
+
+        <div class="ui">
+          <div class="ui-top">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="5" width="3.4" height="14" rx="1.4"/><rect x="13.6" y="5" width="3.4" height="14" rx="1.4"/></svg>
+            <div class="ui-title">
+              <strong>Табата 20/10</strong>
+              <span>8 раундов · 4:00</span>
+            </div>
+            <span class="ui-spacer"></span>
+          </div>
+
+          <div class="ui-main">
+            <div class="ui-dial">
+              <svg viewBox="0 0 300 300" aria-hidden="true">
+                <circle class="ui-ring-track" cx="150" cy="150" r="142"/>
+                <circle class="ui-ring-progress" cx="150" cy="150" r="142"/>
+              </svg>
+              <div class="ui-dial-inner">
+                <span class="ui-phase">РАБОТА</span>
+                <span class="ui-time">00:14</span>
+                <span class="ui-round">раунд 2 из 8</span>
+              </div>
+            </div>
+
+            <div class="ui-track">
+              <span class="is-done"></span><span class="is-current"></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+
+            <div class="ui-next">
+              <span>Далее</span>
+              <strong>Отдых · 10 с</strong>
+            </div>
+
+            <div class="ui-controls">
+              <span class="ui-ctrl">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5.5v13l9.5-6.5z"/><path d="M18 6v12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              </span>
+              <span class="ui-ctrl ui-ctrl--primary">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="5" width="3.4" height="14" rx="1.4"/><rect x="13.6" y="5" width="3.4" height="14" rx="1.4"/></svg>
+              </span>
+              <span class="ui-ctrl">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="6.5" width="11" height="11" rx="2.4"/></svg>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script data-prototype-transition>
+(() => {
+  if (window.__prototypeTransitions) return;
+  window.__prototypeTransitions = true;
+
+  document.addEventListener('click', (event) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      !(event.target instanceof Element)
+    ) {
+      return;
+    }
+
+    const link = event.target.closest('a[href]');
+    if (
+      !link ||
+      (link.target && link.target !== '_self') ||
+      link.hasAttribute('download')
+    ) {
+      return;
+    }
+
+    let url;
+    try {
+      url = new URL(link.href, location.href);
+    } catch {
+      return;
+    }
+
+    if (url.origin !== location.origin) return;
+    if (url.hash && url.pathname === location.pathname) return;
+
+    event.preventDefault();
+    document.documentElement.classList.add('prototype-leaving');
+
+    setTimeout(() => {
+      location.href = url.href;
+    }, 150);
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "screens/06-paywall.html",
+  "entry": "screens/06-paywall.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-11-22T18:16:29.976Z",
+  "updatedAt": "2026-11-22T18:16:29.976Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

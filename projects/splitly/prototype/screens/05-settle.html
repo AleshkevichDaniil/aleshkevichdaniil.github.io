@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=390, initial-scale=1">
+  <title>Splitly — кто кому должен</title>
+  <link rel="stylesheet" href="../assets/splitly.css">
+<style data-prototype-transition>
+@keyframes prototype-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body {
+  animation: prototype-enter 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+html.prototype-leaving body {
+  opacity: 0;
+  transition: opacity 140ms ease;
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  html.prototype-leaving body { transition: none; }
+}
+</style>
+</head>
+<body class="screen-body">
+  <div class="screen" data-od-id="settle-screen">
+
+    <header class="app-header" data-od-id="settle-header">
+      <a class="icon-btn" href="03-group.html" aria-label="Назад в группу" data-od-id="settle-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M15 5l-7 7 7 7"></path>
+        </svg>
+      </a>
+      <div class="app-header-title">Кто кому должен</div>
+      <span aria-hidden="true" style="width: 44px; flex: 0 0 44px;"></span>
+    </header>
+
+    <main class="app-content" data-od-id="settle-content">
+      <p class="context-line">Поездка в Тбилиси · 22 ноября 2026</p>
+
+      <section class="settle-summary card" data-od-id="settle-summary">
+        <div class="settle-summary-top">
+          <span class="badge">2 перевода</span>
+          <span class="amount amount-md">2 150 ₽</span>
+        </div>
+        <p class="settle-summary-copy">Марк переведёт Ане и Лизе — и все долги в группе закроются. Лишних переводов не будет.</p>
+      </section>
+
+      <div class="settle-list" data-od-id="settle-list">
+        <div class="settle-row">
+          <div class="settle-people" aria-hidden="true">
+            <span class="avatar avatar-sm av-sand">М</span>
+            <span class="mini-arrow">→</span>
+            <span class="avatar avatar-sm av-teal">А</span>
+          </div>
+          <div class="settle-main">
+            <div class="settle-title">Марк переводит Ане</div>
+            <div class="settle-sub">Долг за поездку</div>
+          </div>
+          <div class="settle-amount">1 260 ₽</div>
+        </div>
+
+        <div class="settle-row">
+          <div class="settle-people" aria-hidden="true">
+            <span class="avatar avatar-sm av-sand">М</span>
+            <span class="mini-arrow">→</span>
+            <span class="avatar avatar-sm av-sky">Л</span>
+          </div>
+          <div class="settle-main">
+            <div class="settle-title">Марк переводит Лизе</div>
+            <div class="settle-sub">Долг за поездку</div>
+          </div>
+          <div class="settle-amount">890 ₽</div>
+        </div>
+      </div>
+
+      <div class="settle-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="9"></circle>
+          <path d="M12 10.5V16"></path>
+          <path d="M12 7.5h.01"></path>
+        </svg>
+        <span>После выплаты баланс группы сойдётся. Отметить переводы можно одним действием.</span>
+      </div>
+    </main>
+
+    <footer class="screen-footer" data-od-id="settle-footer">
+      <a class="btn btn-primary btn-block" href="06-settled.html" data-od-id="settle-confirm">Отметить всё выплаченным</a>
+    </footer>
+
+    <nav class="bottom-nav" data-od-id="settle-bottom-nav" aria-label="Основная навигация">
+      <a class="nav-item" href="02-groups.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="4" y="4" width="6" height="6" rx="1.6"></rect>
+          <rect x="14" y="4" width="6" height="6" rx="1.6"></rect>
+          <rect x="4" y="14" width="6" height="6" rx="1.6"></rect>
+          <rect x="14" y="14" width="6" height="6" rx="1.6"></rect>
+        </svg>
+        <span>Группы</span>
+      </a>
+      <a class="nav-item is-active" href="05-settle.html" aria-current="page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M7 7h10"></path>
+          <path d="M13 3l4 4-4 4"></path>
+          <path d="M17 17H7"></path>
+          <path d="M11 21l-4-4 4-4"></path>
+        </svg>
+        <span>Долги</span>
+      </a>
+      <a class="nav-item nav-add" href="04-add-expense.html">
+        <span class="nav-add-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path d="M12 5v14"></path>
+            <path d="M5 12h14"></path>
+          </svg>
+        </span>
+        <span>Добавить</span>
+      </a>
+      <a class="nav-item" href="settings.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M12 3v2.2M12 18.8V21M3 12h2.2M18.8 12H21M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M18.4 5.6l-1.6 1.6M7.2 16.8l-1.6 1.6"></path>
+        </svg>
+        <span>Настройки</span>
+      </a>
+    </nav>
+  </div>
+<script data-prototype-transition>
+(() => {
+  if (window.__prototypeTransitions) return;
+  window.__prototypeTransitions = true;
+
+  document.addEventListener('click', (event) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      !(event.target instanceof Element)
+    ) {
+      return;
+    }
+
+    const link = event.target.closest('a[href]');
+    if (
+      !link ||
+      (link.target && link.target !== '_self') ||
+      link.hasAttribute('download')
+    ) {
+      return;
+    }
+
+    let url;
+    try {
+      url = new URL(link.href, location.href);
+    } catch {
+      return;
+    }
+
+    if (url.origin !== location.origin) return;
+    if (url.hash && url.pathname === location.pathname) return;
+
+    event.preventDefault();
+    document.documentElement.classList.add('prototype-leaving');
+
+    setTimeout(() => {
+      location.href = url.href;
+    }, 150);
+  });
+})();
+</script>
+</body>
+</html>

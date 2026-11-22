@@ -1,0 +1,151 @@
+/* Screen 01 — onboarding */
+.brandbar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 2px var(--pad) 10px;
+}
+.brand-mark {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--fg);
+  color: var(--surface);
+}
+.brand-mark svg { width: 19px; height: 19px; }
+.brand-name {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 650;
+  letter-spacing: -0.03em;
+}
+
+.onboarding { display: flex; flex-direction: column; gap: 18px; }
+
+.hero-art {
+  position: relative;
+  flex: 0 0 auto;
+  height: 264px;
+  display: grid;
+  place-items: center;
+  border-radius: 26px;
+  background:
+    url('noise.svg'),
+    var(--surface-2);
+  background-size: 220px 220px, auto;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.hero-art::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 26px;
+  box-shadow: inset 0 1px 0 oklch(1 0 0 / 0.7);
+  pointer-events: none;
+}
+.art-stack { position: relative; width: 160px; height: 200px; transform: translateX(-14px); }
+.art-page {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 18px 15px;
+  border-radius: 7px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-paper);
+}
+.art-page--back { transform: rotate(-8deg) translate(-15px, 4px); background: oklch(0.995 0.002 262); }
+.art-page--mid  { transform: rotate(-3.5deg) translate(-6px, 2px); background: oklch(0.998 0.001 262); }
+.art-page--front { z-index: 2; }
+.art-title { height: 7px; width: 62%; border-radius: 2px; background: var(--fg); opacity: 0.82; }
+.art-title--short { width: 52%; }
+.art-meta  { height: 3px; width: 38%; border-radius: 2px; background: var(--border-strong); margin-bottom: 4px; }
+.art-line  { height: 3px; border-radius: 2px; background: var(--border-strong); }
+.art-line.w-92 { width: 92%; }
+.art-line.w-100 { width: 100%; }
+.art-line.w-84 { width: 84%; }
+.art-line.w-96 { width: 96%; }
+.art-line.w-58 { width: 58%; }
+.art-sign { margin-top: auto; display: flex; gap: 12px; }
+.art-sign span { flex: 1; height: 1px; background: var(--border-strong); }
+
+.art-corners { position: absolute; inset: -11px; z-index: 3; pointer-events: none; }
+.art-corners span {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--accent);
+  border-radius: 6px 0 6px 0;
+}
+.art-corners span:nth-child(1) { top: 0; left: 0; border-right: 0; border-bottom: 0; }
+.art-corners span:nth-child(2) { top: 0; right: 0; border-left: 0; border-bottom: 0; border-radius: 0 6px 0 6px; }
+.art-corners span:nth-child(3) { bottom: 0; right: 0; border-left: 0; border-top: 0; }
+.art-corners span:nth-child(4) { bottom: 0; left: 0; border-right: 0; border-top: 0; border-radius: 0 6px 0 6px; }
+
+.art-scanline {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  top: 58%;
+  z-index: 4;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+  box-shadow: 0 0 16px 2px oklch(0.412 0.136 266 / 0.35);
+}
+.art-chip {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 11px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 6px 14px -8px oklch(0.235 0.03 265 / 0.4);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.02em;
+  color: var(--fg);
+}
+.art-chip svg { width: 13px; height: 13px; color: var(--muted); }
+
+.hero-copy { display: flex; flex-direction: column; gap: 9px; }
+.hero-copy h1 { font-size: 31px; }
+.hero-copy .lead { max-width: 30ch; }
+
+.points { display: flex; flex-direction: column; gap: 2px; margin: 0; padding: 0; list-style: none; }
+.points li { display: flex; align-items: center; gap: 12px; min-height: 42px; }
+.point-icon {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--fg);
+}
+.point-icon svg { width: 16px; height: 16px; }
+.points b { font-size: 14px; font-weight: 550; letter-spacing: -0.01em; }
+.points span { color: var(--muted); font-size: 12.5px; }
+
+.onboarding-dock { display: flex; flex-direction: column; gap: 10px; align-items: stretch; }
+.legal-note {
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--muted);
+  text-align: center;
+  padding: 0 6px;
+}

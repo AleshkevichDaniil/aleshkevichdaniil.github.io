@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=390, initial-scale=1">
+  <title>Splitly — поездка в Тбилиси</title>
+  <link rel="stylesheet" href="../assets/splitly.css">
+<style data-prototype-transition>
+@keyframes prototype-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body {
+  animation: prototype-enter 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+html.prototype-leaving body {
+  opacity: 0;
+  transition: opacity 140ms ease;
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  html.prototype-leaving body { transition: none; }
+}
+</style>
+</head>
+<body class="screen-body">
+  <div class="screen" data-od-id="group-screen">
+
+    <header class="app-header" data-od-id="group-header">
+      <a class="icon-btn" href="02-groups.html" aria-label="Назад к группам" data-od-id="group-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M15 5l-7 7 7 7"></path>
+        </svg>
+      </a>
+      <div class="app-header-title">Поездка в Тбилиси</div>
+      <a class="icon-btn" href="04-add-expense.html" aria-label="Добавить трату" data-od-id="group-add-expense">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M12 5v14"></path>
+          <path d="M5 12h14"></path>
+        </svg>
+      </a>
+    </header>
+
+    <main class="app-content" data-od-id="group-content">
+
+      <p class="context-line">4 участника · 16–21 ноября 2026</p>
+
+      <section class="balance-card" data-od-id="group-balance-card">
+        <div class="balance-grid">
+          <div class="balance-cell">
+            <p class="balance-label">Вам должны</p>
+            <p class="balance-value positive">1 260 ₽</p>
+          </div>
+          <div class="balance-cell">
+            <p class="balance-label">Вы должны</p>
+            <p class="balance-value">0 ₽</p>
+          </div>
+        </div>
+        <div class="balance-footer">
+          <div class="avatar-stack" aria-hidden="true">
+            <span class="avatar avatar-xs av-teal">А</span>
+            <span class="avatar avatar-xs av-sand">М</span>
+            <span class="avatar avatar-xs av-sky">Л</span>
+            <span class="avatar avatar-xs av-rose">Т</span>
+          </div>
+          <a class="text-link" href="05-settle.html" data-od-id="group-settle-link">Рассчитать долги <span>→</span></a>
+        </div>
+      </section>
+
+      <div class="tabs" role="tablist" aria-label="Данные группы">
+        <button class="tab is-active" type="button" role="tab" aria-selected="true" aria-controls="panel-expenses" id="tab-expenses" data-tab="expenses">
+          Расходы <span class="tab-count">8</span>
+        </button>
+        <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="panel-balances" id="tab-balances" data-tab="balances">
+          Балансы <span class="tab-count">4</span>
+        </button>
+      </div>
+
+      <div id="panel-expenses" role="tabpanel" aria-labelledby="tab-expenses" data-od-id="group-expenses-panel">
+
+        <p class="date-label">21 ноября 2026</p>
+        <div class="expense-card">
+          <div class="expense-row">
+            <div class="expense-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8 4v6M6 4v4a2 2 0 0 0 4 0V4M8 10v10"></path>
+                <path d="M16 4c-2 0-3 2-3 4s1 3 3 3v9"></path>
+              </svg>
+            </div>
+            <div class="expense-main">
+              <div class="expense-title">Ужин в «Шави»</div>
+              <div class="expense-sub">Оплатила Аня · по 1 600 ₽</div>
+            </div>
+            <div class="expense-amount">6 400 ₽</div>
+          </div>
+        </div>
+
+        <p class="date-label">20 ноября 2026</p>
+        <div class="expense-card">
+          <div class="expense-row">
+            <div class="expense-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1z"></path>
+              </svg>
+            </div>
+            <div class="expense-main">
+              <div class="expense-title">Апартаменты</div>
+              <div class="expense-sub">Оплатила Лиза · по 2 045 ₽</div>
+            </div>
+            <div class="expense-amount">8 180 ₽</div>
+          </div>
+        </div>
+
+        <p class="date-label">19 ноября 2026</p>
+        <div class="expense-card">
+          <div class="expense-row">
+            <div class="expense-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 16l1.6-5h10.8L19 16"></path>
+                <path d="M4 16h16v3H4z"></path>
+                <circle cx="8" cy="19" r="1"></circle>
+                <circle cx="16" cy="19" r="1"></circle>
+              </svg>
+            </div>
+            <div class="expense-main">
+              <div class="expense-title">Аренда машины</div>
+              <div class="expense-sub">Оплатил Марк · по 1 813 ₽</div>
+            </div>
+            <div class="expense-amount">7 250 ₽</div>
+          </div>
+        </div>
+
+        <p class="date-label">18 ноября 2026</p>
+        <div class="expense-card">
+          <div class="expense-row">
+            <div class="expense-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 9h14l-1.5 10h-11z"></path>
+                <path d="M9 9l3-5 3 5"></path>
+              </svg>
+            </div>
+            <div class="expense-main">
+              <div class="expense-title">Продукты</div>
+              <div class="expense-sub">Оплатила Аня · по 810 ₽</div>
+            </div>
+            <div class="expense-amount">3 240 ₽</div>
+          </div>
+          <div class="expense-row">
+            <div class="expense-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 8h10v5a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4z"></path>
+                <path d="M15 9h2a2 2 0 0 1 0 4h-2"></path>
+                <path d="M5 20h10"></path>
+              </svg>
+            </div>
+            <div class="expense-main">
+              <div class="expense-title">Завтраки</div>
+              <div class="expense-sub">Оплатил Тимур · по 1 050 ₽</div>
+            </div>
+            <div class="expense-amount">4 200 ₽</div>
+          </div>
+        </div>
+
+        <p class="date-label">17 ноября 2026</p>
+        <div class="expense-card">
+          <div class="expense-row">
+            <div class="expense-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8 4h8l-1 6a3 3 0 0 1-6 0z"></path>
+                <path d="M12 13v7"></path>
+                <path d="M9 20h6"></path>
+              </svg>
+            </div>
+            <div class="expense-main">
+              <div class="expense-title">Винный бар</div>
+              <div class="expense-sub">Оплатила Лиза · по 528 ₽</div>
+            </div>
+            <div class="expense-amount">2 110 ₽</div>
+          </div>
+        </div>
+
+        <p class="date-label">16 ноября 2026</p>
+        <div class="expense-card">
+          <div class="expense-row">
+            <div class="expense-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 7h16v4a2 2 0 0 0 0 4v4H4v-4a2 2 0 0 0 0-4z"></path>
+                <path d="M13 7v12"></path>
+              </svg>
+            </div>
+            <div class="expense-main">
+              <div class="expense-title">Музей и билеты</div>
+              <div class="expense-sub">Оплатил Тимур · по 1 300 ₽</div>
+            </div>
+            <div class="expense-amount">5 200 ₽</div>
+          </div>
+          <div class="expense-row">
+            <div class="expense-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 16l1.6-5h10.8L19 16"></path>
+                <path d="M4 16h16v3H4z"></path>
+                <circle cx="8" cy="19" r="1"></circle>
+                <circle cx="16" cy="19" r="1"></circle>
+              </svg>
+            </div>
+            <div class="expense-main">
+              <div class="expense-title">Такси из аэропорта</div>
+              <div class="expense-sub">Оплатила Аня · по 255 ₽</div>
+            </div>
+            <div class="expense-amount">1 020 ₽</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="panel-balances" role="tabpanel" aria-labelledby="tab-balances" data-od-id="group-balances-panel" hidden>
+        <div class="section-label">
+          <span>Баланс участников</span>
+          <span class="count">37 600 ₽</span>
+        </div>
+
+        <div class="card list-card">
+          <div class="member-row">
+            <span class="avatar av-teal">А</span>
+            <div class="member-main">
+              <div class="member-name">Аня</div>
+              <div class="member-sub">Оплатила 10 660 ₽ · доля 9 400 ₽</div>
+            </div>
+            <div class="member-balance positive">+1 260 ₽</div>
+          </div>
+          <div class="member-row">
+            <span class="avatar av-sand">М</span>
+            <div class="member-main">
+              <div class="member-name">Марк</div>
+              <div class="member-sub">Оплатил 7 250 ₽ · доля 9 400 ₽</div>
+            </div>
+            <div class="member-balance negative">−2 150 ₽</div>
+          </div>
+          <div class="member-row">
+            <span class="avatar av-sky">Л</span>
+            <div class="member-main">
+              <div class="member-name">Лиза</div>
+              <div class="member-sub">Оплатила 10 290 ₽ · доля 9 400 ₽</div>
+            </div>
+            <div class="member-balance positive">+890 ₽</div>
+          </div>
+          <div class="member-row">
+            <span class="avatar av-rose">Т</span>
+            <div class="member-main">
+              <div class="member-name">Тимур</div>
+              <div class="member-sub">Оплатил 9 400 ₽ · доля 9 400 ₽</div>
+            </div>
+            <div class="member-balance muted">0 ₽</div>
+          </div>
+        </div>
+
+        <p class="footnote">Все расходы делятся поровну между четырьмя участниками. После двух переводов баланс группы сойдётся.</p>
+      </div>
+    </main>
+
+    <nav class="bottom-nav" data-od-id="group-bottom-nav" aria-label="Основная навигация">
+      <a class="nav-item is-active" href="02-groups.html" aria-current="page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="4" y="4" width="6" height="6" rx="1.6"></rect>
+          <rect x="14" y="4" width="6" height="6" rx="1.6"></rect>
+          <rect x="4" y="14" width="6" height="6" rx="1.6"></rect>
+          <rect x="14" y="14" width="6" height="6" rx="1.6"></rect>
+        </svg>
+        <span>Группы</span>
+      </a>
+      <a class="nav-item" href="05-settle.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M7 7h10"></path>
+          <path d="M13 3l4 4-4 4"></path>
+          <path d="M17 17H7"></path>
+          <path d="M11 21l-4-4 4-4"></path>
+        </svg>
+        <span>Долги</span>
+      </a>
+      <a class="nav-item nav-add" href="04-add-expense.html">
+        <span class="nav-add-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path d="M12 5v14"></path>
+            <path d="M5 12h14"></path>
+          </svg>
+        </span>
+        <span>Добавить</span>
+      </a>
+      <a class="nav-item" href="settings.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M12 3v2.2M12 18.8V21M3 12h2.2M18.8 12H21M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M18.4 5.6l-1.6 1.6M7.2 16.8l-1.6 1.6"></path>
+        </svg>
+        <span>Настройки</span>
+      </a>
+    </nav>
+  </div>
+
+  <script>
+    (function () {
+      const tabs = Array.from(document.querySelectorAll('[data-tab]'));
+      const panels = {
+        expenses: document.getElementById('panel-expenses'),
+        balances: document.getElementById('panel-balances')
+      };
+
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          const name = tab.dataset.tab;
+          tabs.forEach(function (item) {
+            const isActive = item === tab;
+            item.classList.toggle('is-active', isActive);
+            item.setAttribute('aria-selected', String(isActive));
+          });
+          Object.keys(panels).forEach(function (key) {
+            panels[key].hidden = key !== name;
+          });
+        });
+      });
+    })();
+  </script>
+<script data-prototype-transition>
+(() => {
+  if (window.__prototypeTransitions) return;
+  window.__prototypeTransitions = true;
+
+  document.addEventListener('click', (event) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      !(event.target instanceof Element)
+    ) {
+      return;
+    }
+
+    const link = event.target.closest('a[href]');
+    if (
+      !link ||
+      (link.target && link.target !== '_self') ||
+      link.hasAttribute('download')
+    ) {
+      return;
+    }
+
+    let url;
+    try {
+      url = new URL(link.href, location.href);
+    } catch {
+      return;
+    }
+
+    if (url.origin !== location.origin) return;
+    if (url.hash && url.pathname === location.pathname) return;
+
+    event.preventDefault();
+    document.documentElement.classList.add('prototype-leaving');
+
+    setTimeout(() => {
+      location.href = url.href;
+    }, 150);
+  });
+})();
+</script>
+</body>
+</html>

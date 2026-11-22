@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "locations.html",
+  "entry": "locations.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-11-22T18:25:01.675Z",
+  "updatedAt": "2026-11-22T18:25:01.675Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

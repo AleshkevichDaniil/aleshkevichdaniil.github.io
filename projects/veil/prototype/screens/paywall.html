@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=390, initial-scale=1" />
+  <title>Veil — подписка Pro</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+<style data-prototype-transition>
+@keyframes prototype-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body {
+  animation: prototype-enter 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+html.prototype-leaving body {
+  opacity: 0;
+  transition: opacity 140ms ease;
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  html.prototype-leaving body { transition: none; }
+}
+</style>
+</head>
+<body data-screen="paywall">
+  <div class="app" data-od-id="screen-paywall">
+
+    <header class="hdr hdr-center" data-od-id="paywall-header">
+      <a class="icon-btn" href="included.html" aria-label="Закрыть">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+          <path d="M6 6l12 12M18 6 6 18" />
+        </svg>
+      </a>
+      <span class="hdr-label">Veil Pro</span>
+      <span class="hdr-slot" aria-hidden="true"></span>
+    </header>
+
+    <main class="app-body pay-body" data-od-id="paywall-content">
+      <p class="eyebrow">Подписка</p>
+      <h1 class="pay-title" data-od-id="paywall-title">Ваш трафик —<br />только ваш.</h1>
+      <p class="pay-lead">Все локации, пять устройств, блокировка рекламы. Без логов и ограничений скорости.</p>
+
+      <ul class="benefits" data-od-id="paywall-benefits">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7" /></svg>
+          Все локации, включая США и Японию
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7" /></svg>
+          До пяти устройств на одном аккаунте
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7" /></svg>
+          Блокировка рекламы и трекеров
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7" /></svg>
+          Приоритетная поддержка
+        </li>
+      </ul>
+
+      <div class="plans" role="group" aria-label="Выберите тариф" data-od-id="paywall-plans">
+        <button class="plan" type="button" data-plan="month" aria-pressed="false" data-od-id="paywall-plan-month">
+          <span class="plan-name">Месяц</span>
+          <span class="plan-price">299&nbsp;₽</span>
+          <span class="plan-per">каждый месяц</span>
+        </button>
+        <button class="plan" type="button" data-plan="year" aria-pressed="true" data-od-id="paywall-plan-year">
+          <span class="plan-badge">−45%</span>
+          <span class="plan-name">Год</span>
+          <span class="plan-price">1&nbsp;990&nbsp;₽</span>
+          <span class="plan-per">166&nbsp;₽ в месяц</span>
+        </button>
+      </div>
+
+      <p class="pay-note">Отмена в любой момент в настройках.</p>
+    </main>
+
+    <footer class="pay-foot" data-od-id="paywall-footer">
+      <button class="btn btn-primary btn-block" id="buyBtn" type="button" data-od-id="paywall-buy">Попробовать 7 дней</button>
+      <p class="fineprint" id="payLegal">7 дней бесплатно, затем 1&nbsp;990&nbsp;₽ в год. Первое списание — 29&nbsp;ноября&nbsp;2026.</p>
+    </footer>
+
+  </div>
+
+  <script src="../assets/app.js"></script>
+<script data-prototype-transition>
+(() => {
+  if (window.__prototypeTransitions) return;
+  window.__prototypeTransitions = true;
+
+  document.addEventListener('click', (event) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      !(event.target instanceof Element)
+    ) {
+      return;
+    }
+
+    const link = event.target.closest('a[href]');
+    if (
+      !link ||
+      (link.target && link.target !== '_self') ||
+      link.hasAttribute('download')
+    ) {
+      return;
+    }
+
+    let url;
+    try {
+      url = new URL(link.href, location.href);
+    } catch {
+      return;
+    }
+
+    if (url.origin !== location.origin) return;
+    if (url.hash && url.pathname === location.pathname) return;
+
+    event.preventDefault();
+    document.documentElement.classList.add('prototype-leaving');
+
+    setTimeout(() => {
+      location.href = url.href;
+    }, 150);
+  });
+})();
+</script>
+</body>
+</html>

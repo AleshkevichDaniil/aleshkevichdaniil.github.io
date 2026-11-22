@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=390, initial-scale=1">
+  <title>Splitly — настройки</title>
+  <link rel="stylesheet" href="../assets/splitly.css">
+<style data-prototype-transition>
+@keyframes prototype-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body {
+  animation: prototype-enter 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+html.prototype-leaving body {
+  opacity: 0;
+  transition: opacity 140ms ease;
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  html.prototype-leaving body { transition: none; }
+}
+</style>
+</head>
+<body class="screen-body">
+  <div class="screen" data-od-id="settings-screen">
+
+    <header class="app-header app-header--large" data-od-id="settings-header">
+      <div>
+        <p class="header-kicker">Аккаунт</p>
+        <h1 class="page-title">Настройки</h1>
+      </div>
+      <span class="header-spacer"></span>
+      <span class="avatar avatar-lg av-teal" aria-hidden="true">А</span>
+    </header>
+
+    <main class="app-content" data-od-id="settings-content">
+
+      <section class="profile-card card" data-od-id="settings-profile">
+        <span class="avatar avatar-lg av-teal" aria-hidden="true">А</span>
+        <div class="profile-main">
+          <div class="profile-name">Аня Соколова</div>
+          <div class="profile-email">anya@splitly.app</div>
+        </div>
+        <span class="profile-badge">Вы</span>
+      </section>
+
+      <section class="plus-card" data-od-id="settings-plus">
+        <div class="plus-top">
+          <span class="badge">Splitly Plus</span>
+          <span class="plus-price">299 ₽ / мес</span>
+        </div>
+        <h2 class="plus-title">Без лимита групп</h2>
+        <p class="plus-copy">Напоминания о долгах и полная история расходов — в одном месте.</p>
+        <button class="btn btn-secondary btn-sm" id="open-plus" type="button" data-od-id="settings-plus-open">Подробнее</button>
+      </section>
+
+      <section class="settings-group" data-od-id="settings-notifications">
+        <p class="section-label">Уведомления</p>
+        <div class="card list-card">
+          <div class="setting-row">
+            <div class="setting-main">
+              <div class="setting-title">Новые траты</div>
+              <div class="setting-sub">Когда в группе что-то добавляют</div>
+            </div>
+            <label class="switch">
+              <input type="checkbox" checked aria-label="Уведомления о новых тратах">
+              <span class="switch-track"></span>
+            </label>
+          </div>
+          <div class="setting-row">
+            <div class="setting-main">
+              <div class="setting-title">Напоминания о долгах</div>
+              <div class="setting-sub">Раз в неделю, если баланс не сошёлся</div>
+            </div>
+            <label class="switch">
+              <input type="checkbox" checked aria-label="Напоминания о долгах">
+              <span class="switch-track"></span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <section class="settings-group" data-od-id="settings-preferences">
+        <p class="section-label">Предпочтения</p>
+        <div class="card list-card">
+          <div class="setting-row">
+            <div class="setting-main">
+              <div class="setting-title">Валюта</div>
+            </div>
+            <span class="setting-value">Рубль · ₽</span>
+          </div>
+          <div class="setting-row">
+            <div class="setting-main">
+              <div class="setting-title">Язык</div>
+            </div>
+            <span class="setting-value">Русский</span>
+          </div>
+        </div>
+      </section>
+
+      <button class="btn btn-ghost btn-block logout-btn" id="open-logout" type="button" data-od-id="settings-logout">Выйти из аккаунта</button>
+    </main>
+
+    <nav class="bottom-nav" data-od-id="settings-bottom-nav" aria-label="Основная навигация">
+      <a class="nav-item" href="02-groups.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="4" y="4" width="6" height="6" rx="1.6"></rect>
+          <rect x="14" y="4" width="6" height="6" rx="1.6"></rect>
+          <rect x="4" y="14" width="6" height="6" rx="1.6"></rect>
+          <rect x="14" y="14" width="6" height="6" rx="1.6"></rect>
+        </svg>
+        <span>Группы</span>
+      </a>
+      <a class="nav-item" href="05-settle.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M7 7h10"></path>
+          <path d="M13 3l4 4-4 4"></path>
+          <path d="M17 17H7"></path>
+          <path d="M11 21l-4-4 4-4"></path>
+        </svg>
+        <span>Долги</span>
+      </a>
+      <a class="nav-item nav-add" href="04-add-expense.html">
+        <span class="nav-add-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path d="M12 5v14"></path>
+            <path d="M5 12h14"></path>
+          </svg>
+        </span>
+        <span>Добавить</span>
+      </a>
+      <a class="nav-item is-active" href="settings.html" aria-current="page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M12 3v2.2M12 18.8V21M3 12h2.2M18.8 12H21M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M18.4 5.6l-1.6 1.6M7.2 16.8l-1.6 1.6"></path>
+        </svg>
+        <span>Настройки</span>
+      </a>
+    </nav>
+
+    <div class="sheet-backdrop" id="plus-backdrop" hidden></div>
+    <section class="sheet" id="plus-sheet" role="dialog" aria-modal="true" aria-labelledby="plus-sheet-title" data-od-id="plus-paywall" hidden>
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <div class="sheet-head">
+        <div>
+          <span class="badge">Splitly Plus</span>
+          <h2 class="sheet-title" id="plus-sheet-title" style="margin-top: 10px;">Больше групп — меньше напоминаний</h2>
+        </div>
+        <button class="sheet-close" id="close-plus" type="button" aria-label="Закрыть">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18"></path>
+          </svg>
+        </button>
+      </div>
+
+      <div id="plus-offer">
+        <div class="plus-features">
+          <div class="plus-feature">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12.5l4.2 4.2L19 7"></path>
+            </svg>
+            <span>Неограниченное число групп</span>
+          </div>
+          <div class="plus-feature">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12.5l4.2 4.2L19 7"></path>
+            </svg>
+            <span>Автоматические напоминания о долгах</span>
+          </div>
+          <div class="plus-feature">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12.5l4.2 4.2L19 7"></path>
+            </svg>
+            <span>Полная история расходов без ограничений</span>
+          </div>
+        </div>
+
+        <div class="plan-grid" role="group" aria-label="Тариф Splitly Plus">
+          <button class="plan" type="button" data-plan="month" aria-pressed="false">
+            <span class="plan-label">Месяц</span>
+            <span class="plan-price">299 ₽</span>
+            <span class="plan-unit">в месяц</span>
+          </button>
+          <button class="plan is-selected" type="button" data-plan="year" aria-pressed="true">
+            <span class="plan-badge">−30%</span>
+            <span class="plan-label">Год</span>
+            <span class="plan-price">2 490 ₽</span>
+            <span class="plan-unit">208 ₽ в месяц</span>
+          </button>
+        </div>
+
+        <button class="btn btn-primary btn-block" id="plus-cta" type="button" data-od-id="plus-cta">Оформить Plus</button>
+        <p class="plus-note" id="plus-note">2 490 ₽ в год. Отмена в любой момент.</p>
+      </div>
+
+      <div class="plus-success" id="plus-success" hidden>
+        <div class="success-art" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12.5l4.2 4.2L19 7"></path>
+          </svg>
+        </div>
+        <h3>Plus активирован</h3>
+        <p>Лимит групп снят, напоминания включены. Всё готово к следующей поездке.</p>
+        <button class="btn btn-primary btn-block" id="plus-done" type="button">Готово</button>
+      </div>
+    </section>
+
+    <div class="sheet-backdrop" id="logout-backdrop" hidden></div>
+    <section class="sheet sheet--small" id="logout-sheet" role="dialog" aria-modal="true" aria-labelledby="logout-title" data-od-id="logout-dialog" hidden>
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <h2 class="sheet-title" id="logout-title">Выйти из аккаунта?</h2>
+      <p class="sheet-copy">Балансы групп сохранятся. Вернуться можно в любой момент.</p>
+      <a class="btn btn-danger btn-block" href="01-onboarding.html" data-od-id="logout-confirm">Выйти</a>
+      <button class="btn btn-ghost btn-block" id="cancel-logout" type="button">Остаться</button>
+    </section>
+  </div>
+
+  <script>
+    (function () {
+      const plusSheet = document.getElementById('plus-sheet');
+      const plusBackdrop = document.getElementById('plus-backdrop');
+      const plusOpen = document.getElementById('open-plus');
+      const plusClose = document.getElementById('close-plus');
+      const plusCta = document.getElementById('plus-cta');
+      const plusDone = document.getElementById('plus-done');
+      const plusOffer = document.getElementById('plus-offer');
+      const plusSuccess = document.getElementById('plus-success');
+      const plusNote = document.getElementById('plus-note');
+      const plans = Array.from(document.querySelectorAll('[data-plan]'));
+
+      const logoutSheet = document.getElementById('logout-sheet');
+      const logoutBackdrop = document.getElementById('logout-backdrop');
+      const logoutOpen = document.getElementById('open-logout');
+      const logoutCancel = document.getElementById('cancel-logout');
+
+      function openOverlay(sheet, backdrop, focusTarget) {
+        closeOverlays();
+        backdrop.hidden = false;
+        sheet.hidden = false;
+        if (focusTarget) focusTarget.focus({ preventScroll: true });
+      }
+
+      function closeOverlays() {
+        plusSheet.hidden = true;
+        plusBackdrop.hidden = true;
+        logoutSheet.hidden = true;
+        logoutBackdrop.hidden = true;
+      }
+
+      plusOpen.addEventListener('click', function () {
+        openOverlay(plusSheet, plusBackdrop, plusClose);
+      });
+
+      plusClose.addEventListener('click', function () {
+        closeOverlays();
+        plusOpen.focus({ preventScroll: true });
+      });
+
+      plusBackdrop.addEventListener('click', closeOverlays);
+
+      plans.forEach(function (plan) {
+        plan.addEventListener('click', function () {
+          plans.forEach(function (item) {
+            const isSelected = item === plan;
+            item.classList.toggle('is-selected', isSelected);
+            item.setAttribute('aria-pressed', String(isSelected));
+          });
+          plusNote.textContent = plan.dataset.plan === 'year'
+            ? '2 490 ₽ в год. Отмена в любой момент.'
+            : '299 ₽ в месяц. Отмена в любой момент.';
+        });
+      });
+
+      plusCta.addEventListener('click', function () {
+        plusOffer.hidden = true;
+        plusSuccess.hidden = false;
+        plusDone.focus({ preventScroll: true });
+      });
+
+      plusDone.addEventListener('click', function () {
+        closeOverlays();
+        plusOpen.focus({ preventScroll: true });
+        window.setTimeout(function () {
+          plusOffer.hidden = false;
+          plusSuccess.hidden = true;
+        }, 220);
+      });
+
+      logoutOpen.addEventListener('click', function () {
+        openOverlay(logoutSheet, logoutBackdrop, logoutCancel);
+      });
+
+      logoutCancel.addEventListener('click', function () {
+        closeOverlays();
+        logoutOpen.focus({ preventScroll: true });
+      });
+
+      logoutBackdrop.addEventListener('click', closeOverlays);
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') closeOverlays();
+      });
+    })();
+  </script>
+<script data-prototype-transition>
+(() => {
+  if (window.__prototypeTransitions) return;
+  window.__prototypeTransitions = true;
+
+  document.addEventListener('click', (event) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      !(event.target instanceof Element)
+    ) {
+      return;
+    }
+
+    const link = event.target.closest('a[href]');
+    if (
+      !link ||
+      (link.target && link.target !== '_self') ||
+      link.hasAttribute('download')
+    ) {
+      return;
+    }
+
+    let url;
+    try {
+      url = new URL(link.href, location.href);
+    } catch {
+      return;
+    }
+
+    if (url.origin !== location.origin) return;
+    if (url.hash && url.pathname === location.pathname) return;
+
+    event.preventDefault();
+    document.documentElement.classList.add('prototype-leaving');
+
+    setTimeout(() => {
+      location.href = url.href;
+    }, 150);
+  });
+})();
+</script>
+</body>
+</html>

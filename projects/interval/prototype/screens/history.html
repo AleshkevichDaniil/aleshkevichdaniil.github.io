@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interval — История</title>
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="../assets/screens.css">
+<style data-prototype-transition>
+@keyframes prototype-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body {
+  animation: prototype-enter 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+html.prototype-leaving body {
+  opacity: 0;
+  transition: opacity 140ms ease;
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  html.prototype-leaving body { transition: none; }
+}
+</style>
+</head>
+<body class="screen-page" data-screen="history">
+
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9.5 6 6 6-6 6"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.2"/><path d="M12 7.6V12l3 1.9"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11.2 12 4l8 7.2"/><path d="M6.6 9.9V19h10.8V9.9"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13.4 3 6 13.4h4.9L10.3 21 18 10.6h-5z"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.4" width="14" height="9.6" rx="2.4"/><path d="M8.4 10.4V8a3.6 3.6 0 0 1 7.2 0v2.4"/></symbol>
+</svg>
+
+<div class="page">
+  <div class="stage">
+    <div class="app-shell">
+      <div class="app" data-view="history">
+
+        <header class="app-bar">
+          <div class="bar-heading">
+            <p class="date">16–22 ноября</p>
+            <h1 class="app-title" id="historyTitle" data-od-id="history-title">История</h1>
+          </div>
+        </header>
+
+        <main class="content">
+          <section class="history-summary card" data-od-id="week-summary" aria-label="Сводка за неделю">
+            <div class="summary-top">
+              <span class="section-label">Эта неделя</span>
+              <strong class="summary-total num" id="weekTotal">28:45</strong>
+            </div>
+            <div class="week-chart" aria-hidden="true">
+              <div class="week-col"><div class="week-track"><span class="week-bar" data-day="0" style="--h:89%"></span></div><span class="week-day">пн</span></div>
+              <div class="week-col"><div class="week-track"><span class="week-bar is-empty" data-day="1"></span></div><span class="week-day">вт</span></div>
+              <div class="week-col"><div class="week-track"><span class="week-bar" data-day="2" style="--h:100%"></span></div><span class="week-day">ср</span></div>
+              <div class="week-col"><div class="week-track"><span class="week-bar is-empty" data-day="3"></span></div><span class="week-day">чт</span></div>
+              <div class="week-col"><div class="week-track"><span class="week-bar" data-day="4" style="--h:58%"></span></div><span class="week-day">пт</span></div>
+              <div class="week-col"><div class="week-track"><span class="week-bar is-empty" data-day="5"></span></div><span class="week-day">сб</span></div>
+              <div class="week-col is-today"><div class="week-track"><span class="week-bar" data-day="6" style="--h:40%"></span></div><span class="week-day">вс</span></div>
+            </div>
+            <div class="summary-foot">
+              <span><strong id="weekCount">4 тренировки</strong> за неделю</span>
+              <span>средняя <strong class="num" id="weekAvg">7:11</strong></span>
+            </div>
+          </section>
+
+          <div class="filters" role="group" data-od-id="history-filters" aria-label="Фильтр по длительности">
+            <button class="filter is-active" data-filter="all">Все</button>
+            <button class="filter" data-filter="short">До 5 мин</button>
+            <button class="filter" data-filter="long">Дольше 5 мин</button>
+          </div>
+
+          <div class="history-list" id="historyList" data-od-id="history-list">
+            <article class="history-item" data-date="2026-11-22" data-duration="240" data-name="Табата 20/10" data-meta="8 раундов · 20/10 с">
+              <div class="history-info"><h3>Табата 20/10</h3><p><time datetime="2026-11-22">22 ноября</time> · 8 раундов · 20/10 с</p></div>
+              <span class="history-dur num">4:00</span>
+            </article>
+            <article class="history-item" data-date="2026-11-20" data-duration="350" data-name="HIIT 40/20" data-meta="6 раундов · 40/20 с">
+              <div class="history-info"><h3>HIIT 40/20</h3><p><time datetime="2026-11-20">20 ноября</time> · 6 раундов · 40/20 с</p></div>
+              <span class="history-dur num">5:50</span>
+            </article>
+            <article class="history-item" data-date="2026-11-18" data-duration="600" data-name="EMOM 10" data-meta="10 раундов · 60 с работы">
+              <div class="history-info"><h3>EMOM 10</h3><p><time datetime="2026-11-18">18 ноября</time> · 10 раундов · 60 с работы</p></div>
+              <span class="history-dur num">10:00</span>
+            </article>
+            <article class="history-item" data-date="2026-11-16" data-duration="535" data-name="Лестница 30/15" data-meta="12 раундов · 30/15 с">
+              <div class="history-info"><h3>Лестница 30/15</h3><p><time datetime="2026-11-16">16 ноября</time> · 12 раундов · 30/15 с</p></div>
+              <span class="history-dur num">8:55</span>
+            </article>
+          </div>
+
+          <div class="history-empty" id="historyEmpty">
+            <h3>Ничего не найдено</h3>
+            <p>В этом диапазоне пока нет тренировок. Покажем все записи?</p>
+            <button class="btn btn--ghost" id="resetFilter">Показать все</button>
+          </div>
+
+          <a class="pro-card" href="paywall.html?from=history" data-od-id="pro-analytics-card">
+            <svg class="icon"><use href="#i-lock"/></svg>
+            <span class="pro-copy"><strong>Аналитика за месяц</strong><span>Средняя длительность, серии и любимые пресеты</span></span>
+            <svg class="icon"><use href="#i-chevron"/></svg>
+          </a>
+        </main>
+
+        <nav class="tabbar" aria-label="Основная навигация">
+          <a class="tab" href="home.html"><svg class="icon"><use href="#i-home"/></svg>Главная</a>
+          <a class="tab is-active" href="history.html"><svg class="icon"><use href="#i-clock"/></svg>История</a>
+          <a class="tab" href="paywall.html?from=history"><svg class="icon"><use href="#i-bolt"/></svg>Pro</a>
+        </nav>
+
+        <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+      </div>
+    </div>
+  </div>
+
+  <p class="page-note"><a href="onboarding.html">← Все экраны</a><span class="page-note__sep">·</span><span>07 · История</span></p>
+</div>
+
+<script src="../assets/app.js"></script>
+<script data-prototype-transition>
+(() => {
+  if (window.__prototypeTransitions) return;
+  window.__prototypeTransitions = true;
+
+  document.addEventListener('click', (event) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      !(event.target instanceof Element)
+    ) {
+      return;
+    }
+
+    const link = event.target.closest('a[href]');
+    if (
+      !link ||
+      (link.target && link.target !== '_self') ||
+      link.hasAttribute('download')
+    ) {
+      return;
+    }
+
+    let url;
+    try {
+      url = new URL(link.href, location.href);
+    } catch {
+      return;
+    }
+
+    if (url.origin !== location.origin) return;
+    if (url.hash && url.pathname === location.pathname) return;
+
+    event.preventDefault();
+    document.documentElement.classList.add('prototype-leaving');
+
+    setTimeout(() => {
+      location.href = url.href;
+    }, 150);
+  });
+})();
+</script>
+</body>
+</html>

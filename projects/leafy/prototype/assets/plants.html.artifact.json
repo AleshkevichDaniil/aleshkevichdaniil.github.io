@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "plants.html",
+  "entry": "plants.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-11-16T20:20:27.216Z",
+  "updatedAt": "2026-11-16T20:20:27.216Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

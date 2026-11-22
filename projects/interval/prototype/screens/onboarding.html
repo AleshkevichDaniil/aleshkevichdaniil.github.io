@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interval — Онбординг</title>
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="../assets/screens.css">
+<style data-prototype-transition>
+@keyframes prototype-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body {
+  animation: prototype-enter 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+html.prototype-leaving body {
+  opacity: 0;
+  transition: opacity 140ms ease;
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  html.prototype-leaving body { transition: none; }
+}
+</style>
+</head>
+<body class="screen-page" data-screen="onboarding">
+
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><rect x="7.5" y="5.5" width="3.4" height="13" rx="1.3" fill="currentColor" stroke="none"/><rect x="13.1" y="5.5" width="3.4" height="13" rx="1.3" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-skip" viewBox="0 0 24 24"><path d="M6 5.5v13l9.5-6.5z" fill="currentColor" stroke="none"/><path d="M18 6v12"/></symbol>
+  <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6.5" y="6.5" width="11" height="11" rx="2.4" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M7 7l10 10M17 7 7 17"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9.5 6 6 6-6 6"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="m14.5 6-6 6 6 6"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.2"/><path d="M12 7.6V12l3 1.9"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11.2 12 4l8 7.2"/><path d="M6.6 9.9V19h10.8V9.9"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13.4 3 6 13.4h4.9L10.3 21 18 10.6h-5z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.4 4.6 4.6L19 7"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.4" width="14" height="9.6" rx="2.4"/><path d="M8.4 10.4V8a3.6 3.6 0 0 1 7.2 0v2.4"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 8h8.4M17.4 8H20M4 16h2.6M11.6 16H20"/><circle cx="15" cy="8" r="2.1"/><circle cx="9" cy="16" r="2.1"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 19.5h16"/><path d="M7.5 19.5v-5.5"/><path d="M12 19.5V8.5"/><path d="M16.5 19.5v-8"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5.5v13M5.5 12h13"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5.5 12h13"/></symbol>
+</svg>
+
+<div class="page">
+  <div class="stage">
+    <div class="app-shell">
+      <div class="app" data-view="onboarding">
+
+        <header class="app-bar app-bar--onboarding">
+          <span class="wordmark">INTERVAL</span>
+          <a class="text-btn" href="home.html">Пропустить</a>
+        </header>
+
+        <main class="content onboarding">
+          <p class="eyebrow">Интервальный таймер</p>
+          <h1 class="display onboarding-title" id="onboardingTitle" data-od-id="onboarding-title">Тренируйся<br>по секундам.</h1>
+          <p class="onboarding-sub">Готовые интервалы, свои настройки и история, к которой хочется возвращаться.</p>
+
+          <section class="ticket card" data-od-id="onboarding-preset-card" aria-label="Пример пресета">
+            <div class="ticket-head">
+              <span class="ticket-name">Табата 20/10</span>
+              <span class="ticket-rounds">8 раундов</span>
+            </div>
+            <div class="ticket-nums">
+              <div class="ticket-num"><span class="num">20</span><small>работа</small></div>
+              <span class="ticket-sep" aria-hidden="true">/</span>
+              <div class="ticket-num ticket-num--rest"><span class="num">10</span><small>отдых</small></div>
+              <span class="ticket-total num">4:00</span>
+            </div>
+            <div class="seg-strip" aria-hidden="true">
+              <span class="is-work"></span><span></span><span class="is-work"></span><span></span><span class="is-work"></span><span></span><span class="is-work"></span><span></span><span class="is-work"></span><span></span><span class="is-work"></span><span></span><span class="is-work"></span><span></span><span class="is-work"></span>
+            </div>
+          </section>
+
+          <ul class="feature-list">
+            <li>
+              <span class="feature-icon"><svg class="icon"><use href="#i-bolt"/></svg></span>
+              <div><strong>Готовые пресеты</strong><span>Табата, EMOM и HIIT в один тап.</span></div>
+            </li>
+            <li>
+              <span class="feature-icon"><svg class="icon"><use href="#i-sliders"/></svg></span>
+              <div><strong>Свои интервалы</strong><span>Работа, отдых и раунды.</span></div>
+            </li>
+            <li>
+              <span class="feature-icon"><svg class="icon"><use href="#i-chart"/></svg></span>
+              <div><strong>История и прогресс</strong><span>Сколько и когда вы тренировались.</span></div>
+            </li>
+          </ul>
+        </main>
+
+        <footer class="app-footer">
+          <a class="btn btn--primary btn--block" href="home.html" data-od-id="onboarding-cta">Начать<svg class="icon"><use href="#i-arrow"/></svg></a>
+        </footer>
+
+      </div>
+    </div>
+  </div>
+
+  <p class="page-note"><a href="onboarding.html">← Все экраны</a><span class="page-note__sep">·</span><span>01 · Онбординг</span></p>
+</div>
+
+<script src="../assets/app.js"></script>
+<script data-prototype-transition>
+(() => {
+  if (window.__prototypeTransitions) return;
+  window.__prototypeTransitions = true;
+
+  document.addEventListener('click', (event) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      !(event.target instanceof Element)
+    ) {
+      return;
+    }
+
+    const link = event.target.closest('a[href]');
+    if (
+      !link ||
+      (link.target && link.target !== '_self') ||
+      link.hasAttribute('download')
+    ) {
+      return;
+    }
+
+    let url;
+    try {
+      url = new URL(link.href, location.href);
+    } catch {
+      return;
+    }
+
+    if (url.origin !== location.origin) return;
+    if (url.hash && url.pathname === location.pathname) return;
+
+    event.preventDefault();
+    document.documentElement.classList.add('prototype-leaving');
+
+    setTimeout(() => {
+      location.href = url.href;
+    }, 150);
+  });
+})();
+</script>
+</body>
+</html>

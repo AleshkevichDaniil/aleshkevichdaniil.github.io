@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "empty-state.html",
+  "entry": "empty-state.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-11-16T20:20:27.240Z",
+  "updatedAt": "2026-11-16T20:20:27.240Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=390, initial-scale=1" />
+  <title>Habitly — Habitly Plus</title>
+  <link rel="stylesheet" href="../assets/habitly.css" />
+<style data-prototype-transition>
+@keyframes prototype-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body {
+  animation: prototype-enter 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+html.prototype-leaving body {
+  opacity: 0;
+  transition: opacity 140ms ease;
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  html.prototype-leaving body { transition: none; }
+}
+</style>
+</head>
+<body class="screen-page">
+  <div class="screen" data-od-id="paywall-screen" data-screen="paywall">
+
+    <header class="app-header compact" data-od-id="paywall-header">
+      <span aria-hidden="true"></span>
+      <h1 class="header-title">Habitly Plus</h1>
+      <a class="icon-btn plain" href="07-profile.html" aria-label="Закрыть и вернуться в профиль">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18" /></svg>
+      </a>
+    </header>
+
+    <main class="app-body" data-od-id="paywall-content">
+
+      <section class="paywall-hero" data-od-id="paywall-hero">
+        <p class="mono">подписка</p>
+        <h2 class="display">Больше свободы для привычек.</h2>
+        <p class="lead">Безлимит привычек, статистика за год и заморозка серии.</p>
+      </section>
+
+      <section class="benefits" data-od-id="paywall-benefits">
+        <div class="benefit">
+          <span class="benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14" /></svg>
+          </span>
+          <p><b>Привычки без ограничений.</b><span>Добавляйте столько, сколько нужно сейчас.</span></p>
+        </div>
+        <div class="benefit">
+          <span class="benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V11M12 20V4M20 20v-6" /></svg>
+          </span>
+          <p><b>Статистика за год.</b><span>Сравнивайте месяцы и находите провалы.</span></p>
+        </div>
+        <div class="benefit">
+          <span class="benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.2-3 7.4-7 9-4-1.6-7-4.8-7-9V6z" /><path d="M9 12l2 2 4-4" /></svg>
+          </span>
+          <p><b>Заморозка серии.</b><span>Один пропуск не сжигает недели работы.</span></p>
+        </div>
+      </section>
+
+      <div class="card sand free-card" data-od-id="paywall-free">
+        <p class="mono">на бесплатном тарифе</p>
+        <p class="caption">Пять привычек и статистика за месяц. Дальше — безлимит, год и заморозка серии.</p>
+      </div>
+
+      <section class="plans" data-od-id="paywall-plans" aria-label="Тариф">
+        <button class="plan" type="button" aria-pressed="false" data-plan="month" data-od-id="paywall-plan-month" data-terms="7 дней бесплатно, затем <strong>299 ₽ в месяц</strong>. Отмена в любой момент.">
+          <span class="plan-top">
+            <span class="plan-name">Месяц</span>
+            <span class="plan-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5" /></svg></span>
+          </span>
+          <span class="plan-price">299&#8239;₽</span>
+          <span class="plan-unit">в месяц</span>
+          <span class="plan-note">Без обязательств</span>
+        </button>
+        <button class="plan" type="button" aria-pressed="true" data-plan="year" data-od-id="paywall-plan-year" data-terms="7 дней бесплатно, затем <strong>1 990 ₽ в год</strong>. Отмена в любой момент.">
+          <span class="plan-top">
+            <span class="plan-name">Год</span>
+            <span class="plan-badge">−45%</span>
+            <span class="plan-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5" /></svg></span>
+          </span>
+          <span class="plan-price">1&#8239;990&#8239;₽</span>
+          <span class="plan-unit">в год</span>
+          <span class="plan-note">166 ₽ в месяц</span>
+        </button>
+      </section>
+
+    </main>
+
+    <footer class="app-footer" data-od-id="paywall-footer">
+      <a class="btn btn-primary btn-block" href="07-profile.html?plus=1">Оформить Plus</a>
+      <p class="micro" data-terms>7 дней бесплатно, затем <strong>1 990 ₽ в год</strong>. Отмена в любой момент.</p>
+    </footer>
+
+  </div>
+  <script src="../assets/habitly.js"></script>
+<script data-prototype-transition>
+(() => {
+  if (window.__prototypeTransitions) return;
+  window.__prototypeTransitions = true;
+
+  document.addEventListener('click', (event) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      !(event.target instanceof Element)
+    ) {
+      return;
+    }
+
+    const link = event.target.closest('a[href]');
+    if (
+      !link ||
+      (link.target && link.target !== '_self') ||
+      link.hasAttribute('download')
+    ) {
+      return;
+    }
+
+    let url;
+    try {
+      url = new URL(link.href, location.href);
+    } catch {
+      return;
+    }
+
+    if (url.origin !== location.origin) return;
+    if (url.hash && url.pathname === location.pathname) return;
+
+    event.preventDefault();
+    document.documentElement.classList.add('prototype-leaving');
+
+    setTimeout(() => {
+      location.href = url.href;
+    }, 150);
+  });
+})();
+</script>
+</body>
+</html>

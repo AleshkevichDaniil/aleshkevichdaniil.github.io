@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leafy — Онбординг</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --primary:#3F7D4E;--on-primary:#FFFFFF;--primary-container:#D7E8D8;--on-primary-container:#1F4F2C;
+    --bg:#F7F5EF;--surface:#FFFDF8;--surface-container:#F1EEE6;--surface-high:#EBE7DD;
+    --on-surface:#1D211C;--muted:#5E665C;--outline:#C8CFC2;--outline-variant:#DDE3D7;
+    --r-xl:28px;--r-lg:24px;--r-md:20px;--sp-1:8px;--sp-2:12px;--sp-3:16px;--sp-4:24px;--sp-5:32px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Roboto',system-ui,sans-serif;}
+  body{background:#dcdad2;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px;color:var(--on-surface);}
+  .phone{width:412px;height:915px;background:var(--bg);border-radius:36px;overflow:hidden;position:relative;box-shadow:0 20px 50px rgba(0,0,0,.2);display:flex;flex-direction:column;}
+  .status{height:32px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;font-size:13px;color:var(--muted);}
+  .slides{flex:1;position:relative;overflow:hidden;}
+  .slide{position:absolute;inset:0;padding:24px 24px 140px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;opacity:0;transform:translateX(30px);transition:all .35s ease;pointer-events:none;}
+  .slide.active{opacity:1;transform:translateX(0);pointer-events:auto;}
+  .illus{width:240px;height:240px;border-radius:120px;background:linear-gradient(180deg,var(--primary-container),#EAF3E8);display:flex;align-items:center;justify-content:center;margin-bottom:32px;color:var(--primary);}
+  .illus svg{width:140px;height:140px;}
+  h1{font-size:28px;line-height:1.3;font-weight:700;margin-bottom:12px;letter-spacing:-0.01em;}
+  p{font-size:16px;line-height:1.6;color:var(--muted);max-width:300px;}
+  .dots{display:flex;gap:8px;justify-content:center;margin-top:28px;}
+  .dot{width:8px;height:8px;border-radius:4px;background:var(--outline);transition:all .25s;}
+  .dot.active{width:24px;background:var(--primary);}
+  .bottom{position:absolute;left:0;right:0;bottom:0;padding:16px 24px 28px;background:linear-gradient(to top,var(--bg) 70%,transparent);}
+  .actions{display:flex;gap:12px;align-items:center;}
+  .btn{height:52px;border-radius:26px;border:none;font-size:16px;font-weight:500;cursor:pointer;padding:0 20px;transition:background .15s, transform .1s;}
+  .btn:active{transform:scale(.98);}
+  .btn-text{background:transparent;color:var(--primary);}
+  .btn-text:hover{background:rgba(63,125,78,.08);}
+  .btn-filled{flex:1;background:var(--primary);color:var(--on-primary);}
+  .btn-filled:hover{background:#356A42;}
+  .skip-row{display:flex;justify-content:flex-end;margin-bottom:8px;}
+</style>
+<style data-prototype-transition>
+@keyframes prototype-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body {
+  animation: prototype-enter 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+html.prototype-leaving body {
+  opacity: 0;
+  transition: opacity 140ms ease;
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  html.prototype-leaving body { transition: none; }
+}
+</style>
+</head>
+<body>
+<div class="phone" data-od-id="onboarding-screen">
+  <div class="status"><span>16:00</span><span>5G · 82%</span></div>
+  <div class="slides">
+    <section class="slide active" data-slide="0" data-od-id="onboarding-slide-1">
+      <div class="illus"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 7 4 9 4 14a8 8 0 0016 0c0-5-4-7-8-12zm0 18a6 6 0 01-6-6c0-3.2 2.4-5 6-9.5 3.6 4.5 6 6.3 6 9.5a6 6 0 01-6 6z"/></svg></div>
+      <h1>Все растения под контролем</h1>
+      <p>Соберите коллекцию комнатных растений в одном месте и следите за их состоянием.</p>
+      <div class="dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
+    </section>
+    <section class="slide" data-slide="1" data-od-id="onboarding-slide-2">
+      <div class="illus"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2v2h1v14a4 4 0 008 0V4h1V2H7zm3 2h4v5h-4V4zm0 7h4v3h-4v-3zm2 9a2 2 0 01-2-2v-2h4v2a2 2 0 01-2 2z"/></svg></div>
+      <h1>Напоминания о поливе</h1>
+      <p>Leafy подскажет, когда пора полить растение, чтобы оно всегда было здоровым.</p>
+      <div class="dots"><span class="dot"></span><span class="dot active"></span><span class="dot"></span></div>
+    </section>
+    <section class="slide" data-slide="2" data-od-id="onboarding-slide-3">
+      <div class="illus"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3h-1V1h-2v2H8V1H6v2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zm0 16H5V9h14v10zm0-12H5V5h14v2zm-7 4l4 4-1.4 1.4-2.6-2.6-2.6 2.6L8 14.9l4-3.9z"/></svg></div>
+      <h1>Календарь ухода</h1>
+      <p>Планируйте уход на неделю вперёд и отмечайте выполненные задачи в календаре.</p>
+      <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot active"></span></div>
+    </section>
+  </div>
+  <div class="bottom">
+    <div class="skip-row"><button class="btn btn-text" id="skipBtn" data-od-id="onboarding-skip">Пропустить</button></div>
+    <div class="actions"><button class="btn btn-filled" id="nextBtn" data-od-id="onboarding-next">Далее</button></div>
+  </div>
+</div>
+<script>
+  const slides=[...document.querySelectorAll('.slide')];
+  let idx=0;
+  const nextBtn=document.getElementById('nextBtn');
+  const skipBtn=document.getElementById('skipBtn');
+  function render(){
+    slides.forEach((s,i)=>s.classList.toggle('active',i===idx));
+    nextBtn.textContent = idx===slides.length-1 ? 'Начать' : 'Далее';
+  }
+  nextBtn.addEventListener('click',()=>{
+    if(idx<slides.length-1){idx++;render();}
+    else{window.location.href='plants.html';}
+  });
+  skipBtn.addEventListener('click',()=>window.location.href='plants.html');
+</script>
+<script data-prototype-transition>
+(() => {
+  if (window.__prototypeTransitions) return;
+  window.__prototypeTransitions = true;
+
+  document.addEventListener('click', (event) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      !(event.target instanceof Element)
+    ) {
+      return;
+    }
+
+    const link = event.target.closest('a[href]');
+    if (
+      !link ||
+      (link.target && link.target !== '_self') ||
+      link.hasAttribute('download')
+    ) {
+      return;
+    }
+
+    let url;
+    try {
+      url = new URL(link.href, location.href);
+    } catch {
+      return;
+    }
+
+    if (url.origin !== location.origin) return;
+    if (url.hash && url.pathname === location.pathname) return;
+
+    event.preventDefault();
+    document.documentElement.classList.add('prototype-leaving');
+
+    setTimeout(() => {
+      location.href = url.href;
+    }, 150);
+  });
+})();
+</script>
+</body>
+</html>

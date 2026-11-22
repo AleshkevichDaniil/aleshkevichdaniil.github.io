@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Scanly — Документ</title>
+  <link rel="stylesheet" href="../assets/app.css" />
+  <link rel="stylesheet" href="../assets/screen-document.css" />
+<style data-prototype-transition>
+@keyframes prototype-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body {
+  animation: prototype-enter 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+html.prototype-leaving body {
+  opacity: 0;
+  transition: opacity 140ms ease;
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  html.prototype-leaving body { transition: none; }
+}
+</style>
+</head>
+<body class="screen">
+
+  <header class="statusbar" data-od-id="statusbar">
+    <span>9:41</span>
+    <span class="status-right">
+      <svg viewBox="0 0 17 11" aria-hidden="true">
+        <rect x="0" y="7" width="3" height="4" rx="0.6"/><rect x="4" y="5" width="3" height="6" rx="0.6"/>
+        <rect x="8" y="3" width="3" height="8" rx="0.6"/><rect x="12" y="0" width="3" height="11" rx="0.6"/>
+      </svg>
+      <svg viewBox="0 0 17 11" aria-hidden="true">
+        <path d="M8.5 1.5C5.5 1.5 2.7 2.6 0.5 4.6L2 6.1C3.8 4.5 6.1 3.6 8.5 3.6c2.4 0 4.7 0.9 6.5 2.5l1.5-1.5c-2.2-2-5-3.1-8-3.1zM3.5 7.6L5 9.1c1-0.9 2.2-1.4 3.5-1.4 1.3 0 2.5 0.5 3.5 1.4l1.5-1.5c-1.4-1.3-3.1-2-5-2-1.9 0-3.6 0.7-5 2zM6.5 10.6l2 2 2-2c-0.5-0.5-1.2-0.8-2-0.8s-1.5 0.3-2 0.8z"/>
+      </svg>
+      <svg class="battery" viewBox="0 0 25 11" aria-hidden="true">
+        <rect x="0.5" y="0.5" width="21" height="10" rx="2.5" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
+        <rect x="22" y="3.5" width="1.5" height="4" rx="0.4" fill="currentColor" fill-opacity="0.4"/>
+        <rect x="2" y="2" width="18" height="7" rx="1.4"/>
+      </svg>
+    </span>
+  </header>
+
+  <header class="appbar" data-od-id="document-header">
+    <a class="icon-btn icon-btn--plain" href="04-documents.html" aria-label="Назад к документам">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M15 5l-7 7 7 7"/>
+      </svg>
+    </a>
+    <div class="appbar-title">
+      <h1 id="doc-title">Договор аренды</h1>
+      <p>PDF · 22 ноября 2026</p>
+    </div>
+    <button class="icon-btn icon-btn--plain" type="button" id="rename-top" aria-label="Переименовать документ">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4 20h4L19 9a2.1 2.1 0 0 0-3-3L5 17v3Z"/><path d="m14.5 6.5 3 3"/>
+      </svg>
+    </button>
+  </header>
+
+  <main class="content doc-content" data-od-id="document-content">
+
+    <section class="page-stage" data-od-id="document-preview" aria-label="Первая страница документа">
+      <span class="page-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="4" y="3" width="16" height="18" rx="2"/><path d="M4 15h16"/>
+        </svg>
+        1 / 1
+      </span>
+
+      <div class="page-sheet">
+        <p class="doc-kicker">ДОГОВОР АРЕНДЫ</p>
+        <h4>жилого помещения</h4>
+        <p class="doc-place">г. Москва · 22 ноября 2026</p>
+
+        <p>Арендодатель: Соколова М. А., паспорт 45 12 № 674321, г. Москва, ул. Лесная, д. 14, кв. 27.</p>
+        <p>Арендатор: Ковалёв Д. С., паспорт 45 09 № 118204, г. Москва, ул. Рабочая, д. 3, кв. 8.</p>
+
+        <h5>1. Предмет договора</h5>
+        <p>Арендодатель передаёт, а Арендатор принимает жилое помещение площадью 54,2 кв. м по адресу: г. Москва, ул. Лесная, д. 14, кв. 27.</p>
+
+        <h5>2. Срок аренды</h5>
+        <p>Срок аренды — с 1 декабря 2026 года по 30 ноября 2027 года. Плата вносится ежемесячно до 5-го числа.</p>
+
+        <div class="doc-signs">
+          <div><span></span><em>Соколова М. А.</em></div>
+          <div><span></span><em>Ковалёв Д. С.</em></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="doc-facts" data-od-id="document-facts">
+      <span>PDF</span><span class="dot" aria-hidden="true"></span>
+      <span>1 страница</span><span class="dot" aria-hidden="true"></span>
+      <span>2,8 МБ</span><span class="dot" aria-hidden="true"></span>
+      <span>Распознан текст</span>
+    </div>
+
+    <div>
+      <p class="section-label">Действия</p>
+      <div class="list actions-card" data-od-id="document-actions">
+
+        <button class="list-row action-row" type="button" id="rename-row">
+          <span class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 20h4L19 9a2.1 2.1 0 0 0-3-3L5 17v3Z"/><path d="m14.5 6.5 3 3"/>
+            </svg>
+          </span>
+          <span class="body">
+            <span class="title">Переименовать</span>
+            <span class="sub" id="rename-sub">Договор аренды</span>
+          </span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+        </button>
+
+        <a class="list-row action-row" href="06-paywall.html">
+          <span class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 13 9 5 9-5"/>
+            </svg>
+          </span>
+          <span class="body">
+            <span class="title">Объединить в PDF</span>
+            <span class="sub">Добавьте страницы из других файлов</span>
+          </span>
+          <span class="pro-pill">Pro</span>
+        </a>
+
+        <button class="list-row action-row action-row--danger" type="button" id="delete-row">
+          <span class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 7h16"/><path d="M9 7V5h6v2"/><path d="M6 7l1 13h10l1-13"/><path d="M10 11v6M14 11v6"/>
+            </svg>
+          </span>
+          <span class="body">
+            <span class="title">Удалить документ</span>
+            <span class="sub">Файл исчезнет на всех устройствах</span>
+          </span>
+        </button>
+
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="dock" data-od-id="document-cta">
+    <button class="btn btn-primary" type="button" id="share-open">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 15V4"/><path d="m7.5 8.5 4.5-4.5 4.5 4.5"/><path d="M5 14v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/>
+      </svg>
+      Поделиться
+    </button>
+  </footer>
+
+  <div class="homebar" aria-hidden="true"></div>
+
+  <!-- share sheet -->
+  <div class="backdrop" id="share-sheet" hidden data-od-id="share-sheet">
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="share-title">
+      <div class="sheet-grab" aria-hidden="true"></div>
+      <h2 id="share-title">Поделиться документом</h2>
+      <p class="sheet-sub" id="share-sub">Договор аренды · PDF · 2,8 МБ</p>
+
+      <button class="sheet-row share-row" type="button" data-share="files">
+        <span class="icon-badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/>
+          </svg>
+        </span>
+        <span class="sheet-body"><b>Сохранить в Файлы</b><span>Локальное хранилище телефона</span></span>
+      </button>
+
+      <button class="sheet-row share-row" type="button" data-share="mail">
+        <span class="icon-badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6 8.5-6"/>
+          </svg>
+        </span>
+        <span class="sheet-body"><b>Отправить на почту</b><span>m.sokolova@pochta.ru</span></span>
+      </button>
+
+      <button class="sheet-row share-row" type="button" data-share="print">
+        <span class="icon-badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 8V4h10v4"/><rect x="4" y="8" width="16" height="8" rx="2"/><path d="M7 16h10v4H7z"/>
+          </svg>
+        </span>
+        <span class="sheet-body"><b>Печать</b><span>Ближайший принтер</span></span>
+      </button>
+
+      <button class="cancel-row" type="button" data-close="share">Отмена</button>
+    </div>
+  </div>
+
+  <!-- rename dialog -->
+  <div class="dialog-wrap" id="rename-dialog" hidden data-od-id="rename-dialog">
+    <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="rename-title">
+      <h2 id="rename-title">Новое название</h2>
+      <div class="field">
+        <label for="rename-input">Название документа</label>
+        <input id="rename-input" type="text" value="Договор аренды" maxlength="60" />
+      </div>
+      <div class="dialog-actions">
+        <button class="btn btn-secondary" type="button" data-close="rename">Отмена</button>
+        <button class="btn btn-primary" type="button" id="rename-save">Сохранить</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- delete dialog -->
+  <div class="dialog-wrap" id="delete-dialog" hidden data-od-id="delete-dialog">
+    <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="delete-title">
+      <h2 id="delete-title">Удалить документ?</h2>
+      <p class="lead dialog-lead">Файл исчезнет из Scanly на всех устройствах. Восстановить его не получится.</p>
+      <div class="dialog-actions">
+        <button class="btn btn-secondary" type="button" data-close="delete">Отмена</button>
+        <button class="btn btn-danger" type="button" id="delete-confirm">Удалить</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (function () {
+      var shareSheet = document.getElementById('share-sheet');
+      var renameDialog = document.getElementById('rename-dialog');
+      var deleteDialog = document.getElementById('delete-dialog');
+      var input = document.getElementById('rename-input');
+      var title = document.getElementById('doc-title');
+      var sub = document.getElementById('rename-sub');
+      var toast = document.getElementById('toast');
+      var toastTimer;
+
+      function open(el) { el.hidden = false; }
+      function close(el) { el.hidden = true; }
+
+      function showToast(text) {
+        toast.textContent = text;
+        toast.classList.add('is-visible');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () { toast.classList.remove('is-visible'); }, 2200);
+      }
+
+      document.getElementById('share-open').addEventListener('click', function () { open(shareSheet); });
+
+      Array.prototype.forEach.call(document.querySelectorAll('.share-row'), function (row) {
+        row.addEventListener('click', function () {
+          close(shareSheet);
+          showToast('PDF готов к отправке');
+        });
+      });
+
+      document.getElementById('rename-row').addEventListener('click', function () {
+        input.value = title.textContent.trim();
+        open(renameDialog);
+        input.focus();
+        input.select();
+      });
+      document.getElementById('rename-top').addEventListener('click', function () {
+        input.value = title.textContent.trim();
+        open(renameDialog);
+        input.focus();
+        input.select();
+      });
+
+      document.getElementById('rename-save').addEventListener('click', function () {
+        var value = input.value.trim() || 'Без названия';
+        title.textContent = value;
+        sub.textContent = value;
+        document.getElementById('share-sub').textContent = value + ' · PDF · 2,8 МБ';
+        close(renameDialog);
+        showToast('Название обновлено');
+      });
+
+      document.getElementById('delete-row').addEventListener('click', function () {
+        open(deleteDialog);
+      });
+      document.getElementById('delete-confirm').addEventListener('click', function () {
+        location.href = '04-documents.html';
+      });
+
+      Array.prototype.forEach.call(document.querySelectorAll('[data-close]'), function (btn) {
+        btn.addEventListener('click', function () {
+          if (btn.dataset.close === 'share') close(shareSheet);
+          if (btn.dataset.close === 'rename') close(renameDialog);
+          if (btn.dataset.close === 'delete') close(deleteDialog);
+        });
+      });
+
+      [shareSheet, renameDialog, deleteDialog].forEach(function (layer) {
+        layer.addEventListener('click', function (event) {
+          if (event.target === layer) close(layer);
+        });
+      });
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+          close(shareSheet);
+          close(renameDialog);
+          close(deleteDialog);
+        }
+      });
+    })();
+    window.parent.postMessage({ screen: '05-document.html' }, '*');
+  </script>
+<script data-prototype-transition>
+(() => {
+  if (window.__prototypeTransitions) return;
+  window.__prototypeTransitions = true;
+
+  document.addEventListener('click', (event) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      !(event.target instanceof Element)
+    ) {
+      return;
+    }
+
+    const link = event.target.closest('a[href]');
+    if (
+      !link ||
+      (link.target && link.target !== '_self') ||
+      link.hasAttribute('download')
+    ) {
+      return;
+    }
+
+    let url;
+    try {
+      url = new URL(link.href, location.href);
+    } catch {
+      return;
+    }
+
+    if (url.origin !== location.origin) return;
+    if (url.hash && url.pathname === location.pathname) return;
+
+    event.preventDefault();
+    document.documentElement.classList.add('prototype-leaving');
+
+    setTimeout(() => {
+      location.href = url.href;
+    }, 150);
+  });
+})();
+</script>
+</body>
+</html>

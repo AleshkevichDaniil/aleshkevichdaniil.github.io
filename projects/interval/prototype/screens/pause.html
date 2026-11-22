@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interval — Пауза</title>
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="../assets/screens.css">
+<style data-prototype-transition>
+@keyframes prototype-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body {
+  animation: prototype-enter 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+html.prototype-leaving body {
+  opacity: 0;
+  transition: opacity 140ms ease;
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  html.prototype-leaving body { transition: none; }
+}
+</style>
+</head>
+<body class="screen-page" data-screen="pause">
+
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M7 7l10 10M17 7 7 17"/></symbol>
+</svg>
+
+<div class="page">
+  <div class="stage">
+    <div class="app-shell">
+      <div class="app" data-view="pause">
+
+        <header class="app-bar">
+          <a class="icon-btn" href="home.html" aria-label="Закрыть паузу"><svg class="icon"><use href="#i-close"/></svg></a>
+          <h1 class="bar-title" data-od-id="pause-title">Пауза</h1>
+          <span class="timer-spacer" aria-hidden="true"></span>
+        </header>
+
+        <main class="content pause-page">
+          <p class="pause-badge">Таймер остановлен</p>
+
+          <div class="pause-dial" data-od-id="pause-dial">
+            <svg viewBox="0 0 300 300" aria-hidden="true">
+              <circle class="ring-track" cx="150" cy="150" r="142"/>
+              <circle class="ring-progress" id="pauseRing" cx="150" cy="150" r="142" stroke-dasharray="892.2" stroke-dashoffset="0"/>
+            </svg>
+            <div class="dial-inner">
+              <span class="phase-label" id="pausePhase">Работа</span>
+              <span class="dial-time num" id="pauseTime">00:14</span>
+              <span class="dial-sub" id="pauseRound">раунд 2 из 8</span>
+            </div>
+          </div>
+
+          <div class="round-track" id="pauseTrack" aria-label="Прогресс раундов">
+            <span class="is-done"></span><span class="is-current"></span><span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+
+          <p class="pause-workout" id="pauseWorkout">Табата 20/10 · 4:00</p>
+
+          <div class="pause-actions">
+            <a class="btn btn--primary btn--block" id="resumeLink" href="timer.html?resume=1">Продолжить</a>
+            <a class="btn btn--ghost btn--block" id="skipLink" href="timer.html?resume=1&skip=1">Пропустить интервал</a>
+            <a class="text-btn text-btn--danger" id="finishBtn" href="results.html">Завершить тренировку</a>
+          </div>
+        </main>
+
+      </div>
+    </div>
+  </div>
+
+  <p class="page-note"><a href="onboarding.html">← Все экраны</a><span class="page-note__sep">·</span><span>05 · Пауза</span></p>
+</div>
+
+<script src="../assets/app.js"></script>
+<script data-prototype-transition>
+(() => {
+  if (window.__prototypeTransitions) return;
+  window.__prototypeTransitions = true;
+
+  document.addEventListener('click', (event) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      !(event.target instanceof Element)
+    ) {
+      return;
+    }
+
+    const link = event.target.closest('a[href]');
+    if (
+      !link ||
+      (link.target && link.target !== '_self') ||
+      link.hasAttribute('download')
+    ) {
+      return;
+    }
+
+    let url;
+    try {
+      url = new URL(link.href, location.href);
+    } catch {
+      return;
+    }
+
+    if (url.origin !== location.origin) return;
+    if (url.hash && url.pathname === location.pathname) return;
+
+    event.preventDefault();
+    document.documentElement.classList.add('prototype-leaving');
+
+    setTimeout(() => {
+      location.href = url.href;
+    }, 150);
+  });
+})();
+</script>
+</body>
+</html>

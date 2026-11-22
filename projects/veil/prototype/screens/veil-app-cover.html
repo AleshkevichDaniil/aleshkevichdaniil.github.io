@@ -1,0 +1,714 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=1200, initial-scale=1" />
+  <title>Veil — обложка приложения</title>
+  <style>
+    /* ─── brand tokens ─────────────────────────────────────────── */
+
+    :root {
+      --bg:          oklch(12.5% 0.022 287);
+      --bg-deep:     oklch(9% 0.016 287);
+      --surface:     oklch(18.5% 0.020 287);
+      --fg:          oklch(96.5% 0.004 286);
+      --muted:       oklch(74% 0.014 286);
+      --faint:       oklch(62% 0.014 286);
+      --border:      oklch(30% 0.022 287);
+      --accent:      oklch(72% 0.160 296);
+      --accent-ink:  oklch(16% 0.030 296);
+      --accent-soft: color-mix(in oklch, var(--accent) 16%, transparent);
+      --accent-line: color-mix(in oklch, var(--accent) 44%, transparent);
+
+      --font-display: 'Avenir Next', 'Bahnschrift', 'Segoe UI Variable Display', 'Segoe UI', system-ui, sans-serif;
+      --font-body:    'Segoe UI Variable Text', 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --font-mono:    'Cascadia Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+      --font-app-display: 'Iowan Old Style', 'Charter', Georgia, 'Times New Roman', serif;
+      --font-app-body:    'Segoe UI Variable Text', 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --font-app-mono:    'Cascadia Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    }
+
+    /* ─── reset ────────────────────────────────────────────────── */
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { background: var(--bg-deep); }
+    body {
+      width: 1200px;
+      height: 630px;
+      margin: 0 auto;
+      overflow: hidden;
+      background: var(--bg-deep);
+      color: var(--fg);
+      font-family: var(--font-body);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    h1, p, ul { margin: 0; }
+    ul { padding: 0; list-style: none; }
+    svg { display: block; }
+
+    /* ─── artboard ─────────────────────────────────────────────── */
+
+    .cover {
+      position: relative;
+      width: 1200px;
+      height: 630px;
+      overflow: hidden;
+      isolation: isolate;
+      background:
+        radial-gradient(46% 76% at 80% 50%,
+          color-mix(in oklch, var(--accent) 22%, transparent) 0%,
+          transparent 68%),
+        radial-gradient(70% 60% at 88% 96%,
+          color-mix(in oklch, var(--accent) 8%, transparent) 0%,
+          transparent 70%),
+        linear-gradient(112deg,
+          oklch(15% 0.020 287) 0%,
+          oklch(12% 0.018 287) 48%,
+          oklch(10% 0.016 287) 100%);
+      box-shadow: inset 0 0 160px 46px oklch(4% 0.010 287 / 0.55);
+    }
+
+    /* faint rings echo the connect orb */
+    .rings {
+      position: absolute;
+      left: 530px;
+      top: -85px;
+      width: 800px;
+      height: 800px;
+      z-index: 0;
+      color: var(--accent);
+      opacity: 0.35;
+      pointer-events: none;
+    }
+    .rings svg { width: 100%; height: 100%; }
+
+    /* ─── left copy ────────────────────────────────────────────── */
+
+    .copy {
+      position: absolute;
+      left: 64px;
+      top: 64px;
+      bottom: 64px;
+      width: 520px;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .mark {
+      position: relative;
+      flex: 0 0 auto;
+      width: 56px;
+      height: 56px;
+      border: 2.5px solid var(--accent);
+      border-radius: 50%;
+    }
+    .mark::after {
+      content: '';
+      position: absolute;
+      inset: 15px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .lockup {
+      margin-top: 36px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .wordmark {
+      font-family: var(--font-display);
+      font-size: 248px;
+      font-weight: 700;
+      line-height: 0.8;
+      letter-spacing: -0.055em;
+      color: var(--fg);
+      white-space: nowrap;
+    }
+
+    .tagline {
+      margin-top: 22px;
+      max-width: 480px;
+      font-family: var(--font-body);
+      font-size: 32px;
+      font-weight: 400;
+      line-height: 1.25;
+      letter-spacing: -0.015em;
+      color: var(--muted);
+      text-wrap: pretty;
+    }
+
+    .bullets {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .bullets li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 17px;
+      font-weight: 500;
+      line-height: 1.35;
+      letter-spacing: -0.005em;
+      color: color-mix(in oklch, var(--fg) 88%, transparent);
+    }
+    .bullets svg {
+      flex: 0 0 auto;
+      width: 18px;
+      height: 18px;
+      color: var(--faint);
+    }
+
+    .footer {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .footer-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-soft);
+    }
+
+    /* ─── phone ────────────────────────────────────────────────── */
+
+    .phone-wrap {
+      position: absolute;
+      left: 794px;
+      top: 30px;
+      z-index: 2;
+    }
+
+    .phone {
+      position: relative;
+      width: 272px;
+      height: 570px;
+      padding: 8px;
+      border-radius: 42px;
+      background:
+        linear-gradient(145deg,
+          oklch(38% 0.014 287) 0%,
+          oklch(19% 0.012 287) 38%,
+          oklch(30% 0.014 287) 62%,
+          oklch(15% 0.010 287) 100%);
+      transform: rotate(5deg);
+      box-shadow:
+        0 54px 100px -36px oklch(2% 0.010 287 / 0.92),
+        0 18px 42px -20px oklch(2% 0.010 287 / 0.72),
+        0 0 84px -26px var(--accent),
+        inset 0 0 0 1px oklch(100% 0% 0 / 0.07);
+    }
+
+    /* side buttons */
+    .phone::before {
+      content: '';
+      position: absolute;
+      right: -2px;
+      top: 142px;
+      width: 2px;
+      height: 72px;
+      border-radius: 2px;
+      background: linear-gradient(180deg, oklch(36% 0.014 287), oklch(22% 0.012 287));
+    }
+    .phone::after {
+      content: '';
+      position: absolute;
+      left: -2px;
+      top: 118px;
+      width: 2px;
+      height: 34px;
+      border-radius: 2px;
+      background: linear-gradient(180deg, oklch(36% 0.014 287), oklch(22% 0.012 287));
+      box-shadow: 0 48px 0 oklch(28% 0.012 287);
+    }
+
+    .screen {
+      position: relative;
+      width: 256px;
+      height: 554px;
+      overflow: hidden;
+      border-radius: 34px;
+      background: var(--bg);
+      box-shadow: inset 0 0 0 1px oklch(0% 0% 0 / 0.55);
+    }
+    /* glass glint, kept very low so UI stays crisp */
+    .screen::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      pointer-events: none;
+      background: linear-gradient(140deg,
+        oklch(100% 0% 0 / 0.055) 0%,
+        transparent 42%);
+    }
+
+    /* the app UI is authored at 390 × 844 and scaled into the screen */
+    .ui {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 390px;
+      height: 844px;
+      transform: scale(0.65641);
+      transform-origin: top left;
+    }
+
+    /* ─── phone UI: Veil home, connected ───────────────────────── */
+
+    .app {
+      --ui-bg:         oklch(14.5% 0.018 287);
+      --ui-surface:    oklch(18.5% 0.020 287);
+      --ui-surface-2:  oklch(22.5% 0.022 287);
+      --ui-fg:         oklch(96.5% 0.004 286);
+      --ui-muted:      oklch(74% 0.014 286);
+      --ui-faint:      oklch(64% 0.014 286);
+      --ui-border:     oklch(30% 0.022 287);
+      --ui-accent:     oklch(72% 0.160 296);
+      --ui-accent-ink: oklch(16% 0.030 296);
+      --ui-accent-soft: color-mix(in oklch, var(--ui-accent) 16%, transparent);
+      --ui-accent-line: color-mix(in oklch, var(--ui-accent) 44%, transparent);
+
+      width: 390px;
+      height: 844px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: var(--ui-bg);
+      color: var(--ui-fg);
+      font-family: var(--font-app-body);
+    }
+
+    .app-hdr {
+      flex: 0 0 auto;
+      min-height: 64px;
+      padding: 18px 22px 6px;
+      display: flex;
+      align-items: center;
+    }
+    .app-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-family: var(--font-app-display);
+      font-size: 28px;
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .app-mark {
+      position: relative;
+      width: 18px;
+      height: 18px;
+      border: 1.5px solid var(--ui-accent);
+      border-radius: 50%;
+    }
+    .app-mark::after {
+      content: '';
+      position: absolute;
+      inset: 5px;
+      border-radius: 50%;
+      background: var(--ui-accent);
+    }
+
+    .app-body {
+      flex: 1 1 auto;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 22px 14px;
+    }
+
+    .app-status {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: var(--font-app-mono);
+      font-size: 16px;
+      line-height: 1.4;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ui-muted);
+    }
+    .app-pip {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--ui-accent);
+      box-shadow: 0 0 0 4px var(--ui-accent-soft);
+    }
+
+    .orb-wrap {
+      position: relative;
+      flex: 0 0 auto;
+      width: 264px;
+      height: 264px;
+      margin: 14px auto 0;
+      display: grid;
+      place-items: center;
+    }
+    .orb-ring {
+      position: absolute;
+      inset: 0;
+      border: 1px solid var(--ui-accent-line);
+      border-radius: 50%;
+    }
+    .orb-ring.inner {
+      inset: 24px;
+      border-color: var(--ui-accent-soft);
+    }
+    .orb {
+      position: relative;
+      z-index: 2;
+      width: 186px;
+      height: 186px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      border-radius: 50%;
+      background: var(--ui-accent);
+      color: var(--ui-accent-ink);
+      box-shadow: 0 0 74px -18px var(--ui-accent);
+    }
+    .orb-icon { width: 27px; height: 27px; }
+    .orb-label {
+      font-size: 24px;
+      font-weight: 650;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+    }
+    .orb-sub {
+      font-family: var(--font-app-mono);
+      font-size: 16px;
+      line-height: 1.1;
+      letter-spacing: 0.06em;
+      color: color-mix(in oklch, var(--ui-accent-ink) 78%, transparent);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .app-meta {
+      margin-top: 12px;
+      text-align: center;
+      font-family: var(--font-app-mono);
+      font-size: 16px;
+      line-height: 1.4;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ui-muted);
+    }
+
+    .app-loc {
+      flex: 0 0 auto;
+      margin-top: 14px;
+      min-height: 70px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid var(--ui-border);
+      border-radius: 14px;
+      background: color-mix(in oklch, var(--ui-surface) 62%, transparent);
+    }
+    .loc-code {
+      flex: 0 0 auto;
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--ui-border);
+      border-radius: 11px;
+      background: var(--ui-bg);
+      font-family: var(--font-app-mono);
+      font-size: 16px;
+      letter-spacing: 0.06em;
+      color: var(--ui-muted);
+    }
+    .loc-text { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+    .loc-name { font-size: 20px; font-weight: 600; line-height: 1.25; letter-spacing: -0.01em; }
+    .loc-sub { font-size: 16px; line-height: 1.25; color: var(--ui-muted); }
+    .chev { flex: 0 0 auto; width: 18px; height: 18px; margin-left: auto; color: var(--ui-faint); }
+
+    .app-fact {
+      flex: 0 0 auto;
+      margin-top: 10px;
+      min-height: 56px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border: 1px solid var(--ui-border);
+      border-radius: 13px;
+      background: color-mix(in oklch, var(--ui-surface) 50%, transparent);
+    }
+    .app-fact span {
+      font-family: var(--font-app-mono);
+      font-size: 16px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ui-muted);
+    }
+    .app-fact strong {
+      font-family: var(--font-app-mono);
+      font-size: 17px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      color: var(--ui-fg);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .app-tabs {
+      flex: 0 0 auto;
+      height: 80px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      padding: 7px 8px 12px;
+      border-top: 1px solid var(--ui-border);
+      background: color-mix(in oklch, var(--ui-bg) 94%, transparent);
+    }
+    .tab {
+      position: relative;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      color: var(--ui-muted);
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.2;
+      letter-spacing: 0.005em;
+    }
+    .tab svg { width: 24px; height: 24px; }
+    .tab.active { color: var(--ui-fg); }
+    .tab.active::before {
+      content: '';
+      position: absolute;
+      top: -7px;
+      width: 18px;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--ui-accent);
+    }
+  </style>
+<style data-prototype-transition>
+@keyframes prototype-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body {
+  animation: prototype-enter 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+html.prototype-leaving body {
+  opacity: 0;
+  transition: opacity 140ms ease;
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  html.prototype-leaving body { transition: none; }
+}
+</style>
+</head>
+<body>
+  <main class="cover" data-od-id="cover">
+
+    <div class="rings" aria-hidden="true">
+      <svg viewBox="0 0 800 800" fill="none">
+        <circle cx="400" cy="400" r="200" stroke="currentColor" stroke-width="1" opacity=".28" />
+        <circle cx="400" cy="400" r="290" stroke="currentColor" stroke-width="1" opacity=".18" />
+        <circle cx="400" cy="400" r="380" stroke="currentColor" stroke-width="1" opacity=".10" />
+      </svg>
+    </div>
+
+    <section class="copy" data-od-id="cover-copy">
+      <div class="lockup">
+        <span class="mark" aria-hidden="true"></span>
+        <h1 class="wordmark" data-od-id="cover-wordmark">veil</h1>
+      </div>
+      <p class="tagline" data-od-id="cover-tagline">Интернет без наблюдателей.</p>
+
+      <ul class="bullets" data-od-id="cover-features">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m5 12.5 4.5 4.5L19 7" />
+          </svg>
+          <span>Шифрование трафика</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m5 12.5 4.5 4.5L19 7" />
+          </svg>
+          <span>Скрытый IP-адрес</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m5 12.5 4.5 4.5L19 7" />
+          </svg>
+          <span>Без журналов активности</span>
+        </li>
+      </ul>
+
+      <p class="footer" data-od-id="cover-footer">
+        <span class="footer-dot" aria-hidden="true"></span>
+        7 дней бесплатно
+      </p>
+    </section>
+
+    <div class="phone-wrap" data-od-id="cover-phone" aria-hidden="true">
+      <div class="phone">
+        <div class="screen">
+          <div class="ui">
+            <div class="app">
+
+              <div class="app-hdr">
+                <span class="app-brand">
+                  <span class="app-mark"></span>veil
+                </span>
+              </div>
+
+              <div class="app-body">
+                <p class="app-status">
+                  <span class="app-pip"></span>
+                  Защита включена
+                </p>
+
+                <div class="orb-wrap">
+                  <span class="orb-ring"></span>
+                  <span class="orb-ring inner"></span>
+                  <div class="orb">
+                    <svg class="orb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+                      <path d="M12 3v9" />
+                      <path d="M6.4 6.4a8 8 0 1 0 11.2 0" />
+                    </svg>
+                    <span class="orb-label">Отключить</span>
+                    <span class="orb-sub">00:42:18</span>
+                  </div>
+                </div>
+
+                <p class="app-meta">Амстердам · 18 мс</p>
+
+                <div class="app-loc">
+                  <span class="loc-code">NL</span>
+                  <span class="loc-text">
+                    <span class="loc-name">Амстердам</span>
+                    <span class="loc-sub">Нидерланды · 18 мс</span>
+                  </span>
+                  <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m9 5 7 7-7 7" />
+                  </svg>
+                </div>
+
+                <div class="app-fact">
+                  <span>IP-адрес</span>
+                  <strong>185.42.••.17</strong>
+                </div>
+              </div>
+
+              <div class="app-tabs">
+                <span class="tab active">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1v-9.5Z" />
+                  </svg>
+                  <span>Главная</span>
+                </span>
+                <span class="tab">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 21s7-5.4 7-11a7 7 0 1 0-14 0c0 5.6 7 11 7 11Z" />
+                    <circle cx="12" cy="10" r="2.5" />
+                  </svg>
+                  <span>Локации</span>
+                </span>
+                <span class="tab">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3Z" />
+                  </svg>
+                  <span>Подписка</span>
+                </span>
+                <span class="tab">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 7h9M17 7h3M4 17h3M11 17h9" />
+                    <circle cx="15" cy="7" r="2" />
+                    <circle cx="9" cy="17" r="2" />
+                  </svg>
+                  <span>Настройки</span>
+                </span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+<script data-prototype-transition>
+(() => {
+  if (window.__prototypeTransitions) return;
+  window.__prototypeTransitions = true;
+
+  document.addEventListener('click', (event) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      !(event.target instanceof Element)
+    ) {
+      return;
+    }
+
+    const link = event.target.closest('a[href]');
+    if (
+      !link ||
+      (link.target && link.target !== '_self') ||
+      link.hasAttribute('download')
+    ) {
+      return;
+    }
+
+    let url;
+    try {
+      url = new URL(link.href, location.href);
+    } catch {
+      return;
+    }
+
+    if (url.origin !== location.origin) return;
+    if (url.hash && url.pathname === location.pathname) return;
+
+    event.preventDefault();
+    document.documentElement.classList.add('prototype-leaving');
+
+    setTimeout(() => {
+      location.href = url.href;
+    }, 150);
+  });
+})();
+</script>
+</body>
+</html>

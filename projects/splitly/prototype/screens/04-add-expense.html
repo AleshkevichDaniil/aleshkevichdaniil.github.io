@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=390, initial-scale=1">
+  <title>Splitly — новая трата</title>
+  <link rel="stylesheet" href="../assets/splitly.css">
+<style data-prototype-transition>
+@keyframes prototype-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body {
+  animation: prototype-enter 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+html.prototype-leaving body {
+  opacity: 0;
+  transition: opacity 140ms ease;
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  html.prototype-leaving body { transition: none; }
+}
+</style>
+</head>
+<body class="screen-body">
+  <div class="screen" data-od-id="add-expense-screen">
+
+    <header class="app-header" data-od-id="add-expense-header">
+      <a class="icon-btn" href="03-group.html" aria-label="Назад в группу" data-od-id="add-expense-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M15 5l-7 7 7 7"></path>
+        </svg>
+      </a>
+      <div class="app-header-title">Новая трата</div>
+      <span aria-hidden="true" style="width: 44px; flex: 0 0 44px;"></span>
+    </header>
+
+    <main class="app-content form-content" data-od-id="add-expense-content">
+      <p class="context-line">Поездка в Тбилиси · 4 участника</p>
+
+      <form class="form-stack" id="expense-form" novalidate>
+
+        <div class="amount-field">
+          <label class="field-label" for="amount">Сумма</label>
+          <div class="amount-input-row" id="amount-row">
+            <input
+              id="amount"
+              name="amount"
+              type="text"
+              inputmode="decimal"
+              placeholder="0"
+              autocomplete="off"
+              aria-describedby="amount-error"
+            >
+            <span class="currency" aria-hidden="true">₽</span>
+          </div>
+          <p class="error-text" id="amount-error" role="alert" hidden>Введите сумму больше нуля.</p>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="expense-title">На что</label>
+          <input
+            class="input"
+            id="expense-title"
+            name="title"
+            type="text"
+            placeholder="Например, ужин в «Шави»"
+            autocomplete="off"
+            aria-describedby="title-error"
+          >
+          <p class="error-text" id="title-error" role="alert" hidden>Укажите, на что потратили.</p>
+        </div>
+
+        <div class="form-block">
+          <div class="form-block-head">
+            <span class="form-block-title">Кто платил</span>
+            <span class="muted" style="font-size: 10.5px;">Один человек</span>
+          </div>
+          <div class="payer-grid-full" id="payer-grid" data-od-id="add-expense-payers">
+            <button class="payer-chip is-selected" type="button" data-payer="Аня" aria-pressed="true">
+              <span class="avatar av-teal">А</span>
+              <span>Аня</span>
+            </button>
+            <button class="payer-chip" type="button" data-payer="Марк" aria-pressed="false">
+              <span class="avatar av-sand">М</span>
+              <span>Марк</span>
+            </button>
+            <button class="payer-chip" type="button" data-payer="Лиза" aria-pressed="false">
+              <span class="avatar av-sky">Л</span>
+              <span>Лиза</span>
+            </button>
+            <button class="payer-chip" type="button" data-payer="Тимур" aria-pressed="false">
+              <span class="avatar av-rose">Т</span>
+              <span>Тимур</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="form-block">
+          <span class="form-block-title">Категория</span>
+          <div class="chip-row" id="category-row" data-od-id="add-expense-categories">
+            <button class="chip is-active" type="button" data-category="Еда" aria-pressed="true">Еда</button>
+            <button class="chip" type="button" data-category="Жильё" aria-pressed="false">Жильё</button>
+            <button class="chip" type="button" data-category="Транспорт" aria-pressed="false">Транспорт</button>
+            <button class="chip" type="button" data-category="Другое" aria-pressed="false">Другое</button>
+          </div>
+        </div>
+
+        <div class="form-block">
+          <div class="form-block-head">
+            <span class="form-block-title">Как делить</span>
+            <span class="badge">Поровну</span>
+          </div>
+          <div class="split-card">
+            <div class="split-head">
+              <span>Участники</span>
+              <strong id="split-count">4 из 4</strong>
+            </div>
+
+            <button class="participant-row is-on" type="button" data-participant="Аня" aria-pressed="true">
+              <span class="avatar avatar-sm av-teal">А</span>
+              <span class="participant-name">Аня</span>
+              <span class="participant-share" data-share>—</span>
+              <span class="check-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12l4 4 10-10"></path>
+                </svg>
+              </span>
+            </button>
+
+            <button class="participant-row is-on" type="button" data-participant="Марк" aria-pressed="true">
+              <span class="avatar avatar-sm av-sand">М</span>
+              <span class="participant-name">Марк</span>
+              <span class="participant-share" data-share>—</span>
+              <span class="check-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12l4 4 10-10"></path>
+                </svg>
+              </span>
+            </button>
+
+            <button class="participant-row is-on" type="button" data-participant="Лиза" aria-pressed="true">
+              <span class="avatar avatar-sm av-sky">Л</span>
+              <span class="participant-name">Лиза</span>
+              <span class="participant-share" data-share>—</span>
+              <span class="check-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12l4 4 10-10"></path>
+                </svg>
+              </span>
+            </button>
+
+            <button class="participant-row is-on" type="button" data-participant="Тимур" aria-pressed="true">
+              <span class="avatar avatar-sm av-rose">Т</span>
+              <span class="participant-name">Тимур</span>
+              <span class="participant-share" data-share>—</span>
+              <span class="check-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12l4 4 10-10"></path>
+                </svg>
+              </span>
+            </button>
+          </div>
+          <p class="error-text" id="participants-error" role="alert" hidden>Выберите хотя бы одного участника.</p>
+        </div>
+
+        <div class="form-block">
+          <div class="date-row">
+            <span>Дата</span>
+            <input id="expense-date" name="date" type="date" value="2026-11-21" min="2026-11-16" aria-label="Дата траты" aria-describedby="date-error">
+          </div>
+          <p class="error-text" id="date-error" role="alert" hidden>Выберите дату не раньше 16 ноября 2026.</p>
+        </div>
+      </form>
+    </main>
+
+    <footer class="form-footer" data-od-id="add-expense-footer">
+      <button class="btn btn-primary btn-block" type="submit" form="expense-form" data-od-id="add-expense-submit">Сохранить</button>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      const form = document.getElementById('expense-form');
+      const amountInput = document.getElementById('amount');
+      const amountRow = document.getElementById('amount-row');
+      const amountError = document.getElementById('amount-error');
+      const titleInput = document.getElementById('expense-title');
+      const titleError = document.getElementById('title-error');
+      const dateInput = document.getElementById('expense-date');
+      const dateError = document.getElementById('date-error');
+      const participantsError = document.getElementById('participants-error');
+      const splitCount = document.getElementById('split-count');
+      const participants = Array.from(document.querySelectorAll('[data-participant]'));
+      const payerButtons = Array.from(document.querySelectorAll('[data-payer]'));
+      const categoryButtons = Array.from(document.querySelectorAll('[data-category]'));
+      const numberFormatter = new Intl.NumberFormat('ru-RU');
+
+      function parseAmount(value) {
+        const normalized = String(value).replace(/\s/g, '').replace(',', '.');
+        const parsed = Number.parseFloat(normalized);
+        return Number.isFinite(parsed) ? parsed : 0;
+      }
+
+      function formatRub(value) {
+        return numberFormatter.format(Math.round(value)) + ' ₽';
+      }
+
+      function selectedParticipants() {
+        return participants.filter(function (row) {
+          return row.classList.contains('is-on');
+        });
+      }
+
+      function updateShares() {
+        const amount = parseAmount(amountInput.value);
+        const active = selectedParticipants();
+        splitCount.textContent = active.length + ' из ' + participants.length;
+
+        participants.forEach(function (row) {
+          const share = row.querySelector('[data-share]');
+          if (!amount || !row.classList.contains('is-on') || active.length === 0) {
+            share.textContent = '—';
+            return;
+          }
+          share.textContent = formatRub(amount / active.length);
+        });
+
+        if (active.length > 0) participantsError.hidden = true;
+      }
+
+      function setAmountError(isError) {
+        amountRow.classList.toggle('is-error', isError);
+        amountError.hidden = !isError;
+        amountInput.setAttribute('aria-invalid', String(isError));
+      }
+
+      function setTitleError(isError) {
+        titleInput.classList.toggle('is-error', isError);
+        titleError.hidden = !isError;
+        titleInput.setAttribute('aria-invalid', String(isError));
+      }
+
+      function setDateError(isError) {
+        dateError.hidden = !isError;
+        dateInput.setAttribute('aria-invalid', String(isError));
+      }
+
+      function validate(shouldFocus) {
+        let firstInvalid = null;
+
+        const amount = parseAmount(amountInput.value);
+        if (amount <= 0) {
+          setAmountError(true);
+          firstInvalid = firstInvalid || amountInput;
+        } else {
+          setAmountError(false);
+        }
+
+        if (!titleInput.value.trim()) {
+          setTitleError(true);
+          firstInvalid = firstInvalid || titleInput;
+        } else {
+          setTitleError(false);
+        }
+
+        if (selectedParticipants().length === 0) {
+          participantsError.hidden = false;
+        } else {
+          participantsError.hidden = true;
+        }
+
+        if (!dateInput.value || dateInput.value < '2026-11-16') {
+          setDateError(true);
+          firstInvalid = firstInvalid || dateInput;
+        } else {
+          setDateError(false);
+        }
+
+        if (firstInvalid && shouldFocus) {
+          firstInvalid.focus({ preventScroll: true });
+        }
+
+        return !firstInvalid && selectedParticipants().length > 0;
+      }
+
+      payerButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+          payerButtons.forEach(function (item) {
+            const isSelected = item === button;
+            item.classList.toggle('is-selected', isSelected);
+            item.setAttribute('aria-pressed', String(isSelected));
+          });
+        });
+      });
+
+      categoryButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+          categoryButtons.forEach(function (item) {
+            const isSelected = item === button;
+            item.classList.toggle('is-active', isSelected);
+            item.setAttribute('aria-pressed', String(isSelected));
+          });
+        });
+      });
+
+      participants.forEach(function (row) {
+        row.addEventListener('click', function () {
+          row.classList.toggle('is-on');
+          row.setAttribute('aria-pressed', String(row.classList.contains('is-on')));
+          updateShares();
+        });
+      });
+
+      amountInput.addEventListener('input', function () {
+        setAmountError(false);
+        updateShares();
+      });
+
+      titleInput.addEventListener('input', function () {
+        setTitleError(false);
+      });
+
+      dateInput.addEventListener('input', function () {
+        if (dateInput.value >= '2026-11-16') setDateError(false);
+      });
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        if (!validate(true)) return;
+        window.location.href = '03-group.html';
+      });
+
+      if (window.location.hash === '#error') {
+        window.setTimeout(function () {
+          validate(false);
+        }, 60);
+      }
+
+      updateShares();
+    })();
+  </script>
+<script data-prototype-transition>
+(() => {
+  if (window.__prototypeTransitions) return;
+  window.__prototypeTransitions = true;
+
+  document.addEventListener('click', (event) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      !(event.target instanceof Element)
+    ) {
+      return;
+    }
+
+    const link = event.target.closest('a[href]');
+    if (
+      !link ||
+      (link.target && link.target !== '_self') ||
+      link.hasAttribute('download')
+    ) {
+      return;
+    }
+
+    let url;
+    try {
+      url = new URL(link.href, location.href);
+    } catch {
+      return;
+    }
+
+    if (url.origin !== location.origin) return;
+    if (url.hash && url.pathname === location.pathname) return;
+
+    event.preventDefault();
+    document.documentElement.classList.add('prototype-leaving');
+
+    setTimeout(() => {
+      location.href = url.href;
+    }, 150);
+  });
+})();
+</script>
+</body>
+</html>

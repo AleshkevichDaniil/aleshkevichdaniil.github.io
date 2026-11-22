@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Scanly — Подписка</title>
+  <link rel="stylesheet" href="../assets/app.css" />
+  <link rel="stylesheet" href="../assets/screen-paywall.css" />
+<style data-prototype-transition>
+@keyframes prototype-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body {
+  animation: prototype-enter 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+html.prototype-leaving body {
+  opacity: 0;
+  transition: opacity 140ms ease;
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  html.prototype-leaving body { transition: none; }
+}
+</style>
+</head>
+<body class="screen">
+
+  <header class="statusbar" data-od-id="statusbar">
+    <span>9:41</span>
+    <span class="status-right">
+      <svg viewBox="0 0 17 11" aria-hidden="true">
+        <rect x="0" y="7" width="3" height="4" rx="0.6"/><rect x="4" y="5" width="3" height="6" rx="0.6"/>
+        <rect x="8" y="3" width="3" height="8" rx="0.6"/><rect x="12" y="0" width="3" height="11" rx="0.6"/>
+      </svg>
+      <svg viewBox="0 0 17 11" aria-hidden="true">
+        <path d="M8.5 1.5C5.5 1.5 2.7 2.6 0.5 4.6L2 6.1C3.8 4.5 6.1 3.6 8.5 3.6c2.4 0 4.7 0.9 6.5 2.5l1.5-1.5c-2.2-2-5-3.1-8-3.1zM3.5 7.6L5 9.1c1-0.9 2.2-1.4 3.5-1.4 1.3 0 2.5 0.5 3.5 1.4l1.5-1.5c-1.4-1.3-3.1-2-5-2-1.9 0-3.6 0.7-5 2zM6.5 10.6l2 2 2-2c-0.5-0.5-1.2-0.8-2-0.8s-1.5 0.3-2 0.8z"/>
+      </svg>
+      <svg class="battery" viewBox="0 0 25 11" aria-hidden="true">
+        <rect x="0.5" y="0.5" width="21" height="10" rx="2.5" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
+        <rect x="22" y="3.5" width="1.5" height="4" rx="0.4" fill="currentColor" fill-opacity="0.4"/>
+        <rect x="2" y="2" width="18" height="7" rx="1.4"/>
+      </svg>
+    </span>
+  </header>
+
+  <header class="appbar" data-od-id="paywall-header">
+    <button class="icon-btn icon-btn--plain" type="button" id="paywall-close" aria-label="Закрыть">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+        <path d="M6 6l12 12M18 6 6 18"/>
+      </svg>
+    </button>
+    <div class="appbar-title"></div>
+  </header>
+
+  <main class="content paywall-content" data-od-id="paywall-content">
+
+    <section class="pro-hero" data-od-id="paywall-hero">
+      <span class="pro-eyebrow">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 2.5l2.6 5.7 6.2.7-4.6 4.2 1.2 6.1L12 16.3l-5.4 2.9 1.2-6.1L3.2 8.9l6.2-.7L12 2.5Z"/>
+        </svg>
+        Scanly Pro
+      </span>
+      <h1>Документы без ограничений</h1>
+      <p>Сканы, распознанный текст и облако — на всех ваших устройствах.</p>
+    </section>
+
+    <section class="plans" data-od-id="paywall-plans" aria-label="Тарифы">
+      <button class="plan" type="button" data-plan="year" data-price="1 490 ₽ в год" aria-pressed="true">
+        <span class="plan-radio" aria-hidden="true"></span>
+        <span class="plan-main">
+          <span class="plan-name">Год <span class="plan-badge">−86%</span></span>
+          <span class="plan-note">124 ₽ в месяц</span>
+        </span>
+        <span class="plan-price"><b>1 490 ₽</b><span>в год</span></span>
+      </button>
+
+      <button class="plan" type="button" data-plan="week" data-price="199 ₽ в неделю" aria-pressed="false">
+        <span class="plan-radio" aria-hidden="true"></span>
+        <span class="plan-main">
+          <span class="plan-name">Неделя</span>
+          <span class="plan-note">Без долгих обязательств</span>
+        </span>
+        <span class="plan-price"><b>199 ₽</b><span>в неделю</span></span>
+      </button>
+    </section>
+
+    <p class="trial-line">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="9"/><path d="M12 7.5V12l3 2"/>
+      </svg>
+      Первые 3 дня бесплатно, отмена в любой момент
+    </p>
+
+    <p class="perks-label">Что входит</p>
+
+    <ul class="perks" data-od-id="paywall-perks">
+      <li><span class="perk-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg></span>Неограниченные сканы в PDF</li>
+      <li><span class="perk-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg></span>Распознавание текста и поиск</li>
+      <li><span class="perk-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg></span>Облако 10 ГБ и синхронизация</li>
+      <li><span class="perk-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg></span>Экспорт PDF без водяных знаков</li>
+    </ul>
+
+  </main>
+
+  <footer class="dock paywall-dock" data-od-id="paywall-cta">
+    <a class="btn btn-primary" href="04-documents.html" id="paywall-buy">Попробовать 3 дня</a>
+    <p class="paywall-note" id="paywall-note">Затем 1 490 ₽ в год</p>
+    <div class="paywall-links">
+      <a class="btn btn-text" href="04-documents.html">Остаться на бесплатном плане</a>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="btn btn-text" type="button" id="terms-open">Условия</button>
+    </div>
+  </footer>
+
+  <div class="homebar" aria-hidden="true"></div>
+
+  <div class="backdrop" id="terms-sheet" hidden data-od-id="terms-sheet">
+    <div class="sheet terms-sheet" role="dialog" aria-modal="true" aria-labelledby="terms-title">
+      <div class="sheet-grab" aria-hidden="true"></div>
+      <h2 id="terms-title">Подписка и данные</h2>
+      <p>Scanly Pro продлевается автоматически, пока вы не отмените подписку в настройках App Store или Google Play.</p>
+      <p>Пробный период длится 3 дня. Если не отменить подписку до его окончания, спишется стоимость выбранного тарифа.</p>
+      <p>Документы хранятся в облаке Scanly и доступны только вашему аккаунту. Удалить их можно в любой момент.</p>
+      <button class="btn btn-secondary" type="button" id="terms-close">Понятно</button>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var plans = Array.prototype.slice.call(document.querySelectorAll('.plan'));
+      var note = document.getElementById('paywall-note');
+      var terms = document.getElementById('terms-sheet');
+
+      plans.forEach(function (plan) {
+        plan.addEventListener('click', function () {
+          plans.forEach(function (p) { p.setAttribute('aria-pressed', String(p === plan)); });
+          note.textContent = 'Затем ' + plan.dataset.price;
+        });
+      });
+
+      document.getElementById('terms-open').addEventListener('click', function () { terms.hidden = false; });
+      document.getElementById('terms-close').addEventListener('click', function () { terms.hidden = true; });
+      terms.addEventListener('click', function (event) { if (event.target === terms) terms.hidden = true; });
+
+      document.getElementById('paywall-close').addEventListener('click', function () {
+        if (window.history.length > 1) { window.history.back(); }
+        else { window.location.href = '04-documents.html'; }
+      });
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') terms.hidden = true;
+      });
+    })();
+    window.parent.postMessage({ screen: '06-paywall.html' }, '*');
+  </script>
+<script data-prototype-transition>
+(() => {
+  if (window.__prototypeTransitions) return;
+  window.__prototypeTransitions = true;
+
+  document.addEventListener('click', (event) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      !(event.target instanceof Element)
+    ) {
+      return;
+    }
+
+    const link = event.target.closest('a[href]');
+    if (
+      !link ||
+      (link.target && link.target !== '_self') ||
+      link.hasAttribute('download')
+    ) {
+      return;
+    }
+
+    let url;
+    try {
+      url = new URL(link.href, location.href);
+    } catch {
+      return;
+    }
+
+    if (url.origin !== location.origin) return;
+    if (url.hash && url.pathname === location.pathname) return;
+
+    event.preventDefault();
+    document.documentElement.classList.add('prototype-leaving');
+
+    setTimeout(() => {
+      location.href = url.href;
+    }, 150);
+  });
+})();
+</script>
+</body>
+</html>

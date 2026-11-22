@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "screens/02-today.html",
+  "entry": "screens/02-today.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-11-22T18:08:36.401Z",
+  "updatedAt": "2026-11-22T18:08:36.401Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

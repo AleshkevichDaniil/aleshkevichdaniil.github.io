@@ -1,0 +1,250 @@
+/* Prototype host — Scanly
+   Dark presentation canvas, exact phone frames without device chrome. */
+
+@font-face {
+  font-family: 'Golos Text';
+  src: url('fonts/golos-cyrillic.woff2') format('woff2');
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Golos Text';
+  src: url('fonts/golos-latin.woff2') format('woff2');
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2000-206F, U+20AC, U+2122, U+2212;
+}
+
+:root {
+  --canvas: oklch(0.185 0.014 265);
+  --canvas-2: oklch(0.215 0.016 265);
+  --line: oklch(1 0 0 / 0.09);
+  --ink: oklch(0.985 0.002 265);
+  --ink-2: oklch(0.72 0.012 265);
+  --ink-3: oklch(0.655 0.012 265);
+  --blue: oklch(0.66 0.14 265);
+  --font-display: 'Golos Text', 'Segoe UI', system-ui, sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Mono', SFMono-Regular, Menlo, monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+button { font: inherit; color: inherit; }
+
+.shell {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 286px 1fr;
+}
+.rail { overflow-y: auto; }
+
+/* ── rail ─────────────────────────────────────────────────────────── */
+.rail {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 26px 18px 22px;
+  border-right: 1px solid var(--line);
+  background: var(--canvas-2);
+}
+.brand { display: flex; align-items: center; gap: 10px; padding: 0 6px; }
+.brand-mark {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--blue);
+  color: var(--canvas);
+}
+.brand-mark svg { width: 19px; height: 19px; }
+.brand-name {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 650;
+  letter-spacing: -0.03em;
+}
+.brand-sub {
+  padding: 0 6px;
+  margin-top: -12px;
+  font-size: 11.5px;
+  line-height: 1.4;
+  color: var(--ink-3);
+}
+
+.nav-label {
+  padding: 0 8px;
+  margin-bottom: -8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.nav { display: flex; flex-direction: column; gap: 2px; }
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: 100%;
+  padding: 9px 10px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--ink-2);
+  font-size: 13.5px;
+  text-align: left;
+  transition: background-color 0.14s ease, color 0.14s ease;
+}
+.nav-item:hover { background: oklch(1 0 0 / 0.05); color: var(--ink); }
+.nav-item:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
+.nav-item[aria-current="true"] { background: oklch(1 0 0 / 0.08); color: var(--ink); }
+.nav-index {
+  width: 20px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--ink-3);
+}
+.nav-item[aria-current="true"] .nav-index { color: var(--blue); }
+.nav-dot {
+  margin-left: auto;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--blue);
+  opacity: 0;
+}
+.nav-item[aria-current="true"] .nav-dot { opacity: 1; }
+
+.rail-foot {
+  margin-top: auto;
+  padding: 14px 8px 0;
+  border-top: 1px solid var(--line);
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+
+/* ── stage ────────────────────────────────────────────────────────── */
+.main { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
+.topbar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 0 26px;
+  height: 70px;
+  border-bottom: 1px solid var(--line);
+}
+.top-title { display: flex; align-items: baseline; gap: 10px; min-width: 0; }
+.top-title b {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  white-space: nowrap;
+}
+.top-title span {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+.platform {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 10px;
+  background: oklch(1 0 0 / 0.06);
+  border: 1px solid var(--line);
+}
+.platform button {
+  padding: 7px 11px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--ink-2);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.02em;
+  transition: background-color 0.14s ease, color 0.14s ease;
+}
+.platform button:hover { color: var(--ink); }
+.platform button:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
+.platform button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--canvas);
+}
+
+.stage {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  overflow: hidden;
+}
+.frame {
+  position: relative;
+  width: 390px;
+  height: 844px;
+  background: oklch(0.99 0.002 265);
+  box-shadow:
+    0 0 0 1px oklch(1 0 0 / 0.14),
+    0 34px 80px -28px oklch(0 0 0 / 0.8);
+  transform-origin: center center;
+}
+.frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: oklch(0.973 0.006 262);
+}
+.frame-caption {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--ink-3);
+}
+.frame-caption .live {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--blue);
+}
+
+@media (max-width: 900px) {
+  .shell { grid-template-columns: 1fr; }
+  .rail {
+    flex-direction: column;
+    gap: 14px;
+    padding: 16px 16px 12px;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .brand-sub, .rail-foot { display: none; }
+  .nav { flex-direction: row; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav-item { flex: 0 0 auto; width: auto; gap: 7px; padding: 8px 12px; white-space: nowrap; }
+  .nav-dot { display: none; }
+  .nav-label { display: none; }
+  .topbar { height: auto; flex-wrap: wrap; gap: 10px; padding: 12px 16px; }
+  .stage { padding: 14px; }
+}

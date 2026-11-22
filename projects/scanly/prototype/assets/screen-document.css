@@ -1,0 +1,170 @@
+/* Screen 05 — document detail */
+.doc-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 4px;
+}
+
+.page-stage {
+  position: relative;
+  flex: 0 0 auto;
+  height: 340px;
+  display: grid;
+  place-items: center;
+  padding: 14px;
+  border-radius: 20px;
+  background:
+    url('noise.svg'),
+    var(--surface-2);
+  background-size: 220px 220px, auto;
+  border: 1px solid var(--border);
+}
+.page-stage::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  box-shadow: inset 0 1px 0 oklch(1 0 0 / 0.7);
+  pointer-events: none;
+}
+.page-sheet {
+  height: 100%;
+  max-width: 100%;
+  aspect-ratio: 1 / 1.414;
+  display: flex;
+  flex-direction: column;
+  padding: 18px 16px;
+  background: oklch(1 0 0);
+  border-radius: 3px;
+  box-shadow: 0 20px 32px -18px oklch(0.235 0.04 265 / 0.45), 0 0 0 1px oklch(0.235 0.02 265 / 0.07);
+  overflow: hidden;
+}
+.page-sheet .doc-kicker {
+  font-family: var(--font-display);
+  font-size: 5.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-align: center;
+  color: oklch(0.35 0.02 265);
+}
+.page-sheet h4 {
+  margin-top: 4px;
+  font-family: var(--font-display);
+  font-size: 10.5px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: oklch(0.24 0.02 265);
+}
+.page-sheet .doc-place {
+  margin: 3px 0 9px;
+  font-size: 5px;
+  text-align: center;
+  color: oklch(0.45 0.01 265);
+}
+.page-sheet p {
+  font-size: 6.2px;
+  line-height: 1.55;
+  color: oklch(0.3 0.01 265);
+  margin-bottom: 4px;
+}
+.page-sheet h5 {
+  margin: 5px 0 3px;
+  font-size: 6.4px;
+  font-weight: 700;
+  color: oklch(0.26 0.01 265);
+}
+.page-sheet .doc-signs {
+  margin-top: auto;
+  display: flex;
+  gap: 14px;
+  padding-top: 8px;
+}
+.page-sheet .doc-signs div { flex: 1; }
+.page-sheet .doc-signs span {
+  display: block;
+  height: 1px;
+  margin-bottom: 3px;
+  background: oklch(0.5 0.012 265);
+}
+.page-sheet .doc-signs em { font-style: normal; font-size: 4.6px; color: oklch(0.45 0.01 265); }
+
+.page-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  height: 24px;
+  padding: 0 9px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border-radius: 999px;
+  background: oklch(1 0 0 / 0.92);
+  border: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--fg);
+}
+.page-badge svg { width: 12px; height: 12px; color: var(--muted); }
+
+.doc-facts {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.doc-facts .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--border-strong); }
+
+.actions-card { padding: 2px 16px; }
+.action-row .icon-badge {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--surface-2);
+  color: var(--fg);
+  flex: 0 0 auto;
+}
+.action-row:hover .icon-badge { background: var(--surface-3); }
+.action-row .icon-badge svg { width: 18px; height: 18px; }
+.action-row--danger .icon-badge { color: var(--danger); background: color-mix(in oklch, var(--danger) 9%, var(--surface)); }
+.action-row--danger .title { color: var(--danger); }
+
+.pro-pill {
+  display: inline-flex;
+  align-items: center;
+  height: 19px;
+  padding: 0 7px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  color: var(--accent-ink);
+  font-size: 9.5px;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.share-row .icon-badge { background: var(--surface-2); }
+.sheet .cancel-row {
+  width: 100%;
+  min-height: 46px;
+  margin-top: 6px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--surface-2);
+  color: var(--fg);
+  font-size: 14px;
+  font-weight: 550;
+}
+.sheet .cancel-row:hover { background: var(--surface-3); }
+
+.btn-danger { background: var(--danger); color: oklch(1 0 0); }
+.btn-danger:hover { background: color-mix(in oklch, var(--danger) 88%, black); }
+.dialog-lead { margin-top: 8px; }

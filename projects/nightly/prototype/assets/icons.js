@@ -1,0 +1,26 @@
+/* Nightly — monoline icon sprite (1.7px stroke, currentColor) */
+window.OD_ICONS = [
+  '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">',
+  '<symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.2 14.6A8.6 8.6 0 0 1 9.4 3.8a8.8 8.8 0 1 0 10.8 10.8Z"/></symbol>',
+  '<symbol id="i-noise" viewBox="0 0 24 24"><path d="M3.5 10.5v3M7.4 7.6v8.8M11.3 4.6v14.8M15.2 8v8M19.1 10.4v3.2"/></symbol>',
+  '<symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 17.2c1.3-1.3 1.6-2.9 1.6-5.3A4.5 4.5 0 0 1 12 7.4a4.5 4.5 0 0 1 4.4 4.5c0 2.4.3 4 1.6 5.3H6Z"/><path d="M10 19.8a2.1 2.1 0 0 0 4 0"/></symbol>',
+  '<symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 19.5h16"/><path d="M7 16v-4.6M12 16V6.4M17 16v-6.4"/></symbol>',
+  '<symbol id="i-rain" viewBox="0 0 24 24"><path d="M7 13.6a3.8 3.8 0 0 1 .3-7.6 5.2 5.2 0 0 1 9.7 1 3.6 3.6 0 0 1 .5 6.6H7Z"/><path d="M8.6 16.6v2.2M12 16.9v3M15.4 16.6v2.2"/></symbol>',
+  '<symbol id="i-ocean" viewBox="0 0 24 24"><path d="M3 8.6c2.4-2.1 4.8-2.1 7.2 0s4.8 2.1 7.2 0 3.2-1.4 3.6-1"/><path d="M3 13.4c2.4-2.1 4.8-2.1 7.2 0s4.8 2.1 7.2 0"/><path d="M3 18.2c2.4-2.1 4.8-2.1 7.2 0s4.8 2.1 7.2 0"/></symbol>',
+  '<symbol id="i-forest" viewBox="0 0 24 24"><path d="M12 3.6 6.6 12h10.8L12 3.6Z"/><path d="M12 12v7.8M9 19.8h6"/><path d="M18.4 10.4 16 14.2h4.8l-2.4-3.8Z"/></symbol>',
+  '<symbol id="i-fire" viewBox="0 0 24 24"><path d="M12 3.4c3.5 3.4 5.6 6.1 5.6 9a5.6 5.6 0 1 1-11.2 0c0-2.2 1.2-4 2.8-5.6.3 1.7 1 2.5 1.8 2.9-.3-2.3.2-4.4 1-6.3Z"/><path d="M12 20.2a2.6 2.6 0 0 0 2.6-2.6c0-1.7-1.4-3-2.6-4.3-1.2 1.3-2.6 2.6-2.6 4.3a2.6 2.6 0 0 0 2.6 2.6Z"/></symbol>',
+  '<symbol id="i-fan" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1.7"/><path d="M12 10.3c0-3.6-1.2-5.5-3.7-5.5-1.6 1.9-.6 4.1 3.7 5.5Z"/><path d="M13.7 12.8c3.1-1.8 4.1-3.7 2.8-5.5-2.4-.5-3.7 1.5-2.8 5.5Z"/><path d="M11.4 13.3c-3.1 1.8-4.1 3.7-2.8 5.5 2.4.5 3.7-1.5 2.8-5.5Z"/></symbol>',
+  '<symbol id="i-play" viewBox="0 0 24 24"><path d="M8.6 5.5c0-.78.85-1.25 1.5-.84l9.2 5.9a1 1 0 0 1 0 1.68l-9.2 5.9c-.65.41-1.5-.06-1.5-.84V5.5Z" fill="currentColor" stroke="none"/></symbol>',
+  '<symbol id="i-pause" viewBox="0 0 24 24"><rect x="7" y="5" width="3.6" height="14" rx="1.4" fill="currentColor" stroke="none"/><rect x="13.4" y="5" width="3.6" height="14" rx="1.4" fill="currentColor" stroke="none"/></symbol>',
+  '<symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="M14.5 5 8 12l6.5 7"/></symbol>',
+  '<symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="M9.5 5 16 12l-6.5 7"/></symbol>',
+  '<symbol id="i-lock" viewBox="0 0 24 24"><path d="M8.2 10.4V8.6a3.8 3.8 0 0 1 7.6 0v1.8"/><rect x="5.6" y="10.4" width="12.8" height="9.4" rx="2.6"/><path d="M12 14v2.2"/></symbol>',
+  '<symbol id="i-timer" viewBox="0 0 24 24"><circle cx="12" cy="13" r="7.4"/><path d="M12 9.6V13l2.4 1.5"/><path d="M9.6 2.9h4.8"/><path d="M12 2.9v2.3"/></symbol>',
+  '<symbol id="i-volume" viewBox="0 0 24 24"><path d="M5 10v4h2.8l3.8 3.2V6.8L7.8 10H5Z"/><path d="M15.2 9.6a3.6 3.6 0 0 1 0 4.8"/><path d="M17.6 7a7.4 7.4 0 0 1 0 10"/></symbol>',
+  '<symbol id="i-close" viewBox="0 0 24 24"><path d="M6.4 6.4 17.6 17.6M17.6 6.4 6.4 17.6"/></symbol>',
+  '<symbol id="i-check" viewBox="0 0 24 24"><path d="m5.2 12.4 4.6 4.6L19 7.3"/></symbol>',
+  '<symbol id="i-calendar" viewBox="0 0 24 24"><rect x="4.6" y="6.4" width="14.8" height="13.4" rx="2.6"/><path d="M8.4 3.9v3M15.6 3.9v3M4.6 10.6h14.8"/></symbol>',
+  '<symbol id="i-sunrise" viewBox="0 0 24 24"><path d="M4 18.4h16"/><path d="M7.4 18.4a4.6 4.6 0 0 1 9.2 0"/><path d="M12 4.4v4.2M5.8 8.2l2.1 2.1M18.2 8.2l-2.1 2.1"/><path d="M9.6 12.9 12 10.5l2.4 2.4"/></symbol>',
+  '<symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3.6l1.9 5.5 5.5 1.9-5.5 1.9L12 18.4l-1.9-5.5L4.6 11l5.5-1.9L12 3.6Z"/></symbol>',
+  '</svg>'
+].join('');

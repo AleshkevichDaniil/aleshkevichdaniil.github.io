@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Онбординг — SubTrack</title>
+  <link rel="stylesheet" href="../assets/subtrack.css" />
+<style data-prototype-transition>
+@keyframes prototype-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body {
+  animation: prototype-enter 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+html.prototype-leaving body {
+  opacity: 0;
+  transition: opacity 140ms ease;
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  html.prototype-leaving body { transition: none; }
+}
+</style>
+</head>
+<body>
+  <div class="app">
+    <div class="content">
+      <div class="onb">
+        <button class="onb-skip" id="skip" data-od-id="onboarding-skip">Пропустить</button>
+
+        <div class="onb-viewport" id="viewport">
+          <div class="onb-track" id="track">
+
+            <section class="onb-slide" data-od-id="onboarding-slide-1">
+              <div class="onb-illo" aria-hidden="true">
+                <div class="mini-stack">
+                  <div class="mini-card c1">
+                    <span class="logo" style="background: var(--c-youtube)">Y</span>
+                    <span class="mini-lines"><span class="mini-line"></span><span class="mini-line short"></span></span>
+                    <span class="mini-price num">199 ₽</span>
+                  </div>
+                  <div class="mini-card c2">
+                    <span class="logo" style="background: var(--c-spotify)">S</span>
+                    <span class="mini-lines"><span class="mini-line"></span><span class="mini-line short"></span></span>
+                    <span class="mini-price num">199 ₽</span>
+                  </div>
+                  <div class="mini-card c3">
+                    <span class="logo" style="background: var(--c-netflix)">N</span>
+                    <span class="mini-lines"><span class="mini-line"></span><span class="mini-line short"></span></span>
+                    <span class="mini-price num">1 590 ₽</span>
+                  </div>
+                </div>
+              </div>
+              <h1 class="onb-title">Все подписки в одном месте</h1>
+              <p class="onb-body">Добавьте сервисы и видите их рядом — без таблиц, заметок и потерянных чеков.</p>
+            </section>
+
+            <section class="onb-slide" data-od-id="onboarding-slide-2">
+              <div class="onb-illo" aria-hidden="true">
+                <div class="bell-badge">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 9a6 6 0 1 1 12 0c0 5 1.6 6 1.6 6H4.4S6 14 6 9Z"/>
+                    <path d="M10 19a2 2 0 0 0 4 0"/>
+                  </svg>
+                </div>
+                <div class="notif-card">
+                  <span class="logo" style="background: var(--c-netflix)">N</span>
+                  <span>
+                    <span class="notif-title">Netflix · списание 18 ноября</span>
+                    <span class="notif-sub num">1 590 ₽ · за 3 дня</span>
+                  </span>
+                </div>
+              </div>
+              <h1 class="onb-title">Напоминания о списаниях</h1>
+              <p class="onb-body">Мы предупредим за 3 дня до списания, чтобы вы ничего не пропустили и не платили за забытые сервисы.</p>
+            </section>
+
+            <section class="onb-slide" data-od-id="onboarding-slide-3">
+              <div class="onb-illo" aria-hidden="true">
+                <div class="chart-illo">
+                  <div class="chart-total num">3 243 ₽</div>
+                  <div class="chart-label">расходы в ноябре</div>
+                  <div class="chart-bars">
+                    <span style="height: 42%"></span>
+                    <span style="height: 70%"></span>
+                    <span class="on" style="height: 100%"></span>
+                    <span style="height: 58%"></span>
+                  </div>
+                </div>
+              </div>
+              <h1 class="onb-title">Контроль трат</h1>
+              <p class="onb-body">Сколько уходит в месяц и на какие категории — в наглядной статистике.</p>
+            </section>
+
+          </div>
+        </div>
+
+        <div class="onb-foot">
+          <div class="dots" id="dots">
+            <span class="dot-ind active"></span>
+            <span class="dot-ind"></span>
+            <span class="dot-ind"></span>
+          </div>
+          <button class="btn btn-primary" id="next" data-od-id="onboarding-next">Далее</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var track = document.getElementById('track');
+      var dots = Array.prototype.slice.call(document.querySelectorAll('#dots .dot-ind'));
+      var next = document.getElementById('next');
+      var skip = document.getElementById('skip');
+      var total = 3;
+      var index = 0;
+
+      try {
+        var params = new URLSearchParams(location.search);
+        var requested = parseInt(params.get('slide'), 10);
+        if (requested >= 1 && requested <= total) index = requested - 1;
+      } catch (e) {}
+
+      function render() {
+        track.style.transform = 'translateX(-' + (index * (100 / total)) + '%)';
+        dots.forEach(function (d, i) { d.classList.toggle('active', i === index); });
+        next.textContent = index === total - 1 ? 'Начать' : 'Далее';
+        try { localStorage.setItem('subtrack.onboardingSlide', String(index + 1)); } catch (e) {}
+      }
+
+      function go(delta) {
+        index = Math.min(total - 1, Math.max(0, index + delta));
+        render();
+      }
+
+      function finish() {
+        try { localStorage.setItem('subtrack.onboardingSeen', '1'); } catch (e) {}
+        window.location.href = 'subscriptions.html';
+      }
+
+      next.addEventListener('click', function () {
+        if (index === total - 1) { finish(); } else { go(1); }
+      });
+      skip.addEventListener('click', finish);
+
+      /* свайп */
+      var startX = 0, startY = 0, dragging = false;
+      var viewport = document.getElementById('viewport');
+      viewport.addEventListener('touchstart', function (e) {
+        startX = e.touches[0].clientX; startY = e.touches[0].clientY; dragging = true;
+      }, { passive: true });
+      viewport.addEventListener('touchend', function (e) {
+        if (!dragging) return;
+        dragging = false;
+        var dx = e.changedTouches[0].clientX - startX;
+        var dy = e.changedTouches[0].clientY - startY;
+        if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy)) { go(dx < 0 ? 1 : -1); }
+      }, { passive: true });
+
+      render();
+    })();
+  </script>
+<script data-prototype-transition>
+(() => {
+  if (window.__prototypeTransitions) return;
+  window.__prototypeTransitions = true;
+
+  document.addEventListener('click', (event) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      !(event.target instanceof Element)
+    ) {
+      return;
+    }
+
+    const link = event.target.closest('a[href]');
+    if (
+      !link ||
+      (link.target && link.target !== '_self') ||
+      link.hasAttribute('download')
+    ) {
+      return;
+    }
+
+    let url;
+    try {
+      url = new URL(link.href, location.href);
+    } catch {
+      return;
+    }
+
+    if (url.origin !== location.origin) return;
+    if (url.hash && url.pathname === location.pathname) return;
+
+    event.preventDefault();
+    document.documentElement.classList.add('prototype-leaving');
+
+    setTimeout(() => {
+      location.href = url.href;
+    }, 150);
+  });
+})();
+</script>
+</body>
+</html>

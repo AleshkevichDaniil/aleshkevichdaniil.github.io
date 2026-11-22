@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "screens/onboarding.html",
+  "entry": "screens/onboarding.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-11-15T11:31:59.532Z",
+  "updatedAt": "2026-11-15T11:31:59.532Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

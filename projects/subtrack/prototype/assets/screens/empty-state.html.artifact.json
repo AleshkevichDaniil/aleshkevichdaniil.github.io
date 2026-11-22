@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "screens/empty-state.html",
+  "entry": "screens/empty-state.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-11-15T11:40:24.862Z",
+  "updatedAt": "2026-11-15T11:40:24.862Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

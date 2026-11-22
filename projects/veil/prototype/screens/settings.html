@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=390, initial-scale=1" />
+  <title>Veil — настройки</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+<style data-prototype-transition>
+@keyframes prototype-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body {
+  animation: prototype-enter 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+html.prototype-leaving body {
+  opacity: 0;
+  transition: opacity 140ms ease;
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  html.prototype-leaving body { transition: none; }
+}
+</style>
+</head>
+<body data-screen="settings">
+  <div class="app" data-od-id="screen-settings">
+
+    <header class="hdr" data-od-id="settings-header">
+      <a class="brand" href="home.html" aria-label="Veil, главная">
+        <span class="brand-mark" aria-hidden="true"></span>veil
+      </a>
+    </header>
+
+    <main class="app-body" data-od-id="settings-content">
+      <div class="page-head">
+        <h1 class="page-title" data-od-id="settings-title">Настройки</h1>
+      </div>
+
+      <a class="profile" href="account.html" data-od-id="settings-profile">
+        <span class="avatar" aria-hidden="true">АК</span>
+        <span class="profile-text">
+          <span class="profile-name">Анна Ковалёва</span>
+          <span class="profile-mail">anna.k@veil.app</span>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="m9 5 7 7-7 7" />
+        </svg>
+      </a>
+
+      <p class="section-label">Подключение</p>
+      <div class="group">
+        <div class="row">
+          <div class="row-text">
+            <span class="row-title">Автоподключение</span>
+            <span class="row-sub">При запуске приложения</span>
+          </div>
+          <button class="switch" type="button" role="switch" aria-checked="true" aria-label="Автоподключение" data-setting="autoconnect" data-od-id="setting-autoconnect"></button>
+        </div>
+        <div class="row">
+          <div class="row-text">
+            <span class="row-title">Защита от утечек</span>
+            <span class="row-sub">Блокировать DNS и IPv6</span>
+          </div>
+          <button class="switch" type="button" role="switch" aria-checked="true" aria-label="Защита от утечек" data-setting="leaks" data-od-id="setting-leaks"></button>
+        </div>
+        <div class="row">
+          <div class="row-text">
+            <span class="row-title">Уведомления</span>
+            <span class="row-sub">Статус и продление</span>
+          </div>
+          <button class="switch" type="button" role="switch" aria-checked="false" aria-label="Уведомления" data-setting="notifications" data-od-id="setting-notifications"></button>
+        </div>
+      </div>
+
+      <p class="section-label">Подписка</p>
+      <div class="group">
+        <a class="row" href="included.html" data-od-id="settings-plan">
+          <span class="row-text">
+            <span class="row-title">Тариф</span>
+            <span class="row-sub">Локации и устройства</span>
+          </span>
+          <span class="row-value" data-plan-name>Базовый</span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m9 5 7 7-7 7" />
+          </svg>
+        </a>
+        <button class="row" type="button" data-if-plan="pro" data-open-cancel hidden data-od-id="settings-cancel">
+          <span class="row-text">
+            <span class="row-title">Отменить подписку</span>
+            <span class="row-sub">Перейти на базовый тариф</span>
+          </span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m9 5 7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+
+      <p class="section-label">Приложение</p>
+      <div class="group">
+        <div class="row">
+          <span class="row-title">Версия</span>
+          <span class="row-value">2.4.0</span>
+        </div>
+      </div>
+
+      <button class="signout" type="button" data-open-signout data-od-id="settings-signout">Выйти из аккаунта</button>
+      <p class="version">Veil · 2026</p>
+    </main>
+
+    <nav class="tabbar" aria-label="Основная навигация" data-od-id="tabbar">
+      <a class="tab" href="home.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1v-9.5Z" />
+        </svg>
+        <span>Главная</span>
+      </a>
+      <a class="tab" href="locations.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 21s7-5.4 7-11a7 7 0 1 0-14 0c0 5.6 7 11 7 11Z" />
+          <circle cx="12" cy="10" r="2.5" />
+        </svg>
+        <span>Локации</span>
+      </a>
+      <a class="tab" href="included.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3Z" />
+        </svg>
+        <span>Подписка</span>
+      </a>
+      <a class="tab" href="settings.html" aria-current="page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 7h9M17 7h3M4 17h3M11 17h9" />
+          <circle cx="15" cy="7" r="2" />
+          <circle cx="9" cy="17" r="2" />
+        </svg>
+        <span>Настройки</span>
+      </a>
+    </nav>
+
+    <div class="scrim" id="cancelSheet" hidden>
+      <section class="sheet" role="dialog" aria-modal="true" aria-labelledby="cancelTitle">
+        <span class="grabber" aria-hidden="true"></span>
+        <div class="sheet-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3Z" />
+          </svg>
+        </div>
+        <h2 id="cancelTitle">Отменить Veil Pro?</h2>
+        <p>Pro закроется сразу. Вернуться можно в любой момент.</p>
+        <div class="sheet-actions">
+          <button class="btn btn-primary btn-block" type="button" data-cancel-confirm>Отменить подписку</button>
+          <button class="btn btn-ghost btn-block" type="button" data-close-sheet>Оставить Pro</button>
+        </div>
+      </section>
+    </div>
+
+    <div class="scrim" id="signoutSheet" hidden>
+      <section class="sheet" role="dialog" aria-modal="true" aria-labelledby="signoutTitle">
+        <span class="grabber" aria-hidden="true"></span>
+        <div class="sheet-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 4h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-4" />
+            <path d="M10 8l-4 4 4 4M6 12h9" />
+          </svg>
+        </div>
+        <h2 id="signoutTitle">Выйти из аккаунта?</h2>
+        <p>Соединение будет отключено, а сохранённые настройки удалены с этого устройства.</p>
+        <div class="sheet-actions">
+          <button class="btn btn-primary btn-block" type="button" data-signout-confirm>Выйти</button>
+          <button class="btn btn-ghost btn-block" type="button" data-close-sheet>Остаться</button>
+        </div>
+      </section>
+    </div>
+
+  </div>
+
+  <script src="../assets/app.js"></script>
+<script data-prototype-transition>
+(() => {
+  if (window.__prototypeTransitions) return;
+  window.__prototypeTransitions = true;
+
+  document.addEventListener('click', (event) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      !(event.target instanceof Element)
+    ) {
+      return;
+    }
+
+    const link = event.target.closest('a[href]');
+    if (
+      !link ||
+      (link.target && link.target !== '_self') ||
+      link.hasAttribute('download')
+    ) {
+      return;
+    }
+
+    let url;
+    try {
+      url = new URL(link.href, location.href);
+    } catch {
+      return;
+    }
+
+    if (url.origin !== location.origin) return;
+    if (url.hash && url.pathname === location.pathname) return;
+
+    event.preventDefault();
+    document.documentElement.classList.add('prototype-leaving');
+
+    setTimeout(() => {
+      location.href = url.href;
+    }, 150);
+  });
+})();
+</script>
+</body>
+</html>

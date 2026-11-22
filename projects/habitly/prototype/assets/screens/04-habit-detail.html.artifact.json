@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "screens/04-habit-detail.html",
+  "entry": "screens/04-habit-detail.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-11-22T18:16:09.450Z",
+  "updatedAt": "2026-11-22T18:16:09.450Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

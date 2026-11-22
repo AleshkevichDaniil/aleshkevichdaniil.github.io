@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=390, initial-scale=1" />
+  <title>Habitly — Новая привычка</title>
+  <link rel="stylesheet" href="../assets/habitly.css" />
+<style data-prototype-transition>
+@keyframes prototype-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body {
+  animation: prototype-enter 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+html.prototype-leaving body {
+  opacity: 0;
+  transition: opacity 140ms ease;
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  html.prototype-leaving body { transition: none; }
+}
+</style>
+</head>
+<body class="screen-page">
+  <div class="screen" data-od-id="create-screen" data-screen="create">
+
+    <header class="app-header compact" data-od-id="create-header">
+      <a class="icon-btn plain" href="02-today.html" aria-label="Вернуться к списку на сегодня">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7" /></svg>
+      </a>
+      <h1 class="header-title">Новая привычка</h1>
+      <span aria-hidden="true"></span>
+    </header>
+
+    <form class="form-shell" data-od-id="create-form">
+      <main class="app-body" data-od-id="create-content">
+
+        <section class="field" data-od-id="create-name">
+          <label class="field-label" for="habit-name">Название</label>
+          <input class="input" id="habit-name" name="habit-name" type="text" maxlength="40" placeholder="Например, медитация 10 минут" autocomplete="off" />
+          <div class="chips">
+            <button class="chip" type="button" data-fill="Вода 2 литра">Вода</button>
+            <button class="chip" type="button" data-fill="Чтение 20 страниц">Чтение</button>
+            <button class="chip" type="button" data-fill="Прогулка 30 минут">Прогулка</button>
+            <button class="chip" type="button" data-fill="Медитация 10 минут">Медитация</button>
+          </div>
+          <p class="error-text" id="name-error">Введите название — хотя бы одно слово.</p>
+        </section>
+
+        <section class="card plain" data-od-id="create-style">
+          <div class="card-title">
+            <h2>Оформление</h2>
+            <span class="mono">иконка и цвет</span>
+          </div>
+          <div class="style-row">
+            <span class="icon-preview" data-preview data-color="clay" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4" /><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8" /></svg>
+            </span>
+            <div class="icon-row" role="group" aria-label="Иконка привычки">
+              <button class="icon-choice" type="button" data-icon-choice data-icon="water" aria-pressed="false" aria-label="Капля воды">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c3.2 3.4 6 6.7 6 10a6 6 0 0 1-12 0c0-3.3 2.8-6.6 6-10z" /></svg>
+              </button>
+              <button class="icon-choice" type="button" data-icon-choice data-icon="sun" aria-pressed="true" aria-label="Солнце">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4" /><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8" /></svg>
+              </button>
+              <button class="icon-choice" type="button" data-icon-choice data-icon="book" aria-pressed="false" aria-label="Книга">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v15H6.5A2.5 2.5 0 0 0 4 20.5z" /><path d="M7 7h8M7 10.5h5" /></svg>
+              </button>
+              <button class="icon-choice" type="button" data-icon-choice data-icon="leaf" aria-pressed="false" aria-label="Лист">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-7.5 5.5-12.5 13-12.5C18 14 12.5 19 5 19z" /><path d="M8.5 15.5c1.8-2.4 4-4 6.5-5" /></svg>
+              </button>
+              <button class="icon-choice" type="button" data-icon-choice data-icon="journal" aria-pressed="false" aria-label="Дневник">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L18.5 9.5a2.1 2.1 0 0 0-3-3L5 17v3z" /><path d="M13.5 6.5l3 3" /></svg>
+              </button>
+            </div>
+          </div>
+          <div class="swatches" role="group" aria-label="Цвет привычки">
+            <button class="swatch" type="button" data-color="sand" aria-pressed="false" aria-label="Песочный"></button>
+            <button class="swatch" type="button" data-color="clay" aria-pressed="true" aria-label="Глиняный"></button>
+            <button class="swatch" type="button" data-color="sage" aria-pressed="false" aria-label="Шалфейный"></button>
+            <button class="swatch" type="button" data-color="butter" aria-pressed="false" aria-label="Масляный"></button>
+            <button class="swatch" type="button" data-color="sky" aria-pressed="false" aria-label="Небесный"></button>
+          </div>
+        </section>
+
+        <section class="field" data-od-id="create-repeat">
+          <span class="field-label">Повтор</span>
+          <div class="seg" role="group" aria-label="Частота повторения">
+            <button type="button" aria-pressed="true" data-meta="каждый день">Каждый день</button>
+            <button type="button" aria-pressed="false" data-meta="по будням">По будням</button>
+            <button type="button" aria-pressed="false" data-meta="3 раза в неделю">3 в неделю</button>
+          </div>
+        </section>
+
+        <div class="row-card" data-od-id="create-reminder">
+          <span class="tile t-butter">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 9a6 6 0 1 0-12 0c0 4.5-2 5.5-2 5.5h16S18 13.5 18 9z" /><path d="M10.5 19a1.8 1.8 0 0 0 3 0" /></svg>
+          </span>
+          <span class="row-text">
+            <b>Напоминание</b>
+            <span data-reminder-text>Каждый день в 08:00</span>
+          </span>
+          <button class="switch" type="button" role="switch" aria-checked="true" aria-label="Напоминание о привычке" data-switch>
+            <span class="switch-track"><span class="switch-knob"></span></span>
+          </button>
+        </div>
+
+        <section class="field" data-od-id="create-note">
+          <label class="field-label" for="habit-note">Заметка <span class="field-optional">необязательно</span></label>
+          <textarea class="input textarea" id="habit-note" rows="2" placeholder="Зачем эта привычка и как её удобнее делать"></textarea>
+        </section>
+
+      </main>
+
+      <footer class="app-footer" data-od-id="create-footer">
+        <button class="btn btn-primary btn-block" type="submit">Создать привычку</button>
+      </footer>
+    </form>
+
+  </div>
+  <script src="../assets/habitly.js"></script>
+<script data-prototype-transition>
+(() => {
+  if (window.__prototypeTransitions) return;
+  window.__prototypeTransitions = true;
+
+  document.addEventListener('click', (event) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      !(event.target instanceof Element)
+    ) {
+      return;
+    }
+
+    const link = event.target.closest('a[href]');
+    if (
+      !link ||
+      (link.target && link.target !== '_self') ||
+      link.hasAttribute('download')
+    ) {
+      return;
+    }
+
+    let url;
+    try {
+      url = new URL(link.href, location.href);
+    } catch {
+      return;
+    }
+
+    if (url.origin !== location.origin) return;
+    if (url.hash && url.pathname === location.pathname) return;
+
+    event.preventDefault();
+    document.documentElement.classList.add('prototype-leaving');
+
+    setTimeout(() => {
+      location.href = url.href;
+    }, 150);
+  });
+})();
+</script>
+</body>
+</html>

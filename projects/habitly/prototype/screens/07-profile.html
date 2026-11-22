@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=390, initial-scale=1" />
+  <title>Habitly — Профиль</title>
+  <link rel="stylesheet" href="../assets/habitly.css" />
+<style data-prototype-transition>
+@keyframes prototype-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body {
+  animation: prototype-enter 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+html.prototype-leaving body {
+  opacity: 0;
+  transition: opacity 140ms ease;
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  html.prototype-leaving body { transition: none; }
+}
+</style>
+</head>
+<body class="screen-page">
+  <div class="screen" data-od-id="profile-screen">
+
+    <header class="app-header" data-od-id="profile-header">
+      <div class="titles">
+        <p class="header-date">аккаунт</p>
+        <h1 class="app-title">Профиль</h1>
+      </div>
+    </header>
+
+    <main class="app-body" data-od-id="profile-content">
+
+      <section class="card profile-card" data-od-id="profile-card">
+        <div class="profile-head">
+          <span class="avatar" aria-hidden="true">АК</span>
+          <div>
+            <p class="profile-name">Анна Ковалёва</p>
+            <p class="profile-since">С нами с 16 ноября 2026</p>
+          </div>
+        </div>
+        <hr class="divider" />
+        <div class="stats-grid">
+          <div class="stat">
+            <p class="stat-value"><span class="num">86</span></p>
+            <p class="stat-label">выполнений</p>
+          </div>
+          <div class="stat">
+            <p class="stat-value"><span class="num">28</span><small>дн.</small></p>
+            <p class="stat-label">дней серия</p>
+          </div>
+          <div class="stat">
+            <p class="stat-value"><span class="num" data-stat="habits">5</span></p>
+            <p class="stat-label">привычек</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="settings-block" data-od-id="profile-subscription">
+        <h2 class="group-label">Подписка</h2>
+        <div class="list">
+          <a class="list-row" href="06-paywall.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z" /></svg>
+            <span class="list-text">
+              <b>Habitly Plus</b>
+              <span>Безлимит, статистика за год и заморозка серии</span>
+            </span>
+            <span class="pill-plus">7 дней</span>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="settings-block" data-od-id="profile-settings">
+        <h2 class="group-label">Настройки</h2>
+        <div class="list">
+          <div class="list-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 9a6 6 0 1 0-12 0c0 4.5-2 5.5-2 5.5h16S18 13.5 18 9z" /><path d="M10.5 19a1.8 1.8 0 0 0 3 0" /></svg>
+            <span class="list-text"><b>Напоминания</b></span>
+            <button class="switch" type="button" role="switch" aria-checked="true" aria-label="Напоминания" data-switch>
+              <span class="switch-track"><span class="switch-knob"></span></span>
+            </button>
+          </div>
+          <div class="list-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="4" /><path d="M8 3v4M16 3v4M3 11h18" /></svg>
+            <span class="list-text"><b>Неделя с понедельника</b></span>
+            <button class="switch" type="button" role="switch" aria-checked="true" aria-label="Неделя с понедельника" data-switch>
+              <span class="switch-track"><span class="switch-knob"></span></span>
+            </button>
+          </div>
+          <div class="list-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6-10-6-10-6z" /><circle cx="12" cy="12" r="2.6" /></svg>
+            <span class="list-text"><b>Скрывать выполненные</b></span>
+            <button class="switch" type="button" role="switch" aria-checked="false" aria-label="Скрывать выполненные" data-switch>
+              <span class="switch-track"><span class="switch-knob"></span></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="list" data-od-id="profile-logout">
+        <a class="list-row" href="01-onboarding.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4" /><path d="M10 8l-4 4 4 4M6 12h9" /></svg>
+          <span class="list-text"><b class="danger">Выйти из аккаунта</b></span>
+        </a>
+      </div>
+
+    </main>
+
+    <nav class="tabbar" data-od-id="profile-tabbar" aria-label="Основная навигация">
+      <a class="tab" href="02-today.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="4" /><path d="M8 3v4M16 3v4M3 11h18" /><path d="M9 15.5l2 2 4-4" /></svg>
+        Сегодня
+      </a>
+      <a class="tab" href="05-stats.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V11M12 20V4M20 20v-6" /></svg>
+        Статистика
+      </a>
+      <a class="tab" href="07-profile.html" aria-current="page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6" /><path d="M4.5 20a7.5 7.5 0 0 1 15 0" /></svg>
+        Профиль
+      </a>
+    </nav>
+
+  </div>
+  <script src="../assets/habitly.js"></script>
+<script data-prototype-transition>
+(() => {
+  if (window.__prototypeTransitions) return;
+  window.__prototypeTransitions = true;
+
+  document.addEventListener('click', (event) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      !(event.target instanceof Element)
+    ) {
+      return;
+    }
+
+    const link = event.target.closest('a[href]');
+    if (
+      !link ||
+      (link.target && link.target !== '_self') ||
+      link.hasAttribute('download')
+    ) {
+      return;
+    }
+
+    let url;
+    try {
+      url = new URL(link.href, location.href);
+    } catch {
+      return;
+    }
+
+    if (url.origin !== location.origin) return;
+    if (url.hash && url.pathname === location.pathname) return;
+
+    event.preventDefault();
+    document.documentElement.classList.add('prototype-leaving');
+
+    setTimeout(() => {
+      location.href = url.href;
+    }, 150);
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nightly — Nightly Plus</title>
+<link rel="stylesheet" href="../assets/tokens.css">
+<style>
+  body { background: #07080e; }
+
+  .pay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    padding-top: 52px;
+    background:
+      radial-gradient(90% 42% at 50% -8%, rgba(139, 140, 255, 0.2), transparent 68%),
+      radial-gradient(70% 40% at 84% 8%, rgba(255, 184, 107, 0.07), transparent 70%);
+  }
+
+  .pay-top {
+    height: 52px;
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px;
+  }
+
+  .pay-top .eyebrow {
+    color: var(--muted);
+  }
+
+  .pay-scroll {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 0 20px 150px;
+    scrollbar-width: none;
+  }
+
+  .pay-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pay-hero {
+    text-align: center;
+    padding: 6px 0 22px;
+  }
+
+  .pay-mark {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 16px;
+    border-radius: 19px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(155deg, rgba(139, 140, 255, 0.36), rgba(139, 140, 255, 0.08));
+    border: 1px solid rgba(139, 140, 255, 0.42);
+    color: var(--fg);
+    box-shadow: 0 18px 40px -18px rgba(139, 140, 255, 0.85);
+  }
+
+  .pay-mark .ico {
+    width: 27px;
+    height: 27px;
+    stroke-width: 1.6;
+  }
+
+  .pay-hero .display {
+    font-size: 32px;
+    margin-bottom: 8px;
+  }
+
+  .pay-hero .lede {
+    font-size: 14px;
+    max-width: 30ch;
+    margin: 0 auto;
+    text-wrap: balance;
+  }
+
+  /* ---------- benefits ---------- */
+
+  .benefits {
+    list-style: none;
+    margin: 0 0 22px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-radius: var(--r-lg);
+    border: 1px solid var(--border-hair);
+    background: rgba(255, 255, 255, 0.035);
+  }
+
+  .benefits li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13.5px;
+    line-height: 1.4;
+    color: var(--fg);
+  }
+
+  .benefits .ico {
+    width: 15px;
+    height: 15px;
+    margin-top: 2px;
+    color: var(--accent);
+    stroke-width: 2.1;
+    flex: none;
+  }
+
+  /* ---------- plans ---------- */
+
+  .plans {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .plan {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 15px 14px;
+    text-align: left;
+    border-radius: var(--r-lg);
+    border: 1px solid var(--border-soft);
+    background: rgba(255, 255, 255, 0.035);
+    transition: border-color 0.18s var(--ease), background-color 0.18s var(--ease);
+  }
+
+  .plan:hover {
+    border-color: rgba(255, 255, 255, 0.22);
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .plan[aria-checked="true"] {
+    border-color: var(--accent-line);
+    background: rgba(139, 140, 255, 0.1);
+    box-shadow: 0 16px 40px -30px rgba(139, 140, 255, 0.9);
+  }
+
+  .plan-radio {
+    width: 20px;
+    height: 20px;
+    flex: none;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255, 255, 255, 0.28);
+    transition: border-color 0.18s var(--ease), box-shadow 0.18s var(--ease);
+  }
+
+  .plan[aria-checked="true"] .plan-radio {
+    border-color: var(--accent);
+    box-shadow: inset 0 0 0 5px var(--accent);
+  }
+
+  .plan-body {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .plan-line {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .plan-name {
+    font-size: 15px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .plan-badge {
+    display: inline-flex;
+    align-items: center;
+    height: 19px;
+    padding: 0 7px;
+    border-radius: var(--r-pill);
+    background: var(--amber-wash);
+    border: 1px solid var(--amber-line);
+    color: var(--amber);
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+
+  .plan-meta {
+    font-size: 11.5px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .plan-price {
+    flex: none;
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .plan-per {
+    margin-left: 2px;
+    font-family: var(--font-body);
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0;
+  }
+
+  /* ---------- sticky footer ---------- */
+
+  .pay-foot {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 30;
+    padding: 14px 20px 34px;
+    border-top: 1px solid var(--border-hair);
+    background: linear-gradient(180deg, rgba(16, 18, 36, 0.9) 0%, rgba(13, 15, 30, 0.99) 46%, #0c0e1c 100%);
+    backdrop-filter: blur(16px);
+  }
+
+  .legal {
+    margin: 10px 0 0;
+    font-size: 11px;
+    line-height: 1.45;
+    text-align: center;
+    color: var(--muted-soft);
+    text-wrap: balance;
+  }
+</style>
+<style data-prototype-transition>
+@keyframes prototype-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body {
+  animation: prototype-enter 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+html.prototype-leaving body {
+  opacity: 0;
+  transition: opacity 140ms ease;
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  html.prototype-leaving body { transition: none; }
+}
+</style>
+</head>
+<body data-screen="paywall">
+  <div class="device">
+    <div class="pay">
+      <header class="pay-top">
+        <a class="icon-btn bare" href="02-home.html" aria-label="Закрыть" data-od-id="paywall-close">
+          <svg class="ico"><use href="#i-close"></use></svg>
+        </a>
+        <p class="eyebrow">Подписка</p>
+        <span style="width: 44px" aria-hidden="true"></span>
+      </header>
+
+      <div class="pay-scroll">
+        <div class="pay-hero">
+          <div class="pay-mark" aria-hidden="true">
+            <svg class="ico"><use href="#i-spark"></use></svg>
+          </div>
+          <h1 class="display">Nightly Plus</h1>
+          <p class="lede">Все звуки, умный будильник и статистика сна — в одной подписке.</p>
+        </div>
+
+        <ul class="benefits">
+          <li>
+            <svg class="ico" aria-hidden="true"><use href="#i-check"></use></svg>
+            <span>Все шесть звуков: лес, камин и вентилятор тоже</span>
+          </li>
+          <li>
+            <svg class="ico" aria-hidden="true"><use href="#i-check"></use></svg>
+            <span>Умный будильник с окном пробуждения</span>
+          </li>
+          <li>
+            <svg class="ico" aria-hidden="true"><use href="#i-check"></use></svg>
+            <span>Статистика сна и оценка каждой ночи</span>
+          </li>
+        </ul>
+
+        <div class="plans" role="radiogroup" aria-label="Тариф" data-od-id="paywall-plans">
+          <button type="button" class="plan" data-plan="year" role="radio" aria-checked="true">
+            <span class="plan-radio" aria-hidden="true"></span>
+            <span class="plan-body">
+              <span class="plan-line">
+                <span class="plan-name">Год</span>
+                <span class="plan-badge">−53%</span>
+              </span>
+              <span class="plan-meta">166 ₽ в месяц</span>
+            </span>
+            <span class="plan-price">1 990 ₽<span class="plan-per">/год</span></span>
+          </button>
+
+          <button type="button" class="plan" data-plan="month" role="radio" aria-checked="false">
+            <span class="plan-radio" aria-hidden="true"></span>
+            <span class="plan-body">
+              <span class="plan-line">
+                <span class="plan-name">Месяц</span>
+              </span>
+              <span class="plan-meta">Гибкий тариф</span>
+            </span>
+            <span class="plan-price">349 ₽<span class="plan-per">/мес</span></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="pay-foot">
+        <button type="button" class="btn btn-primary btn-block" id="paywallCta" data-od-id="paywall-cta">
+          Попробовать 7 дней бесплатно
+        </button>
+        <p class="legal" id="paywallLegal">7 дней бесплатно, затем 1 990 ₽ в год. Отмена в любой момент в настройках Apple ID.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/icons.js"></script>
+  <script src="../assets/app.js"></script>
+<script data-prototype-transition>
+(() => {
+  if (window.__prototypeTransitions) return;
+  window.__prototypeTransitions = true;
+
+  document.addEventListener('click', (event) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      !(event.target instanceof Element)
+    ) {
+      return;
+    }
+
+    const link = event.target.closest('a[href]');
+    if (
+      !link ||
+      (link.target && link.target !== '_self') ||
+      link.hasAttribute('download')
+    ) {
+      return;
+    }
+
+    let url;
+    try {
+      url = new URL(link.href, location.href);
+    } catch {
+      return;
+    }
+
+    if (url.origin !== location.origin) return;
+    if (url.hash && url.pathname === location.pathname) return;
+
+    event.preventDefault();
+    document.documentElement.classList.add('prototype-leaving');
+
+    setTimeout(() => {
+      location.href = url.href;
+    }, 150);
+  });
+})();
+</script>
+</body>
+</html>
